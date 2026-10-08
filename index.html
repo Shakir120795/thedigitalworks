@@ -1,0 +1,1191 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TheDigitalWork — We Build, Automate & GROW Your Business. Website Development, AI Chatbot, Mobile App, Digital Marketing in Agra.">
+<meta name="theme-color" content="#0a0a0f">
+<title>TheDigitalWork — We Build, Automate & Grow</title>
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & CSS VARIABLES ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0f;--blue:#4f8ef7;--purple:#8b5cf6;--pink:#ec4899;
+  --gold:#f59e0b;--green:#10b981;--text:#f8fafc;--muted:#94a3b8;
+  --border:rgba(248,250,252,.08);--r:16px;--ease:cubic-bezier(.16,1,.3,1);
+}
+html{overflow-x:hidden;scroll-behavior:auto}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;cursor:none;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{cursor:none;font-family:inherit;border:none;background:none}
+::selection{background:var(--blue);color:#fff}
+
+/* ===== PROGRESS BAR ===== */
+#progress-bar{position:fixed;top:0;left:0;height:3px;width:0;z-index:9999;background:linear-gradient(90deg,var(--blue),var(--purple),var(--pink));border-radius:0 2px 2px 0;pointer-events:none;transition:width .1s linear}
+
+/* ===== NOISE OVERLAY ===== */
+#noise{pointer-events:none;position:fixed;inset:0;z-index:9998;opacity:.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+/* ===== CUSTOM CURSOR ===== */
+#cur-dot{width:8px;height:8px;background:var(--text);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);will-change:transform}
+#cur-ring{width:40px;height:40px;border:1.5px solid rgba(248,250,252,.45);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),border-color .3s,background .3s;will-change:transform}
+body.c-hover #cur-ring{width:60px;height:60px;background:rgba(79,142,247,.08);border-color:var(--blue)}
+
+/* ===== NAVBAR ===== */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 60px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,backdrop-filter .4s,padding .4s}
+#nav.scrolled{background:rgba(10,10,15,.85);backdrop-filter:blur(22px);padding:14px 60px;border-bottom:1px solid var(--border)}
+.logo{font-size:1.25rem;font-weight:800;letter-spacing:-.02em}.logo span{color:var(--blue)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--muted);transition:color .3s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--blue);color:#fff;padding:10px 24px;border-radius:100px;font-size:.875rem;font-weight:700;transition:transform .3s var(--ease),box-shadow .3s}
+.nav-cta:hover{transform:scale(1.06);box-shadow:0 0 30px rgba(79,142,247,.45)}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+#mob-menu{display:none;position:fixed;inset:0;background:var(--bg);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:40px}
+#mob-menu.open{display:flex}
+#mob-menu a{font-size:2.2rem;font-weight:800;color:var(--text);transition:color .3s}
+#mob-menu a:hover{color:var(--blue)}
+
+/* ===== CANVAS ===== */
+#webgl-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* ===== HERO ===== */
+#hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(79,142,247,.1);border:1px solid rgba(79,142,247,.3);color:var(--blue);padding:6px 16px;border-radius:100px;font-size:.73rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:32px;opacity:0;transform:translateY(20px)}
+.badge-dot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:bpulse 2s infinite}
+@keyframes bpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+.hero-title{font-size:clamp(2.8rem,7vw,7rem);font-weight:800;line-height:1.05;letter-spacing:-.035em;margin-bottom:28px}
+.hero-title .w{display:inline-block;overflow:hidden;vertical-align:top;margin-right:.22em}
+.hero-title .w span{display:inline-block;transform:translateY(110%)}
+.hi{background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(.95rem,2vw,1.2rem);color:var(--muted);max-width:580px;line-height:1.75;margin-bottom:48px;opacity:0;transform:translateY(20px)}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;opacity:0;transform:translateY(20px)}
+.btn-p{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;padding:16px 36px;border-radius:100px;font-weight:700;font-size:1rem;position:relative;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s}
+.btn-p:hover{transform:scale(1.05);box-shadow:0 20px 60px rgba(79,142,247,.4)}
+.btn-s{background:transparent;color:var(--text);padding:16px 36px;border-radius:100px;font-weight:600;font-size:1rem;border:1.5px solid var(--border);transition:border-color .3s,transform .3s var(--ease),background .3s}
+.btn-s:hover{border-color:var(--blue);background:rgba(79,142,247,.07);transform:scale(1.05)}
+.hero-stats{display:flex;gap:60px;margin-top:80px;flex-wrap:wrap;justify-content:center;opacity:0;transform:translateY(20px)}
+.stat-num{font-size:2.6rem;font-weight:800;letter-spacing:-.04em;color:var(--blue)}
+.stat-lbl{font-size:.85rem;color:var(--muted);margin-top:4px}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+.s-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--border),transparent);animation:sline 2s ease-in-out infinite}
+@keyframes sline{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ===== MARQUEE ===== */
+.mq-section{padding:36px 0;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
+.mq-track{display:flex;white-space:nowrap}
+.mq-inner{display:flex;gap:56px;animation:mq 30s linear infinite;flex-shrink:0;padding-right:56px}
+.mq-inner.rev{animation-direction:reverse}
+.mq-section:hover .mq-inner{animation-play-state:paused}
+.mq-item{font-size:.95rem;font-weight:600;color:var(--muted);letter-spacing:.05em;display:flex;align-items:center;gap:18px}
+.mq-sep{color:var(--blue);font-size:1.3rem}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== SHARED SECTION STYLES ===== */
+section{position:relative;z-index:1}
+.sw{max-width:1200px;margin:0 auto;padding:100px 40px}
+.sec-label{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px}
+.sec-label::before{content:'';width:20px;height:1px;background:var(--blue)}
+.sec-title{font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:22px}
+.sec-sub{font-size:1.05rem;color:var(--muted);max-width:550px;line-height:1.75}
+.fade-up{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.fade-up.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ===== SERVICES ===== */
+.bento{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:60px}
+.scard{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:24px;padding:40px;position:relative;overflow:hidden;transition:transform .45s var(--ease),box-shadow .45s,border-color .45s;transform-style:preserve-3d}
+.scard::before{content:'';position:absolute;inset:0;border-radius:24px;background:radial-gradient(circle at 50% 0%,var(--cc,transparent),transparent 70%);opacity:0;transition:opacity .4s}
+.scard:hover::before{opacity:.14}
+.scard:hover{transform:translateY(-8px) rotateX(2deg) rotateY(1deg);box-shadow:0 40px 80px rgba(0,0,0,.4);border-color:var(--cc)}
+.scard[data-c="blue"]{--cc:var(--blue)}.scard[data-c="purple"]{--cc:var(--purple)}.scard[data-c="green"]{--cc:var(--green)}.scard[data-c="gold"]{--cc:var(--gold)}
+.cicon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:22px;background:rgba(255,255,255,.05);border:1px solid var(--border)}
+.ctag{display:inline-block;padding:4px 12px;border-radius:100px;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.ctag[data-c="blue"]{background:rgba(79,142,247,.14);color:var(--blue)}.ctag[data-c="purple"]{background:rgba(139,92,246,.14);color:var(--purple)}.ctag[data-c="green"]{background:rgba(16,185,129,.14);color:var(--green)}.ctag[data-c="gold"]{background:rgba(245,158,11,.14);color:var(--gold)}
+.ctitle{font-size:1.45rem;font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.cdesc{font-size:.93rem;color:var(--muted);line-height:1.7;margin-bottom:22px}
+.cfeats{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:26px}
+.cfeats li{font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:10px}
+.cfeats li::before{content:'→';color:var(--cc);font-weight:700}
+.cbtn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:100px;font-size:.85rem;font-weight:700;background:rgba(255,255,255,.07);color:var(--text);transition:background .3s,gap .3s,transform .3s var(--ease)}
+.cbtn:hover{background:var(--cc);gap:14px;transform:scale(1.04)}
+
+/* ===== TIMELINE / PROCESS ===== */
+#process{background:rgba(255,255,255,.012)}
+.ph{text-align:center;margin-bottom:80px}
+.tl{position:relative;max-width:900px;margin:0 auto}
+.tl-line-wrap{position:absolute;left:50%;top:0;bottom:0;transform:translateX(-50%);width:2px}
+.tl-line{width:100%;height:100%;background:linear-gradient(to bottom,var(--blue),var(--purple),var(--pink));transform-origin:top;transform:scaleY(0);transition:transform .1s linear}
+.tl-step{display:grid;grid-template-columns:1fr 60px 1fr;align-items:center;margin-bottom:80px}
+.tl-step:last-child{margin-bottom:0}
+.step-box{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;padding:34px;transition:border-color .4s,box-shadow .4s,transform .4s var(--ease)}
+.step-box:hover{border-color:var(--blue);box-shadow:0 20px 60px rgba(79,142,247,.1);transform:translateY(-4px)}
+.step-node-col{display:flex;justify-content:center}
+.step-node{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;box-shadow:0 0 30px rgba(79,142,247,.4);z-index:1;position:relative}
+.step-num{font-size:.7rem;color:var(--blue);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.step-title{font-size:1.2rem;font-weight:800;margin-bottom:10px}
+.step-desc{font-size:.9rem;color:var(--muted);line-height:1.7}
+.step-mock{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;padding:24px;display:flex;align-items:center;justify-content:center;min-height:110px;font-size:2.8rem}
+.tl-step:nth-child(odd) .step-box{grid-column:1}.tl-step:nth-child(odd) .step-node-col{grid-column:2}.tl-step:nth-child(odd) .step-mock{grid-column:3}
+.tl-step:nth-child(even) .step-mock{grid-column:1;grid-row:1}.tl-step:nth-child(even) .step-node-col{grid-column:2;grid-row:1}.tl-step:nth-child(even) .step-box{grid-column:3;grid-row:1}
+
+/* ===== REVIEWS ===== */
+#reviews{overflow:hidden}
+.rv-header{text-align:center;margin-bottom:56px}
+.rv-wrap{overflow:hidden;padding:16px 0 80px}
+.rv-track{display:flex;gap:24px;animation:rvscroll 35s linear infinite;width:max-content}
+.rv-track:hover{animation-play-state:paused}
+@keyframes rvscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.rv-card{width:380px;flex-shrink:0;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;padding:32px;transition:border-color .4s,box-shadow .4s,transform .3s}
+.rv-card:hover{border-color:var(--glow,var(--blue));box-shadow:0 0 60px rgba(79,142,247,.14);transform:translateY(-4px)}
+.rv-stars{color:var(--gold);font-size:1rem;letter-spacing:2px;margin-bottom:16px}
+.rv-text{font-size:.93rem;color:var(--muted);line-height:1.75;margin-bottom:24px;font-style:italic}
+.rv-author{display:flex;align-items:center;gap:14px}
+.rv-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;color:#fff;flex-shrink:0;box-shadow:0 0 20px var(--aglow)}
+.rv-name{font-weight:700;font-size:.93rem}.rv-role{font-size:.78rem;color:var(--muted)}
+
+/* ===== CONTACT ===== */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:60px}
+.ci-lbl{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ci-val{font-size:.98rem;font-weight:500;margin-bottom:22px;line-height:1.6}
+.ci-val a:hover{color:var(--blue)}
+.wa-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;padding:13px 26px;border-radius:100px;font-weight:700;font-size:.93rem;margin-top:6px;transition:transform .3s var(--ease),box-shadow .3s}
+.wa-btn:hover{transform:scale(1.05);box-shadow:0 20px 40px rgba(37,211,102,.3)}
+.cform-box{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:24px;padding:40px}
+.fg{margin-bottom:18px}
+.fl{display:block;font-size:.75rem;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px}
+.fi,.fs,.fta{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text);padding:13px 17px;border-radius:12px;font-family:inherit;font-size:.93rem;transition:border-color .3s,box-shadow .3s;outline:none}
+.fi:focus,.fs:focus,.fta:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(79,142,247,.14)}
+.fs option{background:#111118}
+.fta{resize:vertical;min-height:115px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fsub{width:100%;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;padding:15px;border-radius:12px;font-weight:700;font-size:1rem;transition:transform .3s var(--ease),box-shadow .3s}
+.fsub:hover{transform:scale(1.02);box-shadow:0 20px 60px rgba(79,142,247,.4)}
+
+/* ===== FOOTER ===== */
+#footer{border-top:1px solid var(--border);padding:80px 60px 40px}
+.fg-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1.5fr 1fr;gap:60px;margin-bottom:60px}
+.fb-name{font-size:1.4rem;font-weight:800;margin-bottom:12px}.fb-name span{color:var(--blue)}
+.fb-tag{color:var(--muted);font-size:.88rem;line-height:1.65;margin-bottom:24px}
+.socials{display:flex;gap:10px}
+.sl{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.88rem;transition:background .3s,border-color .3s,transform .3s}
+.sl:hover{background:rgba(79,142,247,.14);border-color:var(--blue);transform:translateY(-2px)}
+.fh{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+.fl-list{list-style:none;display:flex;flex-direction:column;gap:11px}
+.fl-list a{color:var(--muted);font-size:.88rem;transition:color .3s;display:flex;align-items:center;gap:5px}
+.fl-list a:hover{color:var(--text)}
+.wa-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.28);border-radius:100px;color:#25d366;font-size:.85rem;font-weight:600;transition:background .3s,transform .3s}
+.wa-pill:hover{background:rgba(37,211,102,.2);transform:scale(1.04)}
+.fbot{max-width:1200px;margin:0 auto;border-top:1px solid var(--border);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.fcopy{color:var(--muted);font-size:.85rem}
+.fleg{display:flex;gap:22px}.fleg a{color:var(--muted);font-size:.85rem;transition:color .3s}.fleg a:hover{color:var(--text)}
+
+/* ===== LEAD MODAL ===== */
+#lead-modal{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .4s}
+#lead-modal.open{opacity:1;pointer-events:all}
+.mbd{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(10px)}
+.mbox{position:relative;z-index:1;background:#111118;border:1px solid var(--border);border-radius:28px;padding:48px;max-width:480px;width:100%;transform:scale(.9) translateY(20px);transition:transform .4s var(--ease);box-shadow:0 40px 120px rgba(0,0,0,.6)}
+#lead-modal.open .mbox{transform:scale(1) translateY(0)}
+.mclose{position:absolute;top:18px;right:18px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background .3s,color .3s}
+.mclose:hover{background:rgba(255,255,255,.1);color:var(--text)}
+.mbadge{display:inline-flex;align-items:center;gap:7px;background:rgba(79,142,247,.1);border:1px solid rgba(79,142,247,.28);color:var(--blue);padding:5px 14px;border-radius:100px;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+.mtitle{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}
+.msub{color:var(--muted);font-size:.93rem;margin-bottom:28px;line-height:1.65}
+.msub-btn{width:100%;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;padding:14px;border-radius:12px;font-weight:700;font-size:.98rem;margin-top:6px;transition:transform .3s var(--ease),box-shadow .3s}
+.msub-btn:hover{transform:scale(1.02);box-shadow:0 20px 60px rgba(79,142,247,.4)}
+
+/* ===== CHATBOT ===== */
+#chatbot{position:fixed;bottom:96px;right:24px;z-index:9990;width:355px}
+.chat-box{background:#111118;border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.6);transform:scale(.95) translateY(20px) translateX(20px);opacity:0;pointer-events:none;transition:all .4s var(--ease)}
+.chat-box.open{transform:scale(1) translateY(0) translateX(0);opacity:1;pointer-events:all}
+.chat-hdr{background:linear-gradient(135deg,rgba(79,142,247,.18),rgba(139,92,246,.18));padding:16px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+.chat-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:1.05rem}
+.chat-nm{font-weight:700;font-size:.93rem}
+.chat-st{font-size:.72rem;color:var(--green);display:flex;align-items:center;gap:5px}
+.chat-st::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;animation:bpulse 2s infinite}
+.chat-xbtn{margin-left:auto;color:var(--muted);font-size:1.1rem;transition:color .3s}
+.chat-xbtn:hover{color:var(--text)}
+.chat-msgs{height:290px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:11px}
+.chat-msgs::-webkit-scrollbar{width:4px}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.msg{max-width:85%;padding:11px 15px;border-radius:16px;font-size:.875rem;line-height:1.55;animation:msgin .3s var(--ease)}
+@keyframes msgin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.msg.bot{background:rgba(255,255,255,.05);border:1px solid var(--border);border-bottom-left-radius:4px;align-self:flex-start}
+.msg.user{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.chat-quick{padding:8px 14px 0;display:flex;flex-wrap:wrap;gap:7px}
+.qbtn{background:rgba(79,142,247,.1);border:1px solid rgba(79,142,247,.28);color:var(--blue);padding:5px 12px;border-radius:100px;font-size:.76rem;font-weight:600;transition:background .3s,transform .2s}
+.qbtn:hover{background:rgba(79,142,247,.2);transform:scale(1.04)}
+.chat-inp-wrap{padding:14px;display:flex;gap:9px;border-top:1px solid var(--border)}
+.chat-inp{flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text);padding:9px 13px;border-radius:9px;font-family:inherit;font-size:.85rem;outline:none;transition:border-color .3s}
+.chat-inp:focus{border-color:var(--blue)}
+.chat-snd{background:var(--blue);color:#fff;width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;transition:background .3s,transform .2s}
+.chat-snd:hover{background:var(--purple);transform:scale(1.06)}
+#chat-toggle{position:fixed;bottom:24px;right:24px;z-index:9991;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-size:1.3rem;box-shadow:0 8px 30px rgba(79,142,247,.5);transition:transform .3s var(--ease),box-shadow .3s}
+#chat-toggle::before{content:'';position:absolute;inset:-4px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));opacity:.3;animation:ctpulse 2s ease-in-out infinite}
+@keyframes ctpulse{0%,100%{transform:scale(1);opacity:.3}50%{transform:scale(1.35);opacity:0}}
+#chat-toggle:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(79,142,247,.6)}
+
+/* ===== WA STICKY ===== */
+#wa-sticky{position:fixed;bottom:24px;left:24px;z-index:9992;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;padding:12px 18px;border-radius:100px;font-weight:700;font-size:.85rem;box-shadow:0 8px 30px rgba(37,211,102,.4);transition:transform .3s var(--ease),box-shadow .3s}
+#wa-sticky:hover{transform:scale(1.05);box-shadow:0 12px 40px rgba(37,211,102,.5)}
+#wa-sticky svg{width:18px;height:18px;fill:#fff}
+
+/* ===== PWA PROMPT ===== */
+#pwa-prompt{position:fixed;bottom:88px;left:24px;z-index:9993;background:#111118;border:1px solid var(--border);border-radius:16px;padding:18px 22px;max-width:270px;box-shadow:0 20px 60px rgba(0,0,0,.5);transform:translateY(20px);opacity:0;pointer-events:none;transition:all .4s var(--ease)}
+#pwa-prompt.show{transform:translateY(0);opacity:1;pointer-events:all}
+.pwa-t{font-weight:700;font-size:.93rem;margin-bottom:5px}
+.pwa-s{font-size:.78rem;color:var(--muted);margin-bottom:14px;line-height:1.55}
+.pwa-btns{display:flex;gap:9px}
+.pwa-ins{flex:1;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;padding:8px;border-radius:8px;font-size:.8rem;font-weight:700;transition:opacity .3s}
+.pwa-ins:hover{opacity:.88}
+.pwa-dis{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);padding:8px 12px;border-radius:8px;font-size:.8rem;transition:background .3s}
+.pwa-dis:hover{background:rgba(255,255,255,.1)}
+.pwa-x{position:absolute;top:8px;right:10px;color:var(--muted);font-size:.85rem}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  #nav,#nav.scrolled{padding-left:24px;padding-right:24px}
+  .bento{grid-template-columns:1fr}
+  .cgrid{grid-template-columns:1fr;gap:40px}
+  .fg-grid{grid-template-columns:1fr 1fr;gap:40px}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .hero-title{font-size:clamp(2.2rem,8vw,3.5rem)}
+  .hero-stats{gap:30px}
+  .bento{grid-template-columns:1fr}
+  .fg-grid{grid-template-columns:1fr}
+  .tl-line-wrap{display:none}
+  .tl-step{grid-template-columns:1fr}
+  .tl-step .step-box,.tl-step .step-mock,.tl-step .step-node-col{grid-column:1!important;grid-row:auto!important}
+  #chatbot{right:0;left:0;margin:0 24px;width:auto}
+  .frow{grid-template-columns:1fr}
+  .fbot{flex-direction:column;text-align:center}
+  .sw{padding:70px 22px}
+  .cgrid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hero-btns{flex-direction:column;align-items:center}
+  .mbox{padding:30px 22px}
+  .wa-btn span{display:none}
+}
+</style>
+</head>
+
+<!-- ============================================================
+     BODY BEGINS
+     ============================================================ -->
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+<!-- Noise Overlay -->
+<div id="noise" aria-hidden="true"></div>
+<!-- Custom Cursor -->
+<div id="cur-dot" aria-hidden="true"></div>
+<div id="cur-ring" aria-hidden="true"></div>
+<!-- WebGL Canvas -->
+<canvas id="webgl-canvas" aria-hidden="true"></canvas>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <a href="#hero" class="logo">The<span>Digital</span>Work</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta magnetic" id="nav-cta-btn">Get a Quote</button>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<!-- Mobile Menu -->
+<div id="mob-menu" role="dialog" aria-modal="true" aria-label="Navigation">
+  <a href="#services" class="mob-link">Services</a>
+  <a href="#process" class="mob-link">Process</a>
+  <a href="#reviews" class="mob-link">Reviews</a>
+  <a href="#contact" class="mob-link">Contact</a>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero">
+  <div class="hero-badge"><span class="badge-dot"></span>Digital Agency &middot; Agra, UP</div>
+  <h1 class="hero-title" id="htitle">
+    <span class="w"><span>We</span></span>
+    <span class="w"><span>Build,</span></span>
+    <span class="w"><span>Automate</span></span>
+    <span class="w"><span>&amp;</span></span>
+    <span class="w hi"><span>GROW</span></span>
+    <span class="w"><span>Your</span></span>
+    <span class="w"><span>Business</span></span>
+  </h1>
+  <p class="hero-sub">From stunning websites to AI-powered chatbots &mdash; we turn your vision into digital reality that actually converts.</p>
+  <div class="hero-btns">
+    <button class="btn-p magnetic" id="hero-cta1">Start a Project &#x2197;</button>
+    <button class="btn-s magnetic" id="hero-cta2">Explore Services</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num" data-count="120">0</div><div class="stat-lbl">Projects Delivered</div></div>
+    <div class="stat"><div class="stat-num" data-count="98">0</div><div class="stat-lbl">% Client Satisfaction</div></div>
+    <div class="stat"><div class="stat-num" data-count="5">0</div><div class="stat-lbl">Years Experience</div></div>
+    <div class="stat"><div class="stat-num" data-count="40">0</div><div class="stat-lbl">+ Businesses Grown</div></div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"><span>Scroll</span><div class="s-line"></div></div>
+</section>
+
+<!-- ==================== MARQUEE ==================== -->
+<div class="mq-section" aria-hidden="true">
+  <div class="mq-track">
+    <div class="mq-inner">
+      <span class="mq-item">Website Development <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">AI Chatbot &amp; Automation <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Mobile App Development <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Digital Marketing &amp; Growth <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">SEO Optimization <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">UI/UX Design <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Website Development <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">AI Chatbot &amp; Automation <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Mobile App Development <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Digital Marketing &amp; Growth <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">SEO Optimization <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">UI/UX Design <span class="mq-sep">&#10022;</span></span>
+    </div>
+  </div>
+</div>
+<div class="mq-section" style="margin-top:-1px" aria-hidden="true">
+  <div class="mq-track">
+    <div class="mq-inner rev">
+      <span class="mq-item">Agra <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Delhi NCR <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Mumbai <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Pune <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Bengaluru <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Hyderabad <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Agra <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Delhi NCR <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Mumbai <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Pune <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Bengaluru <span class="mq-sep">&#10022;</span></span>
+      <span class="mq-item">Hyderabad <span class="mq-sep">&#10022;</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SERVICES ==================== -->
+<section id="services">
+  <div class="sw">
+    <div class="sec-label fade-up">Our Services</div>
+    <h2 class="sec-title fade-up d1">Everything you need<br>to dominate digital</h2>
+    <p class="sec-sub fade-up d2">Four focused services, one powerful team. We handle the tech so you can handle business.</p>
+    <div class="bento">
+      <!-- Website Development -->
+      <div class="scard fade-up" data-c="blue">
+        <div class="cicon">&#127760;</div>
+        <div class="ctag" data-c="blue">Web</div>
+        <div class="ctitle">Website Development</div>
+        <p class="cdesc">Lightning-fast, SEO-ready websites that convert visitors into customers. From landing pages to full e-commerce solutions.</p>
+        <ul class="cfeats">
+          <li>Custom design &amp; development</li>
+          <li>E-commerce &amp; payment integration</li>
+          <li>Core Web Vitals optimized</li>
+          <li>CMS &amp; admin dashboard</li>
+          <li>SSL, hosting &amp; maintenance</li>
+        </ul>
+        <a href="https://wa.me/917617555488?text=Hi%2C+I%27m+interested+in+Website+Development" target="_blank" rel="noopener" class="cbtn magnetic">Contact for Price &#8594;</a>
+      </div>
+      <!-- AI Chatbot -->
+      <div class="scard fade-up d1" data-c="purple">
+        <div class="cicon">&#129302;</div>
+        <div class="ctag" data-c="purple">AI</div>
+        <div class="ctitle">AI Chatbot &amp; Automation</div>
+        <p class="cdesc">Smart AI chatbots that handle leads, support, and sales 24/7. Automate repetitive tasks and scale without hiring.</p>
+        <ul class="cfeats">
+          <li>Custom AI chatbot for your business</li>
+          <li>WhatsApp &amp; website integration</li>
+          <li>Lead capture &amp; qualification</li>
+          <li>Workflow automation (Zapier/Make)</li>
+          <li>CRM &amp; email automation</li>
+        </ul>
+        <a href="https://wa.me/917617555488?text=Hi%2C+I%27m+interested+in+AI+Chatbot+%26+Automation" target="_blank" rel="noopener" class="cbtn magnetic">Contact for Price &#8594;</a>
+      </div>
+      <!-- Mobile App -->
+      <div class="scard fade-up d2" data-c="green">
+        <div class="cicon">&#128241;</div>
+        <div class="ctag" data-c="green">App</div>
+        <div class="ctitle">Mobile App Development</div>
+        <p class="cdesc">Cross-platform mobile apps for Android &amp; iOS that users love. From MVP to full-scale product launch.</p>
+        <ul class="cfeats">
+          <li>React Native / Flutter</li>
+          <li>iOS &amp; Android deployment</li>
+          <li>UI/UX design included</li>
+          <li>Push notifications &amp; analytics</li>
+          <li>App Store &amp; Play Store submission</li>
+        </ul>
+        <a href="https://wa.me/917617555488?text=Hi%2C+I%27m+interested+in+Mobile+App+Development" target="_blank" rel="noopener" class="cbtn magnetic">Contact for Price &#8594;</a>
+      </div>
+      <!-- Digital Marketing -->
+      <div class="scard fade-up d3" data-c="gold">
+        <div class="cicon">&#128200;</div>
+        <div class="ctag" data-c="gold">Growth</div>
+        <div class="ctitle">Digital Marketing &amp; Growth</div>
+        <p class="cdesc">Data-driven campaigns that bring real leads, not just impressions. We grow your brand where your customers are.</p>
+        <ul class="cfeats">
+          <li>Google Ads &amp; Meta Ads</li>
+          <li>SEO &amp; content marketing</li>
+          <li>Social media management</li>
+          <li>Email &amp; WhatsApp campaigns</li>
+          <li>Monthly analytics reports</li>
+        </ul>
+        <a href="https://wa.me/917617555488?text=Hi%2C+I%27m+interested+in+Digital+Marketing+%26+Growth" target="_blank" rel="noopener" class="cbtn magnetic">Contact for Price &#8594;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROCESS / TIMELINE ==================== -->
+<section id="process">
+  <div class="sw">
+    <div class="ph">
+      <div class="sec-label fade-up" style="justify-content:center">Our Process</div>
+      <h2 class="sec-title fade-up d1" style="text-align:center">How we build<br>your success</h2>
+      <p class="sec-sub fade-up d2" style="margin:0 auto;text-align:center">A transparent four-step journey from idea to launch &mdash; collaborative and always on time.</p>
+    </div>
+    <div class="tl" id="timeline">
+      <div class="tl-line-wrap"><div class="tl-line" id="tl-line"></div></div>
+      <!-- Step 1 -->
+      <div class="tl-step fade-up">
+        <div class="step-box">
+          <div class="step-num">Step 01</div>
+          <div class="step-title">Discovery &amp; Strategy</div>
+          <p class="step-desc">We deep-dive into your business, goals, and audience. Competitor analysis, user research, and a crystal-clear roadmap before we write a single line of code.</p>
+        </div>
+        <div class="step-node-col"><div class="step-node">01</div></div>
+        <div class="step-mock">&#128269;</div>
+      </div>
+      <!-- Step 2 -->
+      <div class="tl-step fade-up d1">
+        <div class="step-mock">&#127912;</div>
+        <div class="step-node-col"><div class="step-node">02</div></div>
+        <div class="step-box">
+          <div class="step-num">Step 02</div>
+          <div class="step-title">Design &amp; Prototype</div>
+          <p class="step-desc">Pixel-perfect Figma designs reviewed with you before development. Interactive prototypes so you see exactly what you're getting, no surprises.</p>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div class="tl-step fade-up d2">
+        <div class="step-box">
+          <div class="step-num">Step 03</div>
+          <div class="step-title">Build &amp; Integrate</div>
+          <p class="step-desc">Agile sprints with weekly demos. Clean, scalable code with every integration tested. Full visibility via shared project dashboard.</p>
+        </div>
+        <div class="step-node-col"><div class="step-node">03</div></div>
+        <div class="step-mock">&#9889;</div>
+      </div>
+      <!-- Step 4 -->
+      <div class="tl-step fade-up d3">
+        <div class="step-mock">&#128640;</div>
+        <div class="step-node-col"><div class="step-node">04</div></div>
+        <div class="step-box">
+          <div class="step-num">Step 04</div>
+          <div class="step-title">Launch &amp; Grow</div>
+          <p class="step-desc">Go live with confidence. We handle deployment, monitoring, and provide 30 days of post-launch support. Then we measure, optimize, and scale.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== REVIEWS ==================== -->
+<section id="reviews">
+  <div class="sw" style="padding-bottom:36px">
+    <div class="rv-header">
+      <div class="sec-label fade-up" style="justify-content:center">Reviews</div>
+      <h2 class="sec-title fade-up d1" style="text-align:center">Clients who grew<br>with us</h2>
+    </div>
+  </div>
+  <div class="rv-wrap">
+    <div class="rv-track" id="rv-track" aria-label="Client reviews">
+      <div class="rv-card" style="--glow:var(--blue)"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="rv-text">"TheDigitalWork built our e-commerce site in 3 weeks and our sales tripled in the first month. Their attention to detail is unmatched &mdash; every pixel is perfect."</p><div class="rv-author"><div class="rv-av" style="background:linear-gradient(135deg,#4f8ef7,#2563eb);--aglow:rgba(79,142,247,.5)">RK</div><div><div class="rv-name">Rahul Kumar</div><div class="rv-role">Founder, TechMart India</div></div></div></div>
+      <div class="rv-card" style="--glow:var(--purple)"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="rv-text">"The AI chatbot they built handles 80% of our customer queries automatically. We saved 2 full-time support salaries while improving response time to 2 seconds."</p><div class="rv-author"><div class="rv-av" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);--aglow:rgba(139,92,246,.5)">PS</div><div><div class="rv-name">Priya Sharma</div><div class="rv-role">CEO, StyleKart</div></div></div></div>
+      <div class="rv-card" style="--glow:var(--green)"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="rv-text">"Our mobile app hit 10,000 downloads in the first 2 months. The team's process was incredibly smooth &mdash; weekly updates, zero delays, and the UI is stunning."</p><div class="rv-author"><div class="rv-av" style="background:linear-gradient(135deg,#10b981,#059669);--aglow:rgba(16,185,129,.5)">AM</div><div><div class="rv-name">Amit Mishra</div><div class="rv-role">MD, FoodRush Agra</div></div></div></div>
+      <div class="rv-card" style="--glow:var(--gold)"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="rv-text">"Our Google Ads ROAS went from 1.8x to 6.2x after TheDigitalWork took over our campaigns. They don't just run ads &mdash; they understand business growth."</p><div class="rv-author"><div class="rv-av" style="background:linear-gradient(135deg,#f59e0b,#d97706);--aglow:rgba(245,158,11,.5)">VG</div><div><div class="rv-name">Vikas Gupta</div><div class="rv-role">Director, VG Traders</div></div></div></div>
+      <div class="rv-card" style="--glow:var(--pink)"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="rv-text">"From our first call to launch took exactly 3 weeks. The website they made for our clinic gets 500+ organic visitors per month now. Best investment this year."</p><div class="rv-author"><div class="rv-av" style="background:linear-gradient(135deg,#ec4899,#be185d);--aglow:rgba(236,72,153,.5)">NK</div><div><div class="rv-name">Neha Kapoor</div><div class="rv-role">Dr., Kapoor Wellness Clinic</div></div></div></div>
+      <!-- Duplicates for seamless loop -->
+      <div class="rv-card" style="--glow:var(--blue)"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="rv-text">"TheDigitalWork built our e-commerce site in 3 weeks and our sales tripled in the first month. Their attention to detail is unmatched &mdash; every pixel is perfect."</p><div class="rv-author"><div class="rv-av" style="background:linear-gradient(135deg,#4f8ef7,#2563eb);--aglow:rgba(79,142,247,.5)">RK</div><div><div class="rv-name">Rahul Kumar</div><div class="rv-role">Founder, TechMart India</div></div></div></div>
+      <div class="rv-card" style="--glow:var(--purple)"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="rv-text">"The AI chatbot they built handles 80% of our customer queries automatically. We saved 2 full-time support salaries while improving response time to 2 seconds."</p><div class="rv-author"><div class="rv-av" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);--aglow:rgba(139,92,246,.5)">PS</div><div><div class="rv-name">Priya Sharma</div><div class="rv-role">CEO, StyleKart</div></div></div></div>
+      <div class="rv-card" style="--glow:var(--green)"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="rv-text">"Our mobile app hit 10,000 downloads in the first 2 months. The team's process was incredibly smooth &mdash; weekly updates, zero delays, and the UI is stunning."</p><div class="rv-author"><div class="rv-av" style="background:linear-gradient(135deg,#10b981,#059669);--aglow:rgba(16,185,129,.5)">AM</div><div><div class="rv-name">Amit Mishra</div><div class="rv-role">MD, FoodRush Agra</div></div></div></div>
+      <div class="rv-card" style="--glow:var(--gold)"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="rv-text">"Our Google Ads ROAS went from 1.8x to 6.2x after TheDigitalWork took over our campaigns. They don't just run ads &mdash; they understand business growth."</p><div class="rv-author"><div class="rv-av" style="background:linear-gradient(135deg,#f59e0b,#d97706);--aglow:rgba(245,158,11,.5)">VG</div><div><div class="rv-name">Vikas Gupta</div><div class="rv-role">Director, VG Traders</div></div></div></div>
+      <div class="rv-card" style="--glow:var(--pink)"><div class="rv-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="rv-text">"From our first call to launch took exactly 3 weeks. The website they made for our clinic gets 500+ organic visitors per month now. Best investment this year."</p><div class="rv-author"><div class="rv-av" style="background:linear-gradient(135deg,#ec4899,#be185d);--aglow:rgba(236,72,153,.5)">NK</div><div><div class="rv-name">Neha Kapoor</div><div class="rv-role">Dr., Kapoor Wellness Clinic</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact">
+  <div class="sw">
+    <div class="sec-label fade-up">Contact</div>
+    <h2 class="sec-title fade-up d1">Let's build something<br>great together</h2>
+    <p class="sec-sub fade-up d2">Drop us a message or ping us on WhatsApp. We respond within 2 hours.</p>
+    <div class="cgrid">
+      <!-- Left: Info -->
+      <div class="fade-up">
+        <div class="ci-lbl">Phone / WhatsApp</div>
+        <div class="ci-val"><a href="tel:+917617555488">+91 76175 55488</a></div>
+        <div class="ci-lbl">Email</div>
+        <div class="ci-val"><a href="mailto:wasim64malik@gmail.com">wasim64malik@gmail.com</a></div>
+        <div class="ci-lbl">Address</div>
+        <div class="ci-val">62/24, Shashtripuram, Near Delhi Public School,<br>Agra &ndash; 282001, Uttar Pradesh</div>
+        <a href="https://wa.me/917617555488?text=Hi+TheDigitalWork%2C+I%27d+like+to+discuss+a+project!" target="_blank" rel="noopener" class="wa-btn magnetic">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span>Chat on WhatsApp</span>
+        </a>
+      </div>
+      <!-- Right: Form -->
+      <div class="fade-up d2">
+        <div class="cform-box">
+          <form name="contact-form" data-netlify="true" method="POST" id="contact-form">
+            <input type="hidden" name="form-name" value="contact-form">
+            <div class="frow">
+              <div class="fg"><label class="fl" for="cf-name">Your Name</label><input class="fi" type="text" id="cf-name" name="name" placeholder="Rahul Kumar" required autocomplete="name"></div>
+              <div class="fg"><label class="fl" for="cf-phone">Phone</label><input class="fi" type="tel" id="cf-phone" name="phone" placeholder="+91 98765 43210" autocomplete="tel"></div>
+            </div>
+            <div class="fg"><label class="fl" for="cf-email">Email</label><input class="fi" type="email" id="cf-email" name="email" placeholder="you@company.com" required autocomplete="email"></div>
+            <div class="fg">
+              <label class="fl" for="cf-service">Service</label>
+              <select class="fs" id="cf-service" name="service">
+                <option value="">Select a service</option>
+                <option value="website">Website Development</option>
+                <option value="ai">AI Chatbot &amp; Automation</option>
+                <option value="app">Mobile App Development</option>
+                <option value="marketing">Digital Marketing &amp; Growth</option>
+                <option value="other">Something Else</option>
+              </select>
+            </div>
+            <div class="fg"><label class="fl" for="cf-msg">Message</label><textarea class="fta" id="cf-msg" name="message" placeholder="Tell us about your project..." required></textarea></div>
+            <button type="submit" class="fsub magnetic">Send Message &#8594;</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer id="footer">
+  <div class="fg-grid">
+    <div>
+      <div class="fb-name">The<span>Digital</span>Work</div>
+      <p class="fb-tag">We build digital experiences that drive real growth. Your success is our portfolio.</p>
+      <div class="socials">
+        <a href="https://wa.me/917617555488" target="_blank" rel="noopener" class="sl" aria-label="WhatsApp">&#128172;</a>
+        <a href="mailto:wasim64malik@gmail.com" class="sl" aria-label="Email">&#9993;&#65039;</a>
+        <a href="#" class="sl" aria-label="Instagram">&#128247;</a>
+        <a href="#" class="sl" aria-label="LinkedIn">&#128188;</a>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Explore</div>
+      <ul class="fl-list">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Our Process</a></li>
+        <li><a href="#reviews">Client Reviews</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fh">Connect</div>
+      <p style="color:var(--muted);font-size:.88rem;line-height:1.75;margin-bottom:18px">62/24, Shashtripuram<br>Near Delhi Public School<br>Agra &ndash; 282001, UP</p>
+      <a href="https://wa.me/917617555488?text=Hi+TheDigitalWork!" target="_blank" rel="noopener" class="wa-pill">&#128172; +91 76175 55488</a>
+    </div>
+    <div>
+      <div class="fh">Legal</div>
+      <ul class="fl-list">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <div class="fcopy">&#169; 2026 TheDigitalWork. All rights reserved. Made with &#10084;&#65039; in Agra, India.</div>
+    <div class="fleg"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Sitemap</a></div>
+  </div>
+</footer>
+
+<!-- ==================== LEAD MODAL ==================== -->
+<div id="lead-modal" role="dialog" aria-modal="true" aria-label="Free consultation offer" aria-hidden="true">
+  <div class="mbd" id="mbd"></div>
+  <div class="mbox">
+    <button class="mclose" id="mclose" aria-label="Close">&#10005;</button>
+    <div class="mbadge">&#127873; Free Consultation</div>
+    <h2 class="mtitle">Get a Free Strategy<br>Call Worth &#8377;2,000</h2>
+    <p class="msub">Tell us about your project and we'll share exactly what it takes to grow your business digitally &mdash; no pitch, just value.</p>
+    <form name="lead-capture" data-netlify="true" method="POST" id="lead-form">
+      <input type="hidden" name="form-name" value="lead-capture">
+      <div class="fg"><label class="fl" for="lf-name">Your Name</label><input class="fi" type="text" id="lf-name" name="name" placeholder="Your full name" required autocomplete="name"></div>
+      <div class="fg"><label class="fl" for="lf-phone">WhatsApp Number</label><input class="fi" type="tel" id="lf-phone" name="phone" placeholder="+91 98765 43210" required autocomplete="tel"></div>
+      <div class="fg">
+        <label class="fl" for="lf-service">I need help with</label>
+        <select class="fs" id="lf-service" name="service" required>
+          <option value="">Select a service</option>
+          <option value="website">Website Development</option>
+          <option value="ai">AI Chatbot &amp; Automation</option>
+          <option value="app">Mobile App Development</option>
+          <option value="marketing">Digital Marketing &amp; Growth</option>
+        </select>
+      </div>
+      <button type="submit" class="msub-btn magnetic">Claim Free Call &#128640;</button>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== AI CHATBOT ==================== -->
+<div id="chatbot">
+  <div class="chat-box" id="chat-box" role="dialog" aria-label="AI Assistant">
+    <div class="chat-hdr">
+      <div class="chat-av">&#129302;</div>
+      <div><div class="chat-nm">TDW Assistant</div><div class="chat-st">Online now</div></div>
+      <button class="chat-xbtn" id="chat-xbtn" aria-label="Close chat">&#10005;</button>
+    </div>
+    <div class="chat-msgs" id="chat-msgs" aria-live="polite"></div>
+    <div class="chat-quick" id="chat-quick">
+      <button class="qbtn">Pricing</button>
+      <button class="qbtn">Services</button>
+      <button class="qbtn">Timeline</button>
+      <button class="qbtn">Portfolio</button>
+      <button class="qbtn">Location</button>
+    </div>
+    <div class="chat-inp-wrap">
+      <input class="chat-inp" type="text" id="chat-inp" placeholder="Ask anything..." aria-label="Chat message">
+      <button class="chat-snd" id="chat-snd" aria-label="Send">&#8593;</button>
+    </div>
+  </div>
+</div>
+<button id="chat-toggle" aria-label="Open AI Assistant">&#128172;</button>
+
+<!-- ==================== WA STICKY ==================== -->
+<a href="https://wa.me/917617555488?text=Hi+TheDigitalWork%2C+I%27d+like+to+discuss+a+project!" id="wa-sticky" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  WhatsApp Us
+</a>
+
+<!-- ==================== PWA INSTALL PROMPT ==================== -->
+<div id="pwa-prompt" role="dialog" aria-label="Install app">
+  <button class="pwa-x" id="pwa-x" aria-label="Close">&#10005;</button>
+  <div class="pwa-t">&#128640; Install TheDigitalWork</div>
+  <p class="pwa-s">Add to your home screen for faster access and offline browsing.</p>
+  <div class="pwa-btns">
+    <button class="pwa-ins" id="pwa-install-btn">Install App</button>
+    <button class="pwa-dis" id="pwa-dismiss">Not now</button>
+  </div>
+</div>
+
+<!-- ==================== CDN SCRIPTS ==================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+(function(){
+'use strict';
+
+/* ============================================================
+   1. LENIS SMOOTH SCROLL
+   ============================================================ */
+var lenis;
+try {
+  lenis = new Lenis({duration:1.2,easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t))},direction:'vertical',gestureDirection:'vertical',smooth:true,mouseMultiplier:1.1,smoothTouch:false,touchMultiplier:2,infinite:false});
+  function rafLoop(time){lenis.raf(time);requestAnimationFrame(rafLoop)}
+  requestAnimationFrame(rafLoop);
+} catch(e){}
+
+/* ============================================================
+   2. PROGRESS BAR
+   ============================================================ */
+var pbar = document.getElementById('progress-bar');
+window.addEventListener('scroll',function(){
+  var s = document.documentElement.scrollTop || document.body.scrollTop;
+  var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  if(pbar) pbar.style.width = (s/h*100)+'%';
+});
+
+/* ============================================================
+   3. CUSTOM CURSOR
+   ============================================================ */
+var dot = document.getElementById('cur-dot');
+var ring = document.getElementById('cur-ring');
+var mx=window.innerWidth/2, my=window.innerHeight/2;
+var rx=mx, ry=my;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;if(dot){dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)'}});
+(function curRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  if(ring){ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)'}
+  requestAnimationFrame(curRing);
+})();
+var hoverEls = document.querySelectorAll('a,button,.scard,.rv-card,.step-box');
+hoverEls.forEach(function(el){
+  el.addEventListener('mouseenter',function(){document.body.classList.add('c-hover')});
+  el.addEventListener('mouseleave',function(){document.body.classList.remove('c-hover')});
+});
+
+/* ============================================================
+   4. NAVBAR SCROLL
+   ============================================================ */
+var nav = document.getElementById('nav');
+window.addEventListener('scroll',function(){
+  if(window.scrollY>60){if(nav)nav.classList.add('scrolled')}
+  else{if(nav)nav.classList.remove('scrolled')}
+});
+
+/* ============================================================
+   5. HAMBURGER / MOBILE MENU
+   ============================================================ */
+var hbtn = document.getElementById('hamburger');
+var mmenu = document.getElementById('mob-menu');
+if(hbtn && mmenu){
+  hbtn.addEventListener('click',function(){
+    var open = mmenu.classList.toggle('open');
+    hbtn.classList.toggle('open',open);
+    hbtn.setAttribute('aria-expanded',open);
+    document.body.style.overflow = open?'hidden':'';
+  });
+  mmenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      mmenu.classList.remove('open');
+      hbtn.classList.remove('open');
+      hbtn.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+    });
+  });
+}
+
+/* ============================================================
+   6. HERO CTA BUTTONS
+   ============================================================ */
+var h1=document.getElementById('hero-cta1');
+var h2=document.getElementById('hero-cta2');
+var ncta=document.getElementById('nav-cta-btn');
+function scrollTo(id){var el=document.getElementById(id);if(el){if(lenis){lenis.scrollTo(el,{offset:-80,duration:1.4})}else{el.scrollIntoView({behavior:'smooth'})}}}
+if(h1) h1.addEventListener('click',function(){scrollTo('contact')});
+if(h2) h2.addEventListener('click',function(){scrollTo('services')});
+if(ncta) ncta.addEventListener('click',function(){scrollTo('contact')});
+
+/* ============================================================
+   7. GSAP ANIMATIONS
+   ============================================================ */
+gsap.registerPlugin(ScrollTrigger);
+
+// Hero word reveal
+var words = document.querySelectorAll('.hero-title .w span');
+gsap.to(words,{translateY:'0%',duration:.9,stagger:.08,ease:'power3.out',delay:.3});
+// Hero badge, sub, btns, stats
+var badge = document.querySelector('.hero-badge');
+var sub = document.querySelector('.hero-sub');
+var btns = document.querySelector('.hero-btns');
+var stats = document.querySelector('.hero-stats');
+gsap.to([badge,sub,btns,stats],{opacity:1,translateY:0,duration:.9,stagger:.15,ease:'power2.out',delay:.7});
+
+// Scroll-triggered fade-up
+var fuEls = document.querySelectorAll('.fade-up');
+fuEls.forEach(function(el){
+  ScrollTrigger.create({
+    trigger:el,start:'top 88%',
+    onEnter:function(){el.classList.add('vis')},
+    once:true
+  });
+});
+
+// Timeline line draw
+var tlLine = document.getElementById('tl-line');
+var tlWrap = document.getElementById('timeline');
+if(tlLine && tlWrap){
+  gsap.to(tlLine,{scaleY:1,ease:'none',scrollTrigger:{trigger:tlWrap,start:'top center',end:'bottom center',scrub:true}});
+}
+
+/* ============================================================
+   8. COUNTER ANIMATION
+   ============================================================ */
+var counters = document.querySelectorAll('.stat-num[data-count]');
+counters.forEach(function(el){
+  ScrollTrigger.create({
+    trigger:el,start:'top 90%',once:true,
+    onEnter:function(){
+      var target = parseInt(el.getAttribute('data-count'),10);
+      var duration = 2000;
+      var start = Date.now();
+      var suffix = el.nextElementSibling && el.nextElementSibling.textContent.indexOf('%')!==-1?'':'';
+      function tick(){
+        var elapsed = Date.now()-start;
+        var progress = Math.min(elapsed/duration,1);
+        var eased = 1-Math.pow(1-progress,3);
+        el.textContent = Math.round(eased*target);
+        if(progress<1) requestAnimationFrame(tick);
+        else el.textContent = target;
+      }
+      tick();
+    }
+  });
+});
+
+/* ============================================================
+   9. SERVICE CARDS 3D TILT
+   ============================================================ */
+document.querySelectorAll('.scard').forEach(function(card){
+  card.addEventListener('mousemove',function(e){
+    var r = card.getBoundingClientRect();
+    var x = (e.clientX-r.left)/r.width - 0.5;
+    var y = (e.clientY-r.top)/r.height - 0.5;
+    card.style.transform = 'translateY(-8px) rotateX('+(-y*10)+'deg) rotateY('+(x*10)+'deg)';
+  });
+  card.addEventListener('mouseleave',function(){
+    card.style.transform = '';
+  });
+});
+
+/* ============================================================
+   10. MAGNETIC EFFECT
+   ============================================================ */
+document.querySelectorAll('.magnetic').forEach(function(el){
+  el.addEventListener('mousemove',function(e){
+    var r = el.getBoundingClientRect();
+    var x = (e.clientX - r.left - r.width/2) * 0.3;
+    var y = (e.clientY - r.top - r.height/2) * 0.3;
+    el.style.transform = 'translate('+x+'px,'+y+'px) scale(1.04)';
+  });
+  el.addEventListener('mouseleave',function(){
+    el.style.transform = '';
+  });
+});
+
+/* ============================================================
+   11. WEBGL 3D BACKGROUND (Three.js r128)
+   ============================================================ */
+(function(){
+  if(!window.THREE) return;
+  var canvas = document.getElementById('webgl-canvas');
+  if(!canvas) return;
+  var renderer = new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,.1,1000);
+  camera.position.z = 6;
+
+  // Wireframe icosahedron
+  var icoGeo = new THREE.IcosahedronGeometry(1.6,1);
+  var icoMat = new THREE.MeshBasicMaterial({color:0x4f8ef7,wireframe:true,opacity:.18,transparent:true});
+  var ico = new THREE.Mesh(icoGeo,icoMat);
+  scene.add(ico);
+
+  // Wireframe torus knot
+  var tkGeo = new THREE.TorusKnotGeometry(.9,.28,80,16);
+  var tkMat = new THREE.MeshBasicMaterial({color:0x8b5cf6,wireframe:true,opacity:.12,transparent:true});
+  var tk = new THREE.Mesh(tkGeo,tkMat);
+  tk.position.set(3,1,0);
+  scene.add(tk);
+
+  // Particles
+  var pCount = 600;
+  var pGeo = new THREE.BufferGeometry();
+  var pPos = new Float32Array(pCount*3);
+  for(var i=0;i<pCount*3;i++) pPos[i]=(Math.random()-0.5)*18;
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+  var pMat = new THREE.PointsMaterial({size:.04,color:0x4f8ef7,opacity:.6,transparent:true,sizeAttenuation:true});
+  var particles = new THREE.Points(pGeo,pMat);
+  scene.add(particles);
+
+  // Second particle cluster — purple
+  var pGeo2 = new THREE.BufferGeometry();
+  var pPos2 = new Float32Array(400*3);
+  for(var j=0;j<400*3;j++) pPos2[j]=(Math.random()-0.5)*14;
+  pGeo2.setAttribute('position',new THREE.BufferAttribute(pPos2,3));
+  var pMat2 = new THREE.PointsMaterial({size:.035,color:0x8b5cf6,opacity:.4,transparent:true,sizeAttenuation:true});
+  var particles2 = new THREE.Points(pGeo2,pMat2);
+  scene.add(particles2);
+
+  var mouseX=0, mouseY=0;
+  document.addEventListener('mousemove',function(e){
+    mouseX=(e.clientX/window.innerWidth-0.5)*2;
+    mouseY=(e.clientY/window.innerHeight-0.5)*2;
+  });
+
+  var scrollY = 0;
+  window.addEventListener('scroll',function(){scrollY=window.scrollY});
+
+  window.addEventListener('resize',function(){
+    camera.aspect=window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+  });
+
+  var clock = new THREE.Clock();
+  function animateGL(){
+    requestAnimationFrame(animateGL);
+    var t = clock.getElapsedTime();
+    var sp = scrollY/window.innerHeight;
+
+    ico.rotation.x = t*0.12 + mouseY*0.2 + sp*0.5;
+    ico.rotation.y = t*0.18 + mouseX*0.2;
+    ico.rotation.z = t*0.06;
+    ico.scale.setScalar(1 + sp*0.3);
+
+    tk.rotation.x = t*0.2 + sp*0.4;
+    tk.rotation.y = t*0.15 + mouseX*0.15;
+    tk.position.x = 3 + mouseX*0.5;
+    tk.position.y = 1 + mouseY*0.3;
+
+    particles.rotation.y = t*0.04 + mouseX*0.06;
+    particles.rotation.x = t*0.02 + mouseY*0.04;
+    particles2.rotation.y = -t*0.035;
+    particles2.rotation.z = t*0.018;
+
+    camera.position.x += (mouseX*0.5 - camera.position.x)*0.04;
+    camera.position.y += (-mouseY*0.3 - camera.position.y)*0.04;
+    camera.lookAt(scene.position);
+
+    renderer.render(scene,camera);
+  }
+  animateGL();
+})();
+
+/* ============================================================
+   12. LEAD MODAL
+   ============================================================ */
+var modal = document.getElementById('lead-modal');
+var mbd = document.getElementById('mbd');
+var mclose = document.getElementById('mclose');
+
+function openModal(){
+  if(!modal) return;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+  if(document.body.style) document.body.style.overflow='hidden';
+}
+function closeModal(){
+  if(!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+
+if(!sessionStorage.getItem('tdw_modal_shown')){
+  setTimeout(function(){openModal();sessionStorage.setItem('tdw_modal_shown','1')},10000);
+}
+if(mclose) mclose.addEventListener('click',closeModal);
+if(mbd) mbd.addEventListener('click',closeModal);
+document.addEventListener('keydown',function(e){if(e.key==='Escape') closeModal()});
+
+var leadForm = document.getElementById('lead-form');
+if(leadForm){
+  leadForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name = encodeURIComponent((document.getElementById('lf-name')||{}).value||'');
+    var phone = (document.getElementById('lf-phone')||{}).value||'';
+    var service = (document.getElementById('lf-service')||{}).value||'your project';
+    var msg = encodeURIComponent('Hi TheDigitalWork! I am '+decodeURIComponent(name)+' and I am interested in '+service+'. Please contact me at '+phone+'.');
+    window.open('https://wa.me/917617555488?text='+msg,'_blank');
+    closeModal();
+  });
+}
+
+/* ============================================================
+   13. CONTACT FORM
+   ============================================================ */
+var contactForm = document.getElementById('contact-form');
+if(contactForm){
+  contactForm.addEventListener('submit',function(e){
+    var btn = contactForm.querySelector('button[type="submit"]');
+    if(btn){btn.textContent='Sending...';btn.disabled=true;}
+    // Netlify handles actual submission; re-enable after short delay for UX
+    setTimeout(function(){
+      if(btn){btn.textContent='Sent! We will contact you soon ✓';btn.style.background='linear-gradient(135deg,#10b981,#059669)';}
+    },1500);
+  });
+}
+
+/* ============================================================
+   14. AI CHATBOT
+   ============================================================ */
+var chatBox = document.getElementById('chat-box');
+var chatToggle = document.getElementById('chat-toggle');
+var chatXBtn = document.getElementById('chat-xbtn');
+var chatMsgs = document.getElementById('chat-msgs');
+var chatInp = document.getElementById('chat-inp');
+var chatSnd = document.getElementById('chat-snd');
+var chatQuick = document.getElementById('chat-quick');
+var chatOpen = false;
+
+var botResponses = {
+  'pricing': 'Our pricing depends on project scope. Website starts from ₹15,000, AI Chatbots from ₹20,000, Apps from ₹50,000, and Marketing from ₹10,000/month. Want a custom quote? 👇',
+  'price': 'Our pricing depends on project scope. Website starts from ₹15,000, AI Chatbots from ₹20,000, Apps from ₹50,000, and Marketing from ₹10,000/month. Want a custom quote? 👇',
+  'cost': 'Our pricing depends on project scope. Website starts from ₹15,000, AI Chatbots from ₹20,000, Apps from ₹50,000, and Marketing from ₹10,000/month. Want a custom quote? 👇',
+  'services': 'We offer 4 core services: 🌐 Website Development, 🤖 AI Chatbot & Automation, 📱 Mobile App Development, and 📈 Digital Marketing & Growth. Which interests you?',
+  'service': 'We offer 4 core services: 🌐 Website Development, 🤖 AI Chatbot & Automation, 📱 Mobile App Development, and 📈 Digital Marketing & Growth. Which interests you?',
+  'timeline': 'Typical timelines: Websites 2–4 weeks, AI Chatbots 1–3 weeks, Mobile Apps 6–12 weeks, Marketing campaigns start in 3–5 days. Rush delivery available!',
+  'time': 'Typical timelines: Websites 2–4 weeks, AI Chatbots 1–3 weeks, Mobile Apps 6–12 weeks, Marketing campaigns start in 3–5 days. Rush delivery available!',
+  'portfolio': 'We have delivered 120+ projects across e-commerce, healthcare, food delivery, and more. Want to see specific examples? Message us on WhatsApp for a portfolio PDF!',
+  'work': 'We have delivered 120+ projects across e-commerce, healthcare, food delivery, and more. Want to see specific examples? Message us on WhatsApp for a portfolio PDF!',
+  'location': '📍 We are based at 62/24, Shashtripuram, Near Delhi Public School, Agra - 282001, UP. We work with clients across India remotely too!',
+  'address': '📍 We are based at 62/24, Shashtripuram, Near Delhi Public School, Agra - 282001, UP. We work with clients across India remotely too!',
+  'agra': '📍 Yes, we are based in Agra! Our office is at 62/24, Shashtripuram, Near Delhi Public School, Agra - 282001.',
+  'contact': '📞 Call/WhatsApp: +91 76175 55488\n✉️ Email: wasim64malik@gmail.com\n📍 Agra, UP\n\nOr click the WhatsApp button on the page!',
+  'phone': '📞 You can reach us at +91 76175 55488 via call or WhatsApp anytime between 9AM–9PM IST!',
+  'whatsapp': '💬 Chat with us directly: wa.me/917617555488 — we respond within 2 hours!',
+  'email': '✉️ Email us at wasim64malik@gmail.com — we reply within 4 hours on business days.',
+  'process': '🚀 Our 4-step process: 1️⃣ Discovery & Strategy → 2️⃣ Design & Prototype → 3️⃣ Build & Integrate → 4️⃣ Launch & Grow. Transparent and always on time!',
+  'website': '🌐 We build custom, SEO-optimized websites starting from ₹15,000. Includes design, development, CMS, and 30-day post-launch support.',
+  'app': '📱 We build cross-platform apps (React Native/Flutter) for both iOS and Android. Projects start from ₹50,000 including UI/UX design.',
+  'chatbot': '🤖 Our AI chatbots handle leads, support, and sales 24/7. Starting from ₹20,000 with WhatsApp and website integration included.',
+  'marketing': '📈 Our digital marketing packages start from ₹10,000/month including Google Ads, Meta Ads, SEO, and monthly performance reports.',
+  'seo': '📈 Yes, all our websites come with basic SEO included. We also offer standalone SEO packages starting ₹8,000/month with guaranteed ranking improvements.',
+  'hello': 'Hello! 👋 Welcome to TheDigitalWork. I am your AI assistant. How can I help you today? Ask me about our services, pricing, or process!',
+  'hi': 'Hi there! 👋 Welcome to TheDigitalWork. I am your AI assistant. How can I help you today?',
+  'help': 'Sure! I can help with: pricing, services, timeline, portfolio, location, contact info, or our process. What would you like to know?'
+};
+
+function addMsg(text, type) {
+  var el = document.createElement('div');
+  el.className = 'msg ' + type;
+  el.textContent = text;
+  if(chatMsgs) { chatMsgs.appendChild(el); chatMsgs.scrollTop = chatMsgs.scrollHeight; }
+}
+
+function botReply(input) {
+  var q = input.toLowerCase().trim();
+  var response = null;
+  var keys = Object.keys(botResponses);
+  for(var i=0; i<keys.length; i++) {
+    if(q.indexOf(keys[i]) !== -1) { response = botResponses[keys[i]]; break; }
+  }
+  if(!response) {
+    response = 'That is a great question! For detailed answers, let me connect you with our team directly. 👇\n\nClick the WhatsApp button to chat with us now!';
+  }
+  setTimeout(function(){
+    addMsg(response, 'bot');
+    // If no match found, add WA escalation button
+    if(response.indexOf('WhatsApp button') !== -1 || response.indexOf('WhatsApp') !== -1) {
+      var btn = document.createElement('button');
+      btn.className = 'qbtn';
+      btn.textContent = '💬 Open WhatsApp';
+      btn.style.margin = '8px 14px';
+      btn.addEventListener('click', function(){
+        window.open('https://wa.me/917617555488?text=Hi+TheDigitalWork%2C+I+need+help+with+'+encodeURIComponent(input),'_blank');
+      });
+      if(chatMsgs){chatMsgs.appendChild(btn);chatMsgs.scrollTop=chatMsgs.scrollHeight;}
+    }
+  }, 600);
+}
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  if(chatBox) chatBox.classList.toggle('open', chatOpen);
+  if(chatToggle) chatToggle.innerHTML = chatOpen ? '&#10005;' : '&#128172;';
+  if(chatOpen && chatMsgs && chatMsgs.children.length === 0) {
+    setTimeout(function(){addMsg('👋 Hello! I am the TDW AI Assistant. Ask me about pricing, services, timeline, or anything else!', 'bot')}, 300);
+  }
+}
+
+if(chatToggle) chatToggle.addEventListener('click', toggleChat);
+if(chatXBtn) chatXBtn.addEventListener('click', toggleChat);
+
+function sendMsg() {
+  var val = chatInp ? chatInp.value.trim() : '';
+  if(!val) return;
+  addMsg(val, 'user');
+  chatInp.value = '';
+  botReply(val);
+}
+if(chatSnd) chatSnd.addEventListener('click', sendMsg);
+if(chatInp) chatInp.addEventListener('keydown', function(e){ if(e.key==='Enter') sendMsg(); });
+
+if(chatQuick){
+  chatQuick.querySelectorAll('.qbtn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var t = btn.textContent.trim();
+      addMsg(t, 'user');
+      botReply(t);
+    });
+  });
+}
+
+/* ============================================================
+   15. PWA INSTALL PROMPT
+   ============================================================ */
+var pwaPrompt = document.getElementById('pwa-prompt');
+var pwaInstall = document.getElementById('pwa-install-btn');
+var pwaDismiss = document.getElementById('pwa-dismiss');
+var pwaX = document.getElementById('pwa-x');
+var deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', function(e){
+  e.preventDefault();
+  deferredInstallPrompt = e;
+});
+
+if(!sessionStorage.getItem('tdw_pwa_dismissed')){
+  setTimeout(function(){
+    if(pwaPrompt) pwaPrompt.classList.add('show');
+  }, 7000);
+}
+
+function closePWA(){
+  if(pwaPrompt) pwaPrompt.classList.remove('show');
+  sessionStorage.setItem('tdw_pwa_dismissed','1');
+}
+
+if(pwaInstall){
+  pwaInstall.addEventListener('click', function(){
+    if(deferredInstallPrompt){
+      deferredInstallPrompt.prompt();
+      deferredInstallPrompt.userChoice.then(function(){ deferredInstallPrompt=null; });
+    }
+    closePWA();
+  });
+}
+if(pwaDismiss) pwaDismiss.addEventListener('click', closePWA);
+if(pwaX) pwaX.addEventListener('click', closePWA);
+
+/* ============================================================
+   16. SCROLL-BASED SECTION CLIP-PATH via GSAP (Active Theory style)
+   ============================================================ */
+var sections = document.querySelectorAll('#services,#process,#reviews,#contact');
+sections.forEach(function(sec){
+  gsap.fromTo(sec, {clipPath:'inset(6% 0 0 0)'}, {
+    clipPath:'inset(0% 0 0 0)',
+    ease:'power2.out',
+    scrollTrigger:{trigger:sec,start:'top 90%',end:'top 60%',scrub:.5}
+  });
+});
+
+/* ============================================================
+   17. HOVER CURSOR UPDATE FOR DYNAMICALLY ADDED ELEMENTS
+   ============================================================ */
+function refreshHover(){
+  document.querySelectorAll('a,button,.scard,.rv-card,.step-box').forEach(function(el){
+    if(!el.dataset.hoverBound){
+      el.dataset.hoverBound='1';
+      el.addEventListener('mouseenter',function(){document.body.classList.add('c-hover')});
+      el.addEventListener('mouseleave',function(){document.body.classList.remove('c-hover')});
+    }
+  });
+}
+setInterval(refreshHover,2000);
+
+})();
+</script>
+</body>
+</html>
