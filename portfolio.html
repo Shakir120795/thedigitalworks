@@ -83,7 +83,7 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 
 /* ===== PORTFOLIO PAGE ===== */
 .portfolio-main{padding-top:150px;padding-bottom:76px}
-.portfolio-hero{position:relative;z-index:1;max-width:1020px;margin:0 auto 96px}
+.portfolio-hero{position:relative;z-index:1;max-width:1200px;margin:0 auto 42px}
 .pf-eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--blue);font-size:.78rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
 .pf-eyebrow:before{content:"";width:24px;height:1px;background:var(--blue);box-shadow:0 0 14px rgba(79,142,247,.8)}
 .portfolio-hero h1{max-width:990px;font-size:clamp(2.8rem,6vw,5.25rem);line-height:1.03;letter-spacing:-.065em;margin:20px 0 24px;font-weight:800}
@@ -171,31 +171,11 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
   <a class="nav-cta" href="/#contact">Get a Quote</a>
 </nav>
   <main class="portfolio-main">
-  <section class="portfolio-hero" aria-labelledby="portfolio-title">
-    <div class="portfolio-copy">
-      <div class="pf-eyebrow">Portfolio · Real projects</div>
-      <h1 id="portfolio-title">Websites and digital tools built for <span class="gradient-text">real business work.</span></h1>
-      <p class="pf-intro">We build and improve responsive business websites and web applications. Our work includes property websites, healthcare experiences, food-ordering journeys, e-commerce workflows, admin dashboards, API and payment integrations, and deployment fixes. The focus is practical: clear navigation, useful features, and a smooth experience on mobile and desktop.</p>
-      <div class="pf-actions">
-        <a class="pf-btn pf-btn-primary" href="/#contact">Start a project <span aria-hidden="true">↗</span></a>
-        <a class="pf-btn pf-btn-secondary" href="#work">Explore live websites <span aria-hidden="true">↓</span></a>
-      </div>
-      <div class="pf-trust-row">
-        <span>Mobile-first websites</span>
-        <span>Real business workflows</span>
-        <span>Integrations & deployment</span>
-      </div>
-    </div>
+  <section class="portfolio-hero" aria-label="Portfolio introduction">
+    <div class="pf-eyebrow">Portfolio · Real projects</div>
   </section>
 
   <section id="work" class="work-section" aria-labelledby="work-title">
-    <div class="pf-section-head">
-      <div>
-        <div class="eyebrow">Selected projects</div>
-        <h2 id="work-title">Work built around<br>real business needs.</h2>
-      </div>
-      <p>These cards link to public project domains. Descriptions focus on the type of website work and digital experience, without invented client results.</p>
-    </div>
     <div class="pf-filters" role="group" aria-label="Filter portfolio projects">
       <button class="pf-filter" type="button" data-work-filter="all" aria-pressed="true">All work</button>
       <button class="pf-filter" type="button" data-work-filter="website" aria-pressed="false">Business websites</button>
