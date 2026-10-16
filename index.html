@@ -1531,146 +1531,264 @@ function addMsg(text, type) {
 }
 
 /* TheDigitalWork guided discovery chatbot: English + Hinglish.
-   Integration: keep botKnowledge and addMsg(). Replace the OLD botReply(input)
-   function with this file's helper functions + botReply(). This is rules-based,
-   not a full AI model. */
-
-var tdwFlow = { step: "idle", project: "", business: "", goal: "", features: "", budget: "", timeline: "", lang: "mixed" };
+   Only this chatbot logic block is replaced. Existing UI, event listeners and page code stay unchanged.
+   Rules-based helper: guided discovery + practical FAQ answers; not a hosted AI model. */
+var tdwFlow = { step:"idle", project:"", business:"", goal:"", features:"", budget:"", timeline:"", lang:"english" };
 
 function tdwNorm(s) {
-  return String(s || "").toLowerCase().replace(/[’']/g, "'").replace(/[^a-z0-9\u0900-\u097f₹\s.+-]/gi, " ").replace(/\s+/g, " ").trim();
+  return String(s || "").toLowerCase().replace(/[’']/g, "'")
+    .replace(/[^a-z0-9\u0900-\u097f₹\s.+-]/gi, " ").replace(/\s+/g, " ").trim();
 }
 function tdwHas(s, list) { return list.some(function (x) { return s.indexOf(x) !== -1; }); }
 function tdwLang(s) {
   var q = tdwNorm(s);
-  if (tdwHas(q, ["mujhe", "chahiye", "banani", "banana", "banwana", "karna hai", "meri", "mera", "batao", "btao", "kitna", "kitne", "kharcha", "dukaan", "dhandha", "bhai", "sir", "kaise", "krna", "krni"])) return "hinglish";
-  if (tdwHas(q, ["i need", "i want", "my business", "for my", "can you", "looking for", "build a", "make a"])) return "english";
-  return "mixed";
+  if (tdwHas(q, ["mujhe","chahiye","banani","banana","banwani","banwana","karna hai","meri","mera","batao","btao","kitna","kitne","kharcha","dukaan","dhandha","bhai","sir","kaise","krna","krni","ke liye","hai","hain","nahi","haan"])) return "hinglish";
+  return "english";
 }
+function tdwSetLanguage(input) { tdwFlow.lang = tdwLang(input); }
 function tdwAskBusiness() {
   return tdwFlow.lang === "english"
-    ? "Sure — first, tell me about your business, profession, or idea. For example: clothing shop, doctor, restaurant, coaching, freelancer, or startup."
-    : "Bilkul — pehle aapka kaam samajhte hain. Aapka business/profession kya hai? Jaise clothing shop, doctor, restaurant, coaching, freelancer ya startup.";
+    ? "Sure — what business, profession, or idea is this for? For example: a clothing shop, restaurant, clinic, coaching centre, property business, freelancer, or startup."
+    : "Bilkul bhai — ye kis business/profession ke liye hai? Jaise clothing shop, restaurant, clinic, coaching, property business, freelancer ya startup.";
 }
 function tdwAskGoal() {
   return tdwFlow.lang === "english"
-    ? "What is the main result you want: more enquiries, online sales, bookings, showcasing your work, or managing your business online?"
-    : "Aapka main goal kya hai — enquiries badhana, online sales lena, bookings/appointments, apna work dikhana, ya business ko online manage karna?";
+    ? "What result matters most right now: online sales, more enquiries/leads, bookings, showing your work, or managing orders/customers online?"
+    : "Aapka main goal kya hai — online sales, enquiries/leads badhana, bookings lena, apna work dikhana, ya orders/customers online manage karna?";
 }
 function tdwAskFeatures() {
   return tdwFlow.lang === "english"
-    ? "Which features do you need? For example: product catalogue, online payment, booking, login/signup, admin panel, WhatsApp enquiries, or just an information website."
-    : "Kaun-se features chahiye? Jaise product catalogue, online payment, booking, login/signup, admin panel, WhatsApp enquiries, ya sirf information website.";
+    ? "Which features are must-haves? For example: product catalogue, cart/payment, booking, login/signup, admin panel, user dashboard, WhatsApp enquiries, or just business information."
+    : "Kaun-se features zaroori hain? Jaise product catalogue, cart/payment, booking, login/signup, admin panel, user dashboard, WhatsApp enquiries, ya sirf business information?";
+}
+function tdwAskBudget() {
+  return tdwFlow.lang === "english"
+    ? "What budget range are you considering: under ₹15k, ₹15k–₹30k, ₹30k–₹60k, ₹60k+, or not sure yet?"
+    : "Budget range kya socha hai: ₹15k se kam, ₹15k–₹30k, ₹30k–₹60k, ₹60k+, ya abhi sure nahi hain?";
+}
+function tdwAskTimeline() {
+  return tdwFlow.lang === "english"
+    ? "When would you like to launch: as soon as possible, within 2–4 weeks, or later? The exact schedule depends on the features."
+    : "Aap launch kab tak chahte hain — jaldi, 2–4 weeks mein, ya baad mein? Exact timeline features par depend karegi.";
+}
+function tdwExtractBusiness(q) {
+  var groups = [
+    [["clothing shop","clothing store","fashion store","garment shop","boutique","kapde ki dukaan","kapdo ki shop","kapdon ki shop"],"clothing shop"],
+    [["restaurant","cafe","café","bakery","tiffin","cloud kitchen","dhaba","food business"],"restaurant / food business"],
+    [["doctor","clinic","dentist","hospital","physio","medical"],"clinic / healthcare"],
+    [["coaching","tuition","academy","school","college","institute","classes"],"coaching / education"],
+    [["property dealer","real estate","property business","builder","broker","flats","plots"],"real estate / property"],
+    [["freelancer","photographer","designer","developer","consultant","artist","creator"],"freelancer / personal brand"],
+    [["travel agency","travel agent","tour operator","tourism","cab service","taxi service"],"travel business"],
+    [["salon","beauty parlour","beauty parlor","spa","barber","makeup artist"],"salon / beauty services"],
+    [["gym","fitness centre","fitness center","yoga studio","personal trainer"],"gym / fitness"],
+    [["manufacturer","manufacturing","factory","wholesale","supplier","export business"],"manufacturing / B2B"],
+    [["ngo","charity","trust","nonprofit","foundation"],"NGO / nonprofit"],
+    [["startup","saas","software product","marketplace","app idea"],"startup / digital product"]
+  ];
+  for (var i=0;i<groups.length;i++) {
+    if (tdwHas(q, groups[i][0])) return groups[i][1];
+  }
+  return "";
 }
 function tdwRecommend() {
-  var b = tdwNorm(tdwFlow.business), g = tdwNorm(tdwFlow.goal), f = tdwNorm(tdwFlow.features);
-  var type = "Business website", why = "It explains your services, builds trust, and makes it easy for customers to contact you.", features = "Home, About, Services, testimonials/portfolio, Contact, and WhatsApp enquiry.";
-  if (tdwHas(b, ["clothing", "fashion", "garment", "kapde", "boutique", "cosmetic", "jewellery", "jewelry", "shoes", "shop", "store", "dukaan", "product"]) || tdwHas(g, ["online sales", "sell online", "products", "orders", "online bech", "order lena"])) {
-    type = "E-commerce website / online store"; why = "Customers can browse products, see prices and place orders. If you're testing demand, start with a small catalogue and WhatsApp ordering."; features = "Product categories, product pages, cart/checkout, payment or COD, order management, coupons and admin panel as needed.";
-  } else if (tdwHas(b, ["restaurant", "cafe", "café", "food", "bakery", "tiffin", "cloud kitchen", "dhaba", "catering"])) {
-    type = "Restaurant / food business website"; why = "Customers need your menu, location, hours and a quick way to order or book."; features = "Menu, food photos, map, timings, WhatsApp ordering, reviews and optional payments.";
-  } else if (tdwHas(b, ["doctor", "clinic", "dentist", "hospital", "therapist", "physio", "medical"])) {
-    type = "Healthcare website with appointment requests"; why = "Patients need to understand your services, timings, location and how to request an appointment."; features = "Doctor profile, treatments, timings, location, appointment form and click-to-call/WhatsApp.";
-  } else if (tdwHas(b, ["coaching", "tuition", "school", "college", "institute", "academy", "course", "teacher", "training", "classes"])) {
-    type = "Education / coaching website"; why = "Students and parents need course details, schedules, teacher information and a simple enquiry or admission process."; features = "Courses, faculty, timetable, admission form, testimonials and optional student login.";
-  } else if (tdwHas(b, ["real estate", "property", "builder", "interior", "architect", "construction", "broker", "plot", "flat"])) {
-    type = "Property listing website"; why = "A catalogue with photos, details, filters and enquiry forms helps buyers find relevant properties."; features = "Listings, photo galleries, filters, location, project details and visit/enquiry forms.";
-  } else if (tdwHas(b, ["freelancer", "designer", "developer", "photographer", "artist", "creator", "consultant", "portfolio", "writer"])) {
-    type = "Portfolio / personal brand website"; why = "Show selected work, results, testimonials and a clear way to contact or book you."; features = "Portfolio, services, profile, testimonials, case studies and contact/booking.";
-  } else if (tdwHas(b, ["travel", "tour", "tourism", "hotel", "homestay", "cab", "taxi", "trip", "travel agent"])) {
-    type = "Travel website with enquiry/booking flow"; why = "Visitors need packages, itineraries, dates and a quick way to request a quote or reserve a trip."; features = "Packages, itineraries, destinations, enquiry form, WhatsApp, reviews and optional payments.";
-  } else if (tdwHas(b, ["ngo", "charity", "trust", "nonprofit", "foundation"])) {
-    type = "NGO / nonprofit website"; why = "A mission-led site can explain impact and guide people to donate, volunteer or contact you."; features = "Mission, projects, impact, reports, volunteer form, donation flow and contact.";
-  } else if (tdwHas(b, ["manufacturer", "factory", "wholesale", "supplier", "export", "b2b", "industrial"])) {
-    type = "B2B company website with quote requests"; why = "Business buyers need capability details, product information and a clear way to request a quote."; features = "Company profile, catalogue, capabilities, brochure, case studies and quote form.";
-  } else if (tdwHas(g, ["ads", "campaign", "lead generation", "enquiries", "promote one service", "promotion"])) {
-    type = "Conversion-focused landing page"; why = "For one offer or ad campaign, a focused page can work better than a large site."; features = "Offer, benefits, proof, FAQs, enquiry form, WhatsApp CTA and conversion tracking.";
-  }
-  if (tdwHas(f, ["login", "signup", "sign up", "dashboard", "admin panel", "user accounts", "marketplace", "database", "subscriptions"])) {
-    type = "Full-stack web application"; why = "Login, dashboards, stored data and user workflows need a backend and database—not just a static page."; features = "User roles, login, database, admin dashboard, core workflow, notifications and payments only if needed.";
-  }
-  if (tdwHas(g, ["booking", "bookings", "appointment", "appointments", "reservation"]) && type === "Business website") {
-    type = "Service website with booking system"; why = "Customers can request a service or time slot without repeated back-and-forth messages."; features = "Service details, booking form, time slots, confirmation messages and optional payment.";
-  }
-  if (tdwFlow.lang === "english") return "Based on your answers, I'd recommend: **" + type + "**.\n\nWhy: " + why + "\n\nA practical first version could include: " + features + "\n\nDoes this fit your need, or is there one important feature I should account for?";
-  return "Aapki requirement ke hisaab se meri recommendation hai: **" + type + "**.\n\nKyun: " + why + "\n\nPehle version mein ye features rakh sakte hain: " + features + "\n\nKya ye aapke kaam ke liye sahi lag raha hai, ya koi important feature aur chahiye?";
-}
-function tdwQuickHelp(input) {
-  var q = tdwNorm(input);
-  if (tdwHas(q, ["price", "pricing", "cost", "budget", "kitne", "kitna", "kharcha", "charges", "rate", "quote"])) {
-    if (tdwHas(q, ["app", "mobile"])) return "📱 Mobile app projects start from ₹50,000. Final cost depends on features, platform, backend and admin tools. Aap app ka main purpose bata dein, main suitable scope suggest karunga.";
-    if (tdwHas(q, ["chatbot", "automation", "ai"])) return "🤖 AI chatbot projects start from ₹20,000; integrations and workflow complexity affect the final cost. Aap bot se kaunsa kaam karwana chahte hain?";
-    if (tdwHas(q, ["marketing", "seo", "ads", "social media"])) return "📈 Digital marketing packages start from ₹10,000/month; ad spend is separate. Aapka goal leads, sales, local reach ya brand awareness hai?";
-    return "🌐 Website projects start from ₹15,000. Final cost pages, design and features par depend karti hai. Aapka business kya hai aur website se kya result chahiye?";
-  }
-  if (tdwHas(q, ["hello", "hi", "hey", "namaste", "salam", "assalam", "hii"])) return "Hi! Welcome to TheDigitalWork 👋 Aap kya karte hain aur kis problem ka solution chahiye? Main aapke goal ke hisaab se website, app, automation ya marketing recommend karunga.";
-  if (tdwHas(q, ["human", "team se baat", "person se baat", "whatsapp", "contact", "call me"])) return "Project discuss karne ke liye WhatsApp/call: +91 76175 55488 or +91 81268 12317. Email: info@thedigitalwork.in. Aap chahein to pehle yahin apni requirement bata sakte hain.";
-  if (tdwHas(q, ["app", "mobile app", "android app", "ios app"])) return "App ka idea kis kaam ke liye hai — booking, delivery, learning, marketplace, ya internal business management? Use-case bata dein, main MVP features suggest karunga.";
-  if (tdwHas(q, ["chatbot", "automation", "ai bot", "workflow"])) return "Aap kaunsa repetitive kaam automate karna chahte hain — customer FAQs, WhatsApp enquiries, lead follow-up, bookings, reports ya data entry? Uske hisaab se solution suggest karunga.";
-  if (tdwHas(q, ["marketing", "ads", "seo", "instagram", "social media", "customers badhana", "leads badhana"])) return "Aap kis business/service ko promote karna chahte hain? Abhi main problem kya hai — reach kam, enquiries nahi aa rahi, ya enquiries sales mein convert nahi ho rahi?";
-  return "Main generic definitions dene ke bajay aapki actual problem samajhna chahta hoon. Aap apna business/profession aur jo result chahiye woh bata dein — main suitable solution recommend karunga.";
-}
+  var b=tdwNorm(tdwFlow.business), g=tdwNorm(tdwFlow.goal), f=tdwNorm(tdwFlow.features);
+  var type="Business website", why="It explains your services, builds trust, and helps customers contact you.";
+  var features="Home, About, Services, testimonials/portfolio, Contact and WhatsApp enquiry.";
 
-function botReply(input) {
-  var q = tdwNorm(input);
-  if (!q) return;
-  var detectedLang = tdwLang(input);
-  if (detectedLang !== "mixed") {
-  tdwFlow.lang = detectedLang;
+  if (tdwHas(b,["clothing","fashion","garment","kapde","boutique","cosmetic","jewellery","jewelry","shoes","shop","store","dukaan","retail","product"]) ||
+      tdwHas(g,["online sales","sell online","products","orders","online bech","order lena","sales online","online order"])) {
+    type="E-commerce website / online store";
+    why="Customers can browse products, see prices, add items to a cart and place orders. If you're testing demand first, a small catalogue with WhatsApp ordering can be a simpler starting point.";
+    features="Product categories/pages, cart and checkout, payment or COD, order management and an admin panel; coupons or inventory can be added if needed.";
+  } else if (tdwHas(b,["restaurant","cafe","café","food","bakery","tiffin","cloud kitchen","dhaba","catering"])) {
+    type="Restaurant / food business website"; why="Customers need your menu, timings, location and a quick way to order or book.";
+    features="Menu, food photos, map, timings, WhatsApp ordering, reviews and optional online payment.";
+  } else if (tdwHas(b,["doctor","clinic","dentist","hospital","therapist","physio","medical","health"])) {
+    type="Healthcare website with appointment requests"; why="Patients need clear service information, timings, location and an easy appointment request.";
+    features="Doctor/team profile, treatments, timings, location, appointment form and click-to-call/WhatsApp. Avoid collecting unnecessary sensitive information.";
+  } else if (tdwHas(b,["coaching","tuition","school","college","institute","academy","course","teacher","training","classes","education"])) {
+    type="Education / coaching website"; why="Students and parents need course details, schedules, teaching team information and a simple enquiry/admission flow.";
+    features="Courses, faculty, timetable, admission/enquiry form, testimonials and optional student login.";
+  } else if (tdwHas(b,["real estate","property","builder","interior","architect","construction","broker","plot","flat","realty"])) {
+    type="Property listing website"; why="Buyers need photos, details, filters, locations and an easy way to enquire or book a visit.";
+    features="Property listings, image galleries, filters, location/project details and enquiry/visit forms.";
+  } else if (tdwHas(b,["freelancer","designer","developer","photographer","artist","creator","consultant","portfolio","writer"])) {
+    type="Portfolio / personal brand website"; why="A curated portfolio demonstrates your work and makes it easy to enquire or book you.";
+    features="Selected work, services, profile, testimonials, case studies and contact/booking.";
+  } else if (tdwHas(b,["travel","tour","tourism","hotel","homestay","cab","taxi","trip","travel agent"])) {
+    type="Travel website with enquiry / booking flow"; why="Visitors need packages, itineraries, dates, inclusions and a quick way to request a quote or reserve a trip.";
+    features="Packages, itineraries, destinations, enquiry/booking form, WhatsApp, reviews and optional payment.";
+  } else if (tdwHas(b,["ngo","charity","trust","nonprofit","foundation","social work"])) {
+    type="NGO / nonprofit website"; why="A mission-focused site can explain impact and guide people to donate, volunteer or contact you.";
+    features="Mission, projects, impact, reports, volunteer form, donation flow and contact.";
+  } else if (tdwHas(b,["manufacturer","manufacturing","factory","wholesale","supplier","export","b2b","industrial"])) {
+    type="B2B company website with quote requests"; why="Business buyers need capability details, product information and a clear way to request a quote.";
+    features="Company profile, catalogue, capabilities, brochure, case studies and quote form.";
+  } else if (tdwHas(b,["salon","spa","beauty","barber","parlour","parlor","makeup","mehndi"])) {
+    type="Salon / beauty service website with booking"; why="Customers want to see services, prices, work samples and timings, then book an appointment.";
+    features="Service menu, price list, gallery, location, appointment form and WhatsApp.";
+  } else if (tdwHas(b,["gym","fitness","yoga","trainer","sports","wellness"])) {
+    type="Fitness / gym website"; why="Visitors need membership options, trainers, timetable and a way to arrange a visit or join.";
+    features="Plans, trainers, timetable, gallery, enquiry form and optional member login.";
+  } else if (tdwHas(b,["startup","saas","software","platform","marketplace","subscription","community","app idea"])) {
+    type="Product landing page first; full-stack platform if needed"; why="A focused page can validate demand. Accounts, dashboards, stored data and transactions can be added when the workflow is clear.";
+    features="Value proposition, benefits, demo, pricing, waitlist/signup; later authentication, database, roles and admin dashboard.";
+  } else if (tdwHas(g,["ads","campaign","lead generation","enquiries","promote one service","promotion","ad traffic"])) {
+    type="Conversion-focused landing page"; why="For one offer or ad campaign, a focused page with one clear action can be more useful than a large site.";
+    features="Offer, benefits, reviews/proof, FAQs, enquiry form, WhatsApp action and conversion tracking.";
+  }
+
+  if (tdwHas(g,["booking","bookings","appointment","appointments","reservation","schedule"]) && type==="Business website") {
+    type="Service website with booking system"; why="Customers can request a service or time slot without repeated back-and-forth messages.";
+    features="Service details, booking form, time slots, confirmation messages and optional payment.";
+  }
+  if (tdwHas(f,["login","signup","sign up","dashboard","admin panel","user accounts","marketplace","database","subscriptions","multiple users","seller accounts"])) {
+    type=tdwHas(f,["marketplace","seller accounts","multiple sellers"]) ? "Full-stack marketplace" : "Full-stack web application";
+    why="Accounts, dashboards, roles, stored data and custom workflows need a backend and database—not just a static page.";
+    features="Authentication, roles, database, admin dashboard, core workflow, notifications and payment only if required.";
+  }
+  var english=tdwFlow.lang==="english";
+  var out=english
+    ? "Based on your answers, I'd recommend: "+type+".\n\nWhy: "+why+"\n\nA practical first version could include: "+features
+    : "Aapki requirements ke hisaab se meri recommendation hai: "+type+".\n\nKyun: "+why+"\n\nPehle version mein ye features rakh sakte hain: "+features;
+  out += english ? "\n\nDoes this fit your need? Reply yes to discuss budget/timeline, or tell me what should change." : "\n\nKya ye aapke kaam ke liye sahi hai? Budget/timeline ke liye haan bolein, ya batayein kya change karna hai.";
+  return out;
 }
-  var websiteIntent = tdwHas(q, [
-  "i need a website",
-  "i want a website",
-  "need a website",
-  "website for my",
-  "website for our",
-  "build a website",
-  "make a website",
-  "create a website",
-  "website banani",
-  "website banana",
-  "website banwana",
-  "website chahiye",
-  "site banani",
-  "site chahiye",
-  "landing page",
-  "ecommerce",
-  "e-commerce",
-  "online store"
-]);
-  var yes = tdwHas(q, ["yes", "yeah", "haan", "han", "bilkul", "sahi", "correct", "thik hai", "theek hai"]);
-  var no = tdwHas(q, ["no", "nahi", "nahin", "not really", "galat", "kuch aur"]);
+function tdwKnownAnswer(q) {
+  var rows = [
+    {keys:["website not working","site not working","website down","site down","website error","page not opening"],answer:"Chaliye issue diagnose karte hain. Exact error kya hai—blank page, 404, server error, SSL warning, ya sirf mobile par issue? URL aur screenshot share karein; bina details ke guess nahi karunga."},
+    {keys:["website price","website cost","web design price","website kitne","website kitne ki"],answer:"Website projects ₹15,000 se start hote hain. Final cost pages, design, e-commerce, accounts, integrations and admin features par depend karti hai. Aapko kis kaam ke liye website chahiye?"},
+    {keys:["chatbot price","ai chatbot price"],answer:"AI chatbot projects ₹20,000 se start hote hain. Cost integrations, knowledge base and workflow complexity par depend karti hai. Bot se kaunsa kaam karwana hai?"},
+    {keys:["app price","mobile app price","app cost"],answer:"Mobile app projects ₹50,000 se start hote hain. Cost features, Android/iOS, backend and admin tools par depend karti hai. App ka main purpose kya hai?"},
+    {keys:["marketing price","digital marketing price","ads cost"],answer:"Digital marketing packages ₹10,000/month se start hote hain; ad spend alag ho sakta hai. Aapka goal leads, sales, local reach ya brand awareness hai?"},
+    {keys:["price","pricing","cost","budget","kitne","kitna","kharcha","charges","rate","quote","quotation","fees","how much"],answer:"Starting prices: website ₹15,000, AI chatbot ₹20,000, mobile app ₹50,000, digital marketing ₹10,000/month. Final quote scope par depend karta hai. Aap apna business aur desired result bata dein."},
+    {keys:["landing page"],answer:"Landing page ek focused page hota hai jo enquiry, booking, signup ya sale jaise ek main action par focus karta hai. Ads ya ek specific offer ke liye useful ho sakta hai. Aap kya promote kar rahe hain?"},
+    {keys:["ecommerce","e-commerce","online store","online shop","cart","checkout"],answer:"E-commerce store products, cart, checkout, payment/COD, order management and admin panel support kar sakta hai. Aap kitne products sell karna chahte hain aur payment online chahiye?"},
+    {keys:["seo","google ranking","rank on google","google par rank","search engine"],answer:"SEO mein useful content, page titles, technical accessibility, site speed and relevant links shamil hain. Ranking guarantee nahi hoti. Aap local customers target kar rahe hain ya India-wide?"},
+    {keys:["domain","domain name"],answer:"Domain aapki website ka address hota hai, jaise example.com. Kya aapke paas domain pehle se hai ya naya register karna hai?"},
+    {keys:["hosting","web hosting"],answer:"Hosting website ko online serve karne ke liye server provide karti hai. Best choice traffic, backend needs and budget par depend karti hai. Kya login/database bhi chahiye?"},
+    {keys:["wordpress","cms","admin dashboard"],answer:"CMS/admin dashboard se aap content, products, orders ya enquiries update kar sakte hain bina har baar code edit kiye. Aapko kya manage karna hai?"},
+    {keys:["ssl","https","website security","secure website"],answer:"HTTPS/TLS visitor aur website ke beech connection encrypt karta hai. Updates, access control, backups and safe data handling bhi important hain."},
+    {keys:["ai chatbot","website chatbot","chatbot","customer support bot"],answer:"Chatbot common questions answer kar sakta hai, leads collect kar sakta hai aur visitors guide kar sakta hai. Rules-based bot configured questions tak limited hota hai; flexible answers ke liye AI backend chahiye. Aapko FAQ bot chahiye ya lead qualification bhi?"},
+    {keys:["automation","workflow automation","ai automation","zapier","make.com"],answer:"Automation repetitive work reduce kar sakti hai—enquiries spreadsheet/CRM mein bhejna, reminders, follow-ups, reports ya lead sorting. Aap kaunsa task baar-baar manually karte hain?"},
+    {keys:["api","api integration","integration"],answer:"API systems ko data exchange karne deti hai—jaise website ko payment gateway, CRM, calendar ya inventory se connect karna. Kaun-si services connect karni hain?"},
+    {keys:["crm","lead management","follow up"],answer:"CRM leads, customer details, follow-ups and sales pipeline organize karta hai. Aap enquiries WhatsApp, spreadsheet ya kisi tool mein manage karte hain?"},
+    {keys:["mobile app","mobile application","android app","ios app"],answer:"App ka suitable design use-case par depend karta hai—booking, delivery, learning, marketplace ya internal business management. App se users ko kya karna chahiye?"},
+    {keys:["digital marketing","online marketing","marketing strategy"],answer:"Digital marketing mein SEO, Google/Meta Ads, social content, email and WhatsApp campaigns shamil ho sakte hain. Priority leads, sales, walk-ins ya awareness mein se kya hai?"},
+    {keys:["google ads","ppc","paid ads"],answer:"Google Ads ka result targeting, competition, setup and landing page par depend karta hai. Kya promote karna hai aur kis location mein?"},
+    {keys:["meta ads","facebook ads","instagram ads"],answer:"Meta Ads Facebook/Instagram par reach, lead or purchase campaigns ke liye use hote hain. Product/service, location aur goal kya hai?"},
+    {keys:["social media","instagram marketing","facebook marketing","reels"],answer:"Social media plan audience, content quality and goal par depend karta hai. Aap kis business ke liye content chahte hain—followers, enquiries ya sales?"},
+    {keys:["timeline","delivery time","how long","development time"],answer:"Basic websites usually kuch weeks leti hain; e-commerce, dashboards and custom integrations zyada time le sakte hain. Exact timeline features discuss karne ke baad confirm hoti hai."},
+    {keys:["portfolio","previous work","past projects","examples"],answer:"Hum relevant portfolio examples share kar sakte hain. Aap kis service ya industry ke examples dekhna chahte hain?"},
+    {keys:["maintenance","website update","website support","bug fix"],answer:"Maintenance mein updates, backups, bug fixes, security checks and performance monitoring ho sakta hai. Existing site maintain karwani hai ya specific issue fix karna hai?"},
+    {keys:["contact","phone number","email address","whatsapp","team se baat","human","talk to human"],answer:"Project discuss karne ke liye WhatsApp/call: +91 76175 55488 ya +91 81268 12317. Email: info@thedigitalwork.in."},
+    {keys:["location","address","office","agra"],answer:"Our office is in Shashtripuram, Agra, Uttar Pradesh. We also work remotely with clients across India and other countries."},
+    {keys:["responsive","mobile friendly","mobile responsive"],answer:"Responsive design website ko phone, tablet and desktop ke screen size ke according adjust karta hai. Hum mobile-first layout plan kar sakte hain."},
+    {keys:["static website","static site"],answer:"Static website simple and fast ho sakti hai jab login, database ya frequently updated user data na chahiye. Sirf information dikhani hai ya transactions/data bhi handle karna hai?"},
+    {keys:["dynamic website","web application","full stack","full-stack"],answer:"Full-stack website backend, database, login and custom workflows support karti hai. Ye tab useful hai jab users data save karein, dashboards use karein, ya orders/bookings manage hon. Aapka main workflow kya hai?"},
+    {keys:["payment gateway","online payment"],answer:"Payment integration provider and business requirements par depend karti hai. UPI/cards, COD, subscriptions, ya sirf payment links mein se kya chahiye?"},
+    {keys:["privacy policy","terms","refund policy","legal page"],answer:"Legal pages business model, data collection and payment flows ke hisaab se hone chahiye. Main general checklist de sakta hoon; final legal wording professional se review karwana best hai."}
+  ];
+  for (var i=0;i<rows.length;i++) if (tdwHas(q,rows[i].keys)) return rows[i].answer;
+
+  // Search the existing approved 200+ Q&A array as a secondary fallback.
+  if (typeof botKnowledge !== "undefined" && Array.isArray(botKnowledge)) {
+    for (var j=0;j<botKnowledge.length;j++) {
+      var item=botKnowledge[j];
+      if (!item || !Array.isArray(item.keys) || !item.answer) continue;
+      for (var k=0;k<item.keys.length;k++) {
+        var key=tdwNorm(item.keys[k]);
+        if (key.length>=4 && q.indexOf(key)!==-1) return item.answer;
+      }
+    }
+  }
+  return "";
+}
+function tdwAnswerFallback(input) {
+  var q=tdwNorm(input);
+  if (/^(hello|hi|hii|hey|heya|namaste|salam|assalam|assalamualaikum|assalamu alaikum|good morning|good afternoon|good evening)$/.test(q)) {
+    return tdwFlow.lang==="english"
+      ? "Hi! Welcome to TheDigitalWork. What are you trying to achieve—more leads, online sales, bookings, automation, or a new app?"
+      : "Hi bhai! TheDigitalWork mein welcome 👋 Aap kya achieve karna chahte hain—leads badhana, online sales, bookings, automation, ya app?";
+  }
+  var known=tdwKnownAnswer(q);
+  if (known) return known;
+  return tdwFlow.lang==="english"
+    ? "Tell me what you're trying to achieve and what's currently difficult. I'll recommend a practical option rather than give you a generic definition. For a website issue, share the URL and exact error."
+    : "Aap kya achieve karna chahte hain aur abhi kya dikkat aa rahi hai? Main generic definition ke bajay practical solution suggest karunga. Website error hai to URL aur exact error share karein.";
+}
+function tdwStartNewProject(lang) {
+  tdwFlow={step:"business",project:"website",business:"",goal:"",features:"",budget:"",timeline:"",lang:lang||tdwFlow.lang};
+  return tdwAskBusiness();
+}
+function botReply(input) {
+  var q=tdwNorm(input);
+  if (!q) return;
+  tdwSetLanguage(input);
+
+  // Match greetings as entire messages only: "hi" must never match "clothing".
+  var greeting=/^(hello|hi|hii|hey|heya|namaste|salam|assalam|assalamualaikum|assalamu alaikum|good morning|good afternoon|good evening)$/.test(q);
+  var websiteIntent=tdwHas(q,[
+    "i need a website","i want a website","need a website","website for my","website for our",
+    "build a website","make a website","create a website","mujhe website","website banwani",
+    "website banvani","website banani","website banana","website banwana","website chahiye",
+    "site banwani","site banvani","site banani","site chahiye","landing page","ecommerce",
+    "e-commerce","online store","website for","web site for"
+  ]);
+  var appIntent=tdwHas(q,["need an app","want an app","build an app","app banani","app banwana","app chahiye","mobile app chahiye"]);
+  var restart=tdwHas(q,["new project","start over","restart","naya project","another website","dobara"]);
+  var yes=/^(yes|yeah|yep|haan|han|ha|bilkul|sahi|correct|thik hai|theek hai|sure|okay|ok)$/.test(q);
+  var no=/^(no|nahi|nahin|not really|galat|kuch aur)$/.test(q);
   var response;
 
-  if (tdwFlow.step === "idle" && websiteIntent) {
-    tdwFlow.project = "website"; tdwFlow.step = "business"; response = tdwAskBusiness();
-  } else if (tdwFlow.step === "business") {
-    tdwFlow.business = input.trim(); tdwFlow.step = "goal"; response = tdwAskGoal();
-  } else if (tdwFlow.step === "goal") {
-    tdwFlow.goal = input.trim(); tdwFlow.step = "features"; response = tdwAskFeatures();
-  } else if (tdwFlow.step === "features") {
-    tdwFlow.features = input.trim(); tdwFlow.step = "recommendation"; response = tdwRecommend();
-  } else if (tdwFlow.step === "recommendation" && no) {
-    tdwFlow.step = "features"; response = tdwAskFeatures();
-  } else if (tdwFlow.step === "recommendation" && yes) {
-    tdwFlow.step = "budget";
-    response = tdwFlow.lang === "english" ? "What budget range are you considering: under ₹15k, ₹15k–₹30k, ₹30k–₹60k, ₹60k+, or not sure yet?" : "Budget range kya socha hai: ₹15k se kam, ₹15k–₹30k, ₹30k–₹60k, ₹60k+, ya abhi sure nahi?";
-  } else if (tdwFlow.step === "budget") {
-    tdwFlow.budget = input.trim(); tdwFlow.step = "timeline";
-    response = tdwFlow.lang === "english" ? "When would you like to launch: as soon as possible, within 2–4 weeks, or later?" : "Aap launch kab tak chahte hain — jaldi, 2–4 weeks mein, ya baad mein?";
-  } else if (tdwFlow.step === "timeline") {
-    tdwFlow.timeline = input.trim(); tdwFlow.step = "done";
-    response = tdwRecommend() + "\n\nProject discuss karne ke liye WhatsApp: +91 76175 55488 / +91 81268 12317.";
-  } else if (tdwFlow.step === "done" && tdwHas(q, ["new project", "start over", "restart", "naya project", "another website", "dobara"])) {
-    tdwFlow = { step: "business", project: "website", business: "", goal: "", features: "", budget: "", timeline: "", lang: tdwFlow.lang }; response = tdwAskBusiness();
+  // If user asks a separate factual/pricing question mid-flow, answer it without losing progress.
+  if (greeting) {
+    response=tdwAnswerFallback(input);
+  } else if (restart) {
+    response=tdwStartNewProject(tdwFlow.lang);
+  } else if (tdwFlow.step==="idle" && websiteIntent) {
+    var knownBusiness=tdwExtractBusiness(q);
+    tdwFlow.project="website";
+    if (knownBusiness) {
+      tdwFlow.business=knownBusiness;
+      tdwFlow.step="goal";
+      response=tdwAskGoal();
+    } else {
+      tdwFlow.step="business";
+      response=tdwAskBusiness();
+    }
+  } else if (tdwFlow.step==="idle" && appIntent) {
+    tdwFlow.project="app"; tdwFlow.step="business";
+    response=tdwFlow.lang==="english"
+      ? "What kind of app is this for, and who will use it? For example: delivery, bookings, learning, marketplace, or internal business management."
+      : "App kis kaam ke liye hai aur ise kaun use karega? Jaise delivery, bookings, learning, marketplace ya apne business ka management.";
+  } else if (tdwFlow.step!=="idle" && tdwKnownAnswer(q)) {
+    response=tdwKnownAnswer(q);
+  } else if (tdwFlow.step==="business") {
+    tdwFlow.business=input.trim(); tdwFlow.step="goal"; response=tdwAskGoal();
+  } else if (tdwFlow.step==="goal") {
+    tdwFlow.goal=input.trim(); tdwFlow.step="features"; response=tdwAskFeatures();
+  } else if (tdwFlow.step==="features") {
+    tdwFlow.features=input.trim(); tdwFlow.step="recommendation"; response=tdwRecommend();
+  } else if (tdwFlow.step==="recommendation" && no) {
+    tdwFlow.step="features"; response=tdwAskFeatures();
+  } else if (tdwFlow.step==="recommendation" && yes) {
+    tdwFlow.step="budget"; response=tdwAskBudget();
+  } else if (tdwFlow.step==="budget") {
+    tdwFlow.budget=input.trim(); tdwFlow.step="timeline"; response=tdwAskTimeline();
+  } else if (tdwFlow.step==="timeline") {
+    tdwFlow.timeline=input.trim(); tdwFlow.step="done"; response=tdwRecommend()+"\n\nProject discuss karne ke liye WhatsApp: +91 76175 55488 / +91 81268 12317.";
   } else if (websiteIntent) {
-    tdwFlow.step = "business"; tdwFlow.project = "website"; tdwFlow.business = ""; tdwFlow.goal = ""; tdwFlow.features = ""; response = tdwAskBusiness();
+    response=tdwStartNewProject(tdwFlow.lang);
+  } else if (appIntent && tdwFlow.step==="idle") {
+    tdwFlow.project="app"; tdwFlow.step="business";
+    response=tdwFlow.lang==="english" ? "What type of app do you need and what should users be able to do?" : "Kis type ki app chahiye aur users usmein kya kar sakenge?";
   } else {
-    response = tdwQuickHelp(input);
+    response=tdwAnswerFallback(input);
   }
-  setTimeout(function () { addMsg(response, "bot"); }, 350);
+  setTimeout(function(){addMsg(response,"bot");},350);
 }
-
 function toggleChat() {
   chatOpen = !chatOpen;
   if(chatBox) chatBox.classList.toggle('open', chatOpen);
