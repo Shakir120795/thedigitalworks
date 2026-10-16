@@ -1531,6 +1531,62 @@ var botKnowledge = [
 ];
 
 
+/* Expanded agency FAQ knowledge: website, software, AI, marketing and common business workflows. */
+botKnowledge = botKnowledge.concat([
+{keys:['salon software','salon management','beauty parlour software','beauty salon app'],answer:'💇 Salon management software can handle appointment booking, customer profiles, services/prices, staff schedules, billing, payments, reminders and reports. Aapko booking, billing, ya all-in-one system chahiye?'},
+{keys:['salon appointment','salon booking','parlour booking'],answer:'📅 Salon booking system services, staff availability, time slots, customer details, confirmations and reminders manage kar sakta hai. Booking customer khud karega, staff karega, ya WhatsApp se bhi?'},
+{keys:['salon billing','salon invoice','salon payment'],answer:'🧾 Salon billing mein service/product bills, discounts, payment methods, receipts and daily sales reports ho sakte hain. Sirf billing chahiye ya appointments aur inventory bhi?'},
+{keys:['salon inventory','salon stock','beauty product stock'],answer:'📦 Salon inventory mein products ka stock, stock-in/out and low-stock alerts track ho sakte hain. Kya salon products retail mein bhi sell karta hai?'},
+{keys:['salon ai','ai for salon','salon chatbot','salon whatsapp'],answer:'🤖 Salon AI assistant services/prices ke FAQs answer, appointment requests collect, timings/location share aur enquiries staff tak bhej sakta hai. Website chat chahiye ya WhatsApp par bhi?'},
+{keys:['gym software','gym members','gym attendance','gym fees','gym management'],answer:'🏋️ Gym software member registration, check-in/attendance, membership plans/expiry, fee dues, payment history, reminders, trainer schedules and reports manage kar sakta hai. Aapko all-in-one chahiye ya entry/fees se shuru karein?'},
+{keys:['clinic software','clinic management','patient management','doctor appointment'],answer:'🩺 Clinic system appointments, patient records, doctor schedules, visit history, invoices and reminders manage kar sakta hai. Sensitive patient data ke liye privacy and access controls plan karne honge. Booking, records ya billing mein se kya chahiye?'},
+{keys:['restaurant software','restaurant management','restaurant ordering','table booking'],answer:'🍽️ Restaurant system menu, table reservations, takeaway/delivery orders, order status, billing and sales reports manage kar sakta hai. Dine-in, takeaway, delivery ya teeno?'},
+{keys:['school software','coaching software','student management','academy management'],answer:'🎓 Coaching/school software student records, attendance, fees, batches, timetable, notices and reports manage kar sakta hai. Online classes chahiye ya institute management?'},
+{keys:['property website','property listing','real estate software','real estate website'],answer:'🏠 Property website listings, photos, filters, location, enquiry forms and admin listing management support kar sakti hai. Sell, rent, ya dono?'},
+{keys:['travel website','travel agency software','tour booking','trip booking'],answer:'✈️ Travel website packages, itineraries, booking/enquiry forms and admin package management dikha sakti hai. Online payments chahiye ya WhatsApp enquiries?'},
+{keys:['portfolio website','personal website','freelancer website'],answer:'🎨 Portfolio website work samples, services, testimonials and contact links showcase kar sakti hai. Aapko client enquiries chahiye ya direct online selling bhi?'},
+{keys:['website features','website mein kya','website me kya','website banane ke liye'],answer:'🌐 Business website mein Home, About, Services/Products, gallery/portfolio, reviews, contact form, WhatsApp, mobile-friendly layout, SEO basics and analytics ho sakte hain. Login, payments, booking ya admin panel bhi chahiye?'},
+{keys:['website redesign','redesign website','website look old'],answer:'✨ Existing website ka redesign karke visual design, mobile layout, navigation, speed and enquiry flow improve kar sakte hain. Current URL aur main problem share karein.'},
+{keys:['website slow','site slow','website speed','page speed'],answer:'⚡ Slow website ka reason large images, scripts, hosting or backend queries ho sakta hai. URL share karein aur batayein issue mobile par hai ya desktop par.'},
+{keys:['website hacked','malware','security issue'],answer:'🔐 Suspected hack mein hosting/Git access secure karein, passwords/tokens rotate karein, backup preserve karein and suspicious changes investigate karein. URL/error share karein; passwords ya secret keys mat bhejein.'},
+{keys:['website backup','backup restore','restore website'],answer:'💾 Backup plan mein website files, database and configuration ke regular backups aur restore test shamil hone chahiye. Aapki site kis platform/hosting par hai?'},
+{keys:['website migration','move website','change hosting','migrate hosting'],answer:'🚚 Migration mein files, database, DNS, SSL, redirects and email settings carefully move karte hain. Current aur target hosting bata dein.'},
+{keys:['google not showing','search console','indexing issue','website not indexed'],answer:'🔎 Google indexing ke liye robots.txt, noindex, sitemap, Search Console and page accessibility check karte hain. URL share karein; ranking/indexing guarantee nahi hoti.'},
+{keys:['google business profile','google maps listing','local seo'],answer:'📍 Local SEO mein Google Business Profile, correct hours/address, reviews, local pages and consistent business details important hain. Business kis city/area mein hai?'},
+{keys:['contact form','form not working','enquiry form'],answer:'📨 Contact form mein validation, spam protection, clear success/error messages and reliable email/CRM delivery check karte hain. URL aur submit karne par kya hota hai bata dein.'},
+{keys:['whatsapp button','whatsapp link','click to whatsapp'],answer:'💬 Click-to-WhatsApp button customer ke phone par chat open kar sakta hai, optionally prefilled message ke saath. Automated replies ke liye alag WhatsApp Business/API setup chahiye.'},
+{keys:['online booking','appointment booking','booking calendar'],answer:'📅 Booking system slots, service/staff selection, customer details, confirmations, cancellations and reminders manage kar sakta hai. Online payment bhi chahiye?'},
+{keys:['subscription website','membership website','recurring payment'],answer:'🔁 Subscription site paid plans, access permissions, renewals and cancellations support kar sakti hai. Recurring billing provider availability pehle confirm karni hogi.'},
+{keys:['user login','signup','sign up','user account'],answer:'🔑 Login/signup mein secure authentication, password reset, profiles and role-based access plan kar sakte hain. User ko login ke baad kya karna hai?'},
+{keys:['admin panel','admin dashboard','manage website myself'],answer:'⚙️ Admin panel se content, products, bookings, users, enquiries and reports manage ho sakte hain. Aapko kaun-si cheezein khud edit karni hain?'},
+{keys:['database','save customer data','store data'],answer:'🗄️ Database customers, bookings, orders and payments jaise structured records store karta hai. Kaunsa data save karna hai aur kitne users honge?'},
+{keys:['razorpay','paypal','stripe','upi payment','payment integration'],answer:'💳 Payment integration provider, business eligibility and currency par depend karti hai. UPI/cards/netbanking, international payments ya subscription mein se kya chahiye?'},
+{keys:['delivery app','food delivery app','marketplace app'],answer:'📦 Delivery/marketplace system customer ordering, admin dashboard, order status, notifications and payments support kar sakta hai. Vendors/delivery partners ke liye alag dashboard bhi chahiye?'},
+{keys:['whatsapp chatbot','whatsapp ai','whatsapp business api'],answer:'💬 WhatsApp bot FAQs, lead qualification, booking requests and follow-ups automate kar sakta hai. WhatsApp Business Platform/provider rules and possible messaging charges apply ho sakte hain. Use-case kya hai?'},
+{keys:['how chatbot works','chatbot kaise','chatbot kaam'],answer:'🤖 Rules-based bot predefined keywords/answers use karta hai. Generative AI bot flexible answers ke liye model/backend use karta hai; privacy, security and usage cost plan karni hoti hai.'},
+{keys:['train chatbot','chatbot knowledge base','feed chatbot','chatbot data'],answer:'📚 Chatbot knowledge base mein approved services, prices, FAQs, policies and contact details feed kiye ja sakte hain. Passwords, API keys or sensitive customer data include na karein.'},
+{keys:['lead generation','get more leads','leads for business'],answer:'🎯 Leads ke liye landing pages, enquiry forms, click-to-WhatsApp, local SEO and targeted ads combine ho sakte hain. Business, target location and monthly budget kya hai?'},
+{keys:['email marketing','email automation','newsletter'],answer:'✉️ Email campaigns newsletters, enquiry follow-ups and customer updates bhej sakte hain, with consent and unsubscribe handling. Existing customer list hai ya new subscribers collect karne hain?'},
+{keys:['customer reviews','get reviews','online reputation'],answer:'⭐ Honest review requests and review monitoring workflow set ho sakta hai. Fake or deceptive reviews recommend nahi kiye jaate.'},
+{keys:['google analytics','track visitors','website analytics'],answer:'📊 Analytics traffic sources, page views, enquiries and conversions track kar sakta hai. Sirf visitor count chahiye ya forms/campaign performance bhi?'},
+{keys:['free hosting','free domain','hosting free'],answer:'💡 Static sites free hosting tiers par chal sakti hain, lekin custom domain, email, database and server functions ki limits alag hoti hain. Login/database bhi chahiye?'},
+{keys:['source code','github','website ownership'],answer:'🧑‍💻 Project handover mein repository/code access, domain/hosting ownership, credentials transfer and documentation scope clear kar sakte hain. Existing site handover chahiye ya new project?'},
+{keys:['mobile testing','responsive testing','mobile friendly'],answer:'📱 Mobile testing mein layout, buttons, navigation, forms, touch interactions and browser compatibility check hote hain. Actual device testing tabhi confirm hogi jab real device/browser par ki jaaye.'},
+{keys:['debug website','website issue','fix a bug'],answer:'🛠️ Bug diagnose karne ke liye URL, exact steps, expected vs actual result and error screenshot share karein. Passwords/API keys share na karein.'},
+{keys:['after launch support','post launch support','website support plan'],answer:'🤝 Post-launch support mein bug fixes, updates, backups, security checks and improvements shamil ho sakte hain. Occasional fixes chahiye ya monthly maintenance?'},
+{keys:['development process','project process','how to start project'],answer:'🧭 Process: requirements, scope/estimate, design, development, testing, launch and handover. Pehle business aur main goal bata dein; baaki details step-by-step clear kar lenge.'},
+{keys:['guarantee ranking','guaranteed results','guarantee leads'],answer:'📈 SEO rankings, ad results or lead volume guarantee nahi kiye ja sakte. Measurable goals, transparent reporting and optimization plan kar sakte hain.'},
+{keys:['do you use ai','is this real ai','is chatbot ai'],answer:'🤖 Website ka current chatbot configured rules/Q&A use karta hai; ise full generative AI kehna sahi nahi hoga. Real AI integration ke liye secure backend/API, privacy and running cost plan karni hogi.'},
+{keys:['multilingual website','hindi website','language switch'],answer:'🌐 Website English, Hindi or selected languages mein ban sakti hai. Language switch, translated content and SEO structure plan kar sakte hain. Kaun-si languages chahiye?'},
+{keys:['website for salon','salon website','beauty parlour website'],answer:'💇 Salon website services/prices, gallery, stylist profiles, location, opening hours, reviews, WhatsApp and appointment booking show kar sakti hai. Simple website chahiye ya booking/billing system bhi?'},
+{keys:['website for gym','gym website','fitness website'],answer:'🏋️ Gym website memberships, trainer profiles, class schedules, pricing, trial enquiries and location show kar sakti hai. Attendance/fees ke liye management dashboard bhi add ho sakta hai.'},
+{keys:['website for restaurant','restaurant website','food website'],answer:'🍽️ Restaurant website menu, hours, location, table booking, takeaway/delivery links and WhatsApp contact show kar sakti hai. Online ordering/payment chahiye ya menu and enquiries enough hain?'},
+{keys:['website for clinic','clinic website','doctor website'],answer:'🩺 Clinic website services, doctor profiles, hours, location and appointment enquiries show kar sakti hai. Patient records handle karne ke liye extra privacy/security planning chahiye.'},
+{keys:['website for coaching','coaching website','online course website'],answer:'🎓 Coaching website courses, batches, faculty, timetable, enquiry forms and testimonials show kar sakti hai. Payments, student login or recorded lessons bhi chahiye?'},
+{keys:['custom software price','software development price','management software cost'],answer:'🧩 Custom software pricing workflows, user roles, database, integrations, reports and security needs par depend karti hai. Business aur must-have features bata dein to scope estimate kar sakte hain.'},
+{keys:['build my idea','custom project','can you build my idea'],answer:'🧩 Custom websites, web apps, mobile apps, dashboards and automations evaluate kar sakte hain. Feasibility third-party APIs, budget and timeline par depend karegi. Apna idea simple words mein bata dein.'}
+]);
+
 function addMsg(text, type) {
   var el = document.createElement('div');
   el.className = 'msg ' + type;
@@ -1592,7 +1648,7 @@ function tdwExtractBusiness(q) {
     [["property dealer","real estate","property business","builder","broker","flats","plots"],"real estate / property"],
     [["freelancer","photographer","designer","developer","consultant","artist","creator"],"freelancer / personal brand"],
     [["travel agency","travel agent","tour operator","tourism","cab service","taxi service"],"travel business"],
-    [["salon","beauty parlour","beauty parlor","spa","barber","makeup artist"],"salon / beauty services"],
+    [["salon","beauty parlour","beauty parlor","parlour","parlor","spa","barber","makeup artist","hair salon","beauty studio"],"salon / beauty services"],
     [["gym","fitness centre","fitness center","yoga studio","personal trainer"],"gym / fitness"],
     [["manufacturer","manufacturing","factory","wholesale","supplier","export business"],"manufacturing / B2B"],
     [["ngo","charity","trust","nonprofit","foundation"],"NGO / nonprofit"],
@@ -1862,18 +1918,34 @@ function tdwAskBusiness() {
     : "Ye kis business/profession ke liye hai? Jaise clothing shop, restaurant, clinic, coaching, property business, freelancer ya startup.";
 }
 function tdwAskGoal() {
-  if (tdwFlow.project === "software" && tdwHas(tdwNorm(tdwFlow.business),["gym","fitness"])) return tdwFlow.lang === "english"
+  var business=tdwNorm(tdwFlow.business);
+  if (tdwFlow.project === "software" && tdwHas(business,["gym","fitness"])) return tdwFlow.lang === "english"
     ? "For your gym, what matters most: member entry/check-in, attendance, membership expiry and fee dues, trainer schedules, or all-in-one management?"
     : "Gym ke liye sabse zaroori kya hai — member entry/check-in, attendance, membership expiry aur fees due, trainer schedule, ya all-in-one management?";
+  if (tdwFlow.project === "software" && tdwHas(business,["salon","beauty","parlour","barber","spa"])) return tdwFlow.lang === "english"
+    ? "For your salon, what do you want to manage: appointments, customer records, staff schedules, billing/payments, product stock, or all-in-one management?"
+    : "Salon ke liye kya manage karna hai — appointments, customer records, staff schedule, billing/payments, product stock, ya all-in-one software?";
+  if (tdwFlow.project === "software" && tdwHas(business,["restaurant","food"])) return tdwFlow.lang === "english"
+    ? "For your restaurant, do you need menu/orders, table bookings, billing, delivery tracking, inventory, or all-in-one management?"
+    : "Restaurant ke liye kya chahiye — menu/orders, table booking, billing, delivery tracking, inventory, ya all-in-one management?";
+  if (tdwFlow.project === "software" && tdwHas(business,["clinic","healthcare","doctor"])) return tdwFlow.lang === "english"
+    ? "For your clinic, do you need appointment scheduling, patient records, billing, staff schedules, or reports?"
+    : "Clinic ke liye kya chahiye — appointment schedule, patient records, billing, staff schedule, ya reports?";
   if (tdwFlow.project === "software") return tdwFlow.lang === "english"
     ? "What's the main job: track records, manage staff/customers, take bookings/orders, handle payments, or provide an admin dashboard?"
     : "Software ka main kaam kya hoga — records track karna, staff/customers manage karna, bookings/orders, payments, ya admin dashboard?";
+  if (tdwFlow.project === "automation" && tdwHas(business,["salon","beauty","parlour","barber","spa"])) return tdwFlow.lang === "english"
+    ? "For your salon, should the AI answer service/price questions, collect appointment requests, send reminders, follow up with customers, or handle all of these?"
+    : "Salon ke liye AI se kya karwana hai — services/prices ke jawab, appointment requests, reminders, customers ka follow-up, ya ye sab?";
+  if (tdwFlow.project === "automation" && tdwHas(business,["gym","fitness"])) return tdwFlow.lang === "english"
+    ? "For your gym, should AI answer membership questions, collect trial-session leads, send renewal reminders, or help with attendance/fee workflows?"
+    : "Gym ke liye AI se kya karwana hai — membership questions, trial-session leads, renewal reminders, ya attendance/fees workflow mein help?";
   if (tdwFlow.project === "automation") return tdwFlow.lang === "english"
     ? "What outcome matters most: answer common questions, qualify leads, follow up automatically, take bookings, update business tools, or generate reports?"
     : "Sabse important result kya hai — FAQs answer karna, leads qualify karna, automatic follow-up, bookings, business tools update karna, ya reports banana?";
-  if (tdwFlow.project === "marketing") return tdwFlow.lang === "english"
-    ? "What result matters most: qualified leads, more sales, local walk-ins, Google visibility, or social-media reach?"
-    : "Aapka main goal kya hai — better leads, zyada sales, local customers/walk-ins, Google visibility, ya social-media reach?";
+  if (tdwFlow.project === "marketing" && tdwHas(business,["salon","beauty","parlour","barber","spa"])) return tdwFlow.lang === "english"
+    ? "For your salon, is the priority more local walk-ins, appointment bookings, Google visibility, Instagram reach, or repeat customers?"
+    : "Salon ke liye priority kya hai — local walk-ins, appointment bookings, Google par visibility, Instagram reach, ya repeat customers?";
   return tdwFlow.lang === "english"
     ? "What result matters most: online sales, more enquiries/leads, bookings, showing your work, or managing orders/customers online?"
     : "Aapka main goal kya hai — online sales, enquiries/leads badhana, bookings lena, apna work dikhana, ya orders/customers online manage karna?";
