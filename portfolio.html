@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore selected website, e-commerce, healthcare, marketplace and brand project directions by TheDigitalWork.">
+  <meta name="description" content="Explore real website and web application work by TheDigitalWork, including business websites, deployment fixes and mobile-first user experiences.">
   <meta name="theme-color" content="#0a0a0f">
-  <title>Portfolio | TheDigitalWork — Websites, E-commerce & Digital Products</title>
+  <title>Portfolio | TheDigitalWork — Real Projects</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
@@ -62,7 +62,7 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 @keyframes footerEnter{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 @media(max-width:1000px){#nav{padding:20px 28px}.fg-grid{grid-template-columns:1.5fr 1fr 1fr;gap:36px}.fg-grid>div:first-child{grid-column:1/-1}#footer{padding:60px 28px 32px}}
-@media(max-width:700px){#nav,#nav.scrolled{padding:16px 20px}.nav-links{gap:14px}.nav-links a{font-size:.78rem}.nav-links li:nth-child(2){display:none}.nav-cta{font-size:.78rem;padding:9px 14px}main{padding:110px 20px 70px}.policy{padding:24px 20px}.fg-grid{grid-template-columns:1fr 1fr;gap:30px 22px}.fg-grid>div:first-child{grid-column:1/-1}#footer{padding:48px 20px 28px}.fbot{flex-direction:column;align-items:flex-start}.fb-tag{max-width:320px}}
+@media(max-width:700px){#nav,#nav.scrolled{padding:16px 20px}.nav-links{gap:14px}.nav-links a{font-size:.78rem}.nav-links li:nth-child(2),.nav-links li:nth-child(3){display:none}.nav-cta{font-size:.78rem;padding:9px 14px}main{padding:110px 20px 70px}.policy{padding:24px 20px}.fg-grid{grid-template-columns:1fr 1fr;gap:30px 22px}.fg-grid>div:first-child{grid-column:1/-1}#footer{padding:48px 20px 28px}.fbot{flex-direction:column;align-items:flex-start}.fb-tag{max-width:320px}}
 @media(max-width:440px){.logo{font-size:1.1rem}.nav-links{gap:10px}.nav-links a{font-size:.72rem}.nav-cta{padding:8px 10px;font-size:.72rem}main{padding:100px 16px 56px}h1{font-size:2.35rem}.fg-grid{grid-template-columns:1fr 1fr;gap:26px 16px}.fb-name{font-size:1.25rem}.wa-pill{font-size:.75rem;padding:7px 9px}.fcopy{font-size:.78rem}}
 
 
@@ -82,13 +82,13 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 #noise{pointer-events:none;position:fixed;inset:0;z-index:9998;opacity:.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
 
 /* ===== PORTFOLIO PAGE ===== */
-.portfolio-main{padding-top:150px}
-.portfolio-hero{display:block;max-width:1040px;margin-bottom:100px}
+.portfolio-main{padding-top:150px;padding-bottom:76px}
+.portfolio-hero{position:relative;z-index:1;max-width:1020px;margin:0 auto 96px}
 .pf-eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--blue);font-size:.78rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
 .pf-eyebrow:before{content:"";width:24px;height:1px;background:var(--blue);box-shadow:0 0 14px rgba(79,142,247,.8)}
-.portfolio-hero h1{max-width:720px;font-size:clamp(2.8rem,5.5vw,5rem);line-height:1.02;letter-spacing:-.065em;margin:20px 0 24px}
+.portfolio-hero h1{max-width:990px;font-size:clamp(2.8rem,6vw,5.25rem);line-height:1.03;letter-spacing:-.065em;margin:20px 0 24px;font-weight:800}
 .gradient-text{background:linear-gradient(110deg,#f8fafc 0%,#8bb6ff 42%,#a78bfa 75%,#ec4899 105%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.pf-intro{max-width:900px;color:var(--muted);font-size:clamp(1rem,1.5vw,1.13rem);line-height:1.85}
+.pf-intro{max-width:900px;color:var(--muted);font-size:clamp(1rem,1.5vw,1.12rem);line-height:1.85;margin:0}
 .pf-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:30px}
 .pf-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 21px;border-radius:100px;font-size:.9rem;font-weight:700;transition:transform .3s var(--ease),box-shadow .3s,border-color .3s,background .3s}
 .pf-btn:hover{transform:translateY(-3px)}
@@ -96,122 +96,64 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 .pf-btn-primary:hover{box-shadow:0 14px 42px rgba(79,142,247,.34)}
 .pf-btn-secondary{border:1px solid var(--border);background:rgba(255,255,255,.035);color:var(--text)}
 .pf-btn-secondary:hover{border-color:rgba(79,142,247,.5);background:rgba(79,142,247,.08)}
-.pf-trust-row{display:flex;gap:20px;flex-wrap:wrap;margin-top:34px;color:var(--muted);font-size:.78rem}
+.pf-trust-row{display:flex;gap:20px;flex-wrap:wrap;margin-top:32px;color:var(--muted);font-size:.78rem}
 .pf-trust-row span{display:inline-flex;align-items:center;gap:8px}
 .pf-trust-row span:before{content:"";width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(16,185,129,.5)}
-
-
-
-
-
-.pf-window-bar i:nth-child(2){background:#8b5cf6}.pf-window-bar i:nth-child(3){background:#ec4899}
-
-
-
-
-
-
-
-
-
-.pf-float-chip small{display:block;color:var(--muted);font-size:.61rem;font-weight:500}
-
-
-.work-section{scroll-margin-top:110px;margin-bottom:112px}
+.work-section{position:relative;z-index:1;scroll-margin-top:110px;margin-bottom:72px}
 .pf-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:28px}
 .pf-section-head .eyebrow{margin-bottom:10px}
 .pf-section-head h2,.pf-bottom-cta h2{font-size:clamp(1.9rem,4vw,3rem);line-height:1.12;letter-spacing:-.05em;margin:0;font-weight:800}
-.pf-section-head p{color:var(--muted);max-width:390px;font-size:.9rem;margin:0}
+.pf-section-head p{color:var(--muted);max-width:420px;font-size:.9rem;line-height:1.75;margin:0}
 .pf-filters{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px}
 .pf-filter{font:inherit;font-size:.78rem;font-weight:700;padding:9px 15px;border-radius:100px;color:var(--muted);background:rgba(255,255,255,.035);border:1px solid var(--border);cursor:pointer;transition:all .25s}
 .pf-filter:hover{color:var(--text);border-color:rgba(79,142,247,.5)}
 .pf-filter[aria-pressed="true"]{color:#fff;border-color:transparent;background:linear-gradient(110deg,var(--blue),var(--purple));box-shadow:0 7px 25px rgba(79,142,247,.17)}
-.pf-work-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
-.work-card{min-width:0;overflow:hidden;border:1px solid var(--border);border-radius:20px;background:linear-gradient(160deg,rgba(21,22,34,.94),rgba(12,12,19,.96));transition:transform .35s var(--ease),border-color .35s,box-shadow .35s;animation:cardEnter .65s both}
-.work-card:hover{transform:translateY(-7px);border-color:rgba(79,142,247,.44);box-shadow:0 22px 55px rgba(0,0,0,.28),0 0 30px rgba(79,142,247,.06)}
+.pf-work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.work-card{min-width:0;overflow:hidden;border:1px solid var(--border);border-radius:20px;background:linear-gradient(160deg,rgba(21,22,34,.94),rgba(12,12,19,.92));transition:transform .35s var(--ease),border-color .35s,box-shadow .35s;animation:cardEnter .65s both}
+.work-card:hover{transform:translateY(-6px);border-color:rgba(79,142,247,.44);box-shadow:0 22px 55px rgba(0,0,0,.28),0 0 30px rgba(79,142,247,.06)}
 .work-card[hidden]{display:none}
-.work-cover{height:230px;position:relative;overflow:hidden;padding:16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
-.cover-label{position:absolute;top:13px;left:14px;z-index:3;padding:5px 9px;background:rgba(5,7,12,.6);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);border-radius:100px;font-size:.61rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:#e2e8f0}
-
-.work-card:hover 
-
-.mock-chrome i:nth-child(2){background:#8b5cf6}.mock-chrome i:nth-child(3){background:#ec4899}
-
-
-
-
-
-
-.cover-agency{background:radial-gradient(circle at 70% 30%,rgba(79,142,247,.29),transparent 42%),linear-gradient(135deg,#0b1020,#141023)}
-.cover-agency 
-.cover-commerce{background:linear-gradient(135deg,#eee9e1,#d9d3c8)}
-.cover-commerce 
-.cover-commerce 
-.cover-commerce 
-.cover-commerce .cover-commerce .cover-commerce .cover-commerce .cover-commerce 
+.work-cover{height:210px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.cover-label{position:absolute;top:14px;left:14px;z-index:3;padding:5px 9px;background:rgba(5,7,12,.62);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);border-radius:100px;font-size:.61rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:#e2e8f0}
+.project-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.project-art:before{content:"";position:absolute;width:235px;height:235px;border:1px solid rgba(255,255,255,.14);border-radius:50%;box-shadow:0 0 0 20px rgba(255,255,255,.025),0 0 0 48px rgba(255,255,255,.02),0 0 0 78px rgba(255,255,255,.015);transition:transform .6s var(--ease)}
+.work-card:hover .project-art:before{transform:scale(1.12) rotate(14deg)}
+.project-mark{position:relative;z-index:1;font-size:clamp(3.7rem,8vw,5.6rem);font-weight:800;letter-spacing:-.095em;line-height:1;color:rgba(248,250,252,.96);text-shadow:0 8px 45px rgba(0,0,0,.2)}
+.project-mark span{color:#8bb6ff}
+.project-orbit{position:absolute;width:110px;height:110px;border:1px solid rgba(139,92,246,.55);border-radius:50%;right:18%;top:21%;box-shadow:0 0 0 11px rgba(139,92,246,.055),0 0 0 25px rgba(79,142,247,.035);transform:rotate(-24deg)}
+.project-domain{position:absolute;z-index:2;right:14px;bottom:13px;left:14px;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;border:1px solid rgba(255,255,255,.13);border-radius:10px;background:rgba(7,9,17,.62);backdrop-filter:blur(12px);color:#d6deed;font-size:.7rem;font-weight:700}
+.project-domain b{font-size:.95rem;color:#8bb6ff}
+.cover-agency{background:radial-gradient(circle at 70% 30%,rgba(79,142,247,.3),transparent 42%),linear-gradient(135deg,#0b1020,#141023)}
+.cover-homes{background:radial-gradient(circle at 78% 20%,rgba(164,199,167,.19),transparent 45%),linear-gradient(135deg,#19231e,#0b1112)}
+.project-art-homes .project-mark span{color:#a4c7a7}
+.project-art-homes .project-orbit{border-color:rgba(164,199,167,.5)}
 .cover-health{background:radial-gradient(circle at 70% 20%,rgba(16,185,129,.2),transparent 40%),linear-gradient(135deg,#071a1d,#0b2531)}
-.cover-health 
-.cover-health .cover-health .cover-health 
-.cover-market{background:radial-gradient(circle at 78% 20%,rgba(139,92,246,.31),transparent 42%),linear-gradient(135deg,#17102e,#090b19)}
-.cover-market 
-.cover-market .cover-market .cover-market 
+.project-art-health .project-mark span{color:#6ee7b7}
+.project-art-health .project-orbit{border-color:rgba(110,231,183,.5)}
 .cover-food{background:radial-gradient(circle at 72% 18%,rgba(251,146,60,.26),transparent 40%),linear-gradient(135deg,#24100d,#100c12)}
-.cover-food .cover-food .cover-food 
-.cover-homes{background:linear-gradient(135deg,#e7e2d7,#c7d1c9)}
-.cover-homes 
-.cover-homes 
-.cover-homes 
-.cover-homes .cover-homes .cover-homes .cover-homes .cover-homes 
-.cover-beauty{background:radial-gradient(circle at 80% 15%,rgba(236,72,153,.21),transparent 36%),linear-gradient(135deg,#261322,#0d0b15)}
-.cover-beauty 
-.cover-beauty .cover-beauty .cover-beauty .cover-beauty 
-
-
-
-
-.cover-health 
-.cover-market 
-.cover-food 
-.cover-beauty 
-.work-meta{padding:21px 21px 22px}
+.project-art-food .project-mark span{color:#fdba74}
+.project-art-food .project-orbit{border-color:rgba(251,146,60,.48)}
+.work-meta{padding:22px 23px 24px}
 .work-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}
 .work-type{font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--blue);font-weight:800}
 .work-index{font-size:.7rem;color:#64748b;font-weight:700}
-.work-meta h3{font-size:1.12rem;letter-spacing:-.03em;margin:0 0 8px;line-height:1.3}
-.work-meta p{font-size:.82rem;line-height:1.7;color:var(--muted);margin:0 0 16px}
+.work-meta h3{font-size:1.17rem;letter-spacing:-.03em;margin:0 0 8px;line-height:1.3}
+.work-meta p{font-size:.84rem;line-height:1.75;color:var(--muted);margin:0 0 16px}
 .work-tags{display:flex;gap:7px;flex-wrap:wrap}
 .work-tags span{font-size:.64rem;padding:5px 8px;border:1px solid var(--border);border-radius:100px;color:#cbd5e1;background:rgba(255,255,255,.025)}
 .work-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:.78rem;font-weight:800;color:var(--text);transition:color .25s,gap .25s}
 .work-link:hover{color:#8bb6ff;gap:12px}
-.pf-note{margin-top:23px;color:#78869c;font-size:.74rem;line-height:1.65}
-.pf-bottom-cta{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:30px;padding:clamp(26px,5vw,52px);margin-bottom:36px;border:1px solid rgba(79,142,247,.22);border-radius:24px;background:linear-gradient(115deg,rgba(79,142,247,.12),rgba(139,92,246,.1) 56%,rgba(236,72,153,.04));box-shadow:inset 0 1px rgba(255,255,255,.03)}
+.pf-note{margin-top:22px;color:#78869c;font-size:.74rem;line-height:1.65}
+.pf-bottom-cta{position:relative;z-index:1;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:30px;padding:clamp(26px,5vw,52px);margin:0 0 36px;border:1px solid rgba(79,142,247,.22);border-radius:24px;background:linear-gradient(115deg,rgba(79,142,247,.12),rgba(139,92,246,.1) 56%,rgba(236,72,153,.04));box-shadow:inset 0 1px rgba(255,255,255,.03)}
 .pf-bottom-cta:after{content:"";position:absolute;width:260px;height:260px;right:-90px;top:-130px;border:1px solid rgba(139,92,246,.38);border-radius:50%;box-shadow:0 0 0 24px rgba(139,92,246,.04),0 0 0 48px rgba(79,142,247,.04);pointer-events:none}
-.pf-bottom-cta .eyebrow{margin-bottom:10px}.pf-bottom-cta p{color:var(--muted);max-width:540px;font-size:.9rem;margin:12px 0 0}.pf-bottom-cta .pf-btn{position:relative;z-index:1;flex-shrink:0}
-50%{transform:rotateY(-2deg) rotateX(1deg) translateY(-10px)}}
-50%{transform:translateY(-9px)}}
-@media(prefers-reduced-motion:reduce){.work-card,.pf-btn{transition:none!important}}}
-@media(max-width:1000px){.portfolio-main{padding-top:125px}.portfolio-hero{margin-bottom:88px}.pf-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.work-cover{height:220px}}.portfolio-hero{grid-template-columns:1fr 0.88fr;gap:30px;margin-bottom:88px}.pf-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.work-cover{height:240px}}
-@media(max-width:700px){.portfolio-main{padding-top:110px}.portfolio-hero{margin-bottom:76px}.portfolio-hero h1{font-size:clamp(2.7rem,12vw,4rem)}.pf-section-head{display:block}.pf-section-head p{margin-top:12px}.work-cover{height:205px}.pf-bottom-cta{align-items:flex-start;flex-direction:column}.pf-bottom-cta .pf-btn{align-self:flex-start}}.portfolio-hero{grid-template-columns:1fr;gap:36px;margin-bottom:76px}.portfolio-hero h1{font-size:clamp(2.7rem,12vw,4rem)}.pf-section-head{display:block}.pf-section-head p{margin-top:12px}.work-cover{height:220px}.pf-bottom-cta{align-items:flex-start;flex-direction:column}.pf-bottom-cta .pf-btn{align-self:flex-start}}
-@media(max-width:480px){.portfolio-main{padding-left:16px;padding-right:16px;padding-bottom:56px}.portfolio-hero h1{font-size:2.7rem}.pf-actions{align-items:stretch}.pf-btn{padding:12px 16px;font-size:.82rem}.pf-work-grid{grid-template-columns:1fr;gap:17px}.work-cover{height:220px}.pf-section-head h2,.pf-bottom-cta h2{font-size:2rem}.pf-trust-row{gap:10px 14px}.pf-section-head{margin-bottom:22px}}.portfolio-hero h1{font-size:2.7rem}.pf-actions{align-items:stretch}.pf-btn{padding:12px 16px;font-size:.82rem}.pf-work-grid{grid-template-columns:1fr;gap:17px}.work-cover{height:230px}.pf-section-head h2,.pf-bottom-cta h2{font-size:2rem}.pf-trust-row{gap:10px 14px}.pf-section-head{margin-bottom:22px}}
+.pf-bottom-cta .eyebrow{margin-bottom:10px}
+.pf-bottom-cta p{color:var(--muted);max-width:540px;font-size:.9rem;margin:12px 0 0}
+.pf-bottom-cta .pf-btn{position:relative;z-index:1;flex-shrink:0}
+@keyframes cardEnter{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.work-card,.pf-btn{transition:none!important}}
+@media(max-width:1000px){.portfolio-main{padding-top:125px}.portfolio-hero{margin-bottom:88px}.pf-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.work-cover{height:205px}}
+@media(max-width:700px){.portfolio-main{padding-top:110px}.portfolio-hero{margin-bottom:76px}.portfolio-hero h1{font-size:clamp(2.7rem,12vw,4rem)}.pf-section-head{display:block}.pf-section-head p{margin-top:12px}.work-cover{height:205px}.pf-bottom-cta{align-items:flex-start;flex-direction:column}.pf-bottom-cta .pf-btn{align-self:flex-start}}
+@media(max-width:480px){.portfolio-main{padding-left:16px;padding-right:16px;padding-bottom:56px}.portfolio-hero h1{font-size:2.7rem}.pf-actions{align-items:stretch}.pf-btn{padding:12px 16px;font-size:.82rem}.pf-work-grid{grid-template-columns:1fr;gap:17px}.work-cover{height:200px}.pf-section-head h2,.pf-bottom-cta h2{font-size:2rem}.pf-trust-row{gap:10px 14px}.pf-section-head{margin-bottom:22px}}
 
-
-
-.work-cover{height:228px;position:relative;overflow:hidden;padding:0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
-.cover-label{position:absolute;top:13px;left:14px;z-index:3;padding:5px 9px;background:rgba(5,7,12,.62);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);border-radius:100px;font-size:.61rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:#e2e8f0}
-.project-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.project-art:before{content:"";position:absolute;width:230px;height:230px;border:1px solid rgba(255,255,255,.14);border-radius:50%;box-shadow:0 0 0 20px rgba(255,255,255,.025),0 0 0 48px rgba(255,255,255,.02),0 0 0 78px rgba(255,255,255,.015);transition:transform .6s var(--ease)}
-.work-card:hover .project-art:before{transform:scale(1.12) rotate(14deg)}
-.project-mark{position:relative;z-index:1;font-size:clamp(3.6rem,7vw,5.6rem);font-weight:800;letter-spacing:-.095em;line-height:1;color:rgba(248,250,252,.96);text-shadow:0 8px 45px rgba(0,0,0,.2)}
-.project-mark span{color:#8bb6ff}
-.project-orbit{position:absolute;width:110px;height:110px;border:1px solid rgba(139,92,246,.55);border-radius:50%;right:16%;top:24%;box-shadow:0 0 0 11px rgba(139,92,246,.055),0 0 0 25px rgba(79,142,247,.035);transform:rotate(-24deg)}
-.project-domain{position:absolute;z-index:2;right:13px;bottom:12px;left:13px;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;border:1px solid rgba(255,255,255,.13);border-radius:10px;background:rgba(7,9,17,.6);backdrop-filter:blur(12px);color:#d6deed;font-size:.68rem;font-weight:700}
-.project-domain b{font-size:.95rem;color:#8bb6ff}
-.project-art-homes .project-mark span{color:#a4c7a7}
-.project-art-homes .project-orbit{border-color:rgba(164,199,167,.5);right:17%;top:23%}
-.project-art-health .project-mark span{color:#6ee7b7}
-.project-art-health .project-orbit{border-color:rgba(110,231,183,.5)}
-.project-art-food .project-mark span{color:#fdba74}
-.project-art-food .project-orbit{border-color:rgba(251,146,60,.48)}
 </style>
 </head>
 <body>
@@ -223,7 +165,7 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
     <li><a href="/#services">Services</a></li>
 
     <li><a href="/#reviews">Reviews</a></li>
-    <li><a href="/portfolio.html" aria-current="page">Portfolio</a></li>
+    <li><a href="/portfolio.html">Portfolio</a></li>
     <li><a href="/#contact">Contact</a></li>
   </ul>
   <a class="nav-cta" href="/#contact">Get a Quote</a>
@@ -249,10 +191,10 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
   <section id="work" class="work-section" aria-labelledby="work-title">
     <div class="pf-section-head">
       <div>
-        <div class="eyebrow">Live project links</div>
+        <div class="eyebrow">Selected projects</div>
         <h2 id="work-title">Work built around<br>real business needs.</h2>
       </div>
-      <p>These cards link to the public websites. Descriptions focus on the type of website work and digital experience—not made-up client results.</p>
+      <p>These cards link to public project domains. Descriptions focus on the type of website work and digital experience, without invented client results.</p>
     </div>
     <div class="pf-filters" role="group" aria-label="Filter portfolio projects">
       <button class="pf-filter" type="button" data-work-filter="all" aria-pressed="true">All work</button>
@@ -273,8 +215,8 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
         <div class="work-meta">
           <div class="work-topline"><span class="work-type">Agency website</span><span class="work-index">01 / 04</span></div>
           <h3>TheDigitalWork</h3>
-          <p>The agency website brings services, motion-led design, an enquiry chatbot and clear ways to start a project into one responsive experience.</p>
-          <div class="work-tags"><span>Responsive UI</span><span>Chatbot</span><span>Lead flows</span></div>
+          <p>The agency website brings service information, motion-led visuals, enquiry paths and a website chatbot together in a responsive experience.</p>
+          <div class="work-tags"><span>Responsive UI</span><span>Chatbot</span><span>Enquiries</span></div>
           <a class="work-link" href="https://thedigitalwork.in/" target="_blank" rel="noopener">Visit live website <span aria-hidden="true">↗</span></a>
         </div>
       </article>
@@ -291,7 +233,7 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
         <div class="work-meta">
           <div class="work-topline"><span class="work-type">Property website</span><span class="work-index">02 / 04</span></div>
           <h3>WOLHomes</h3>
-          <p>Website improvement and deployment work for a property-focused experience, with attention to dependable page loading and clear visitor journeys.</p>
+          <p>Property website support including production deployment troubleshooting, storefront checks and visitor-facing page fixes.</p>
           <div class="work-tags"><span>Property website</span><span>UX fixes</span><span>Deployment</span></div>
           <a class="work-link" href="https://wolhomes.com/" target="_blank" rel="noopener">Visit live website <span aria-hidden="true">↗</span></a>
         </div>
@@ -309,7 +251,7 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
         <div class="work-meta">
           <div class="work-topline"><span class="work-type">Healthcare website</span><span class="work-index">03 / 04</span></div>
           <h3>HealthCure</h3>
-          <p>Healthcare web work focused on responsive page layouts, helpful service information, navigation and frontend deployment troubleshooting.</p>
+          <p>Healthcare web work focused on page layout, clear service information, responsive behavior and frontend troubleshooting.</p>
           <div class="work-tags"><span>Responsive pages</span><span>Content structure</span><span>UI fixes</span></div>
           <a class="work-link" href="https://www.healthcure.in/" target="_blank" rel="noopener">Visit live website <span aria-hidden="true">↗</span></a>
         </div>
@@ -327,16 +269,14 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
         <div class="work-meta">
           <div class="work-topline"><span class="work-type">Food-ordering UX</span><span class="work-index">04 / 04</span></div>
           <h3>NonVegOnWheel</h3>
-          <p>A food-delivery UI direction centred on quick menu discovery, mobile-friendly browsing and a straightforward route from menu to order.</p>
+          <p>Food-delivery interface improvement direction centred on fast menu discovery, mobile-friendly browsing and clearer ordering paths.</p>
           <div class="work-tags"><span>Food service</span><span>Mobile UX</span><span>Menu flow</span></div>
           <a class="work-link" href="https://nonvegonwheel.in/" target="_blank" rel="noopener">Visit website <span aria-hidden="true">↗</span></a>
         </div>
       </article>
     </div>
-    <p class="pf-note">Each project link opens its domain in a new tab. Site content and availability can change over time.</p>
+    <p class="pf-note">Project links open in a new tab. Website content and availability may change over time.</p>
   </section>
-
-  <section class="pf-bottom-cta"</section>
 
   <section class="pf-bottom-cta" aria-labelledby="pf-cta-title">
     <div>
