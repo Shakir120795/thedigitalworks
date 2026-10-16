@@ -1763,7 +1763,7 @@ function botReply(input) {
     response=tdwFlow.lang==="english"
       ? "What kind of app is this for, and who will use it? For example: delivery, bookings, learning, marketplace, or internal business management."
       : "App kis kaam ke liye hai aur ise kaun use karega? Jaise delivery, bookings, learning, marketplace ya apne business ka management.";
-  } else if (tdwFlow.step!=="idle" && tdwKnownAnswer(q)) {
+  } else if (tdwFlow.step!=="idle" && (tdwHas(q,["price","pricing","cost","how much","kitna","kitne","kharcha","quote","not working","website error","site down","contact number","phone number","email address"]) || /^(what is|what are|how does|how do|why does|why do|kya hai|kya hota|kaise kaam karta)/.test(q)) && tdwKnownAnswer(q)) {
     response=tdwKnownAnswer(q);
   } else if (tdwFlow.step==="business") {
     tdwFlow.business=input.trim(); tdwFlow.step="goal"; response=tdwAskGoal();
