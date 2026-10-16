@@ -1542,8 +1542,8 @@ function tdwNorm(s) {
 function tdwHas(s, list) { return list.some(function (x) { return s.indexOf(x) !== -1; }); }
 function tdwLang(s) {
   var q = tdwNorm(s);
-  if (tdwHas(q, ["mujhe","chahiye","banani","banana","banwani","banwana","karna hai","meri","mera","batao","btao","kitna","kitne","kharcha","dukaan","dhandha","bhai","sir","kaise","krna","krni","ke liye","hai","hain","nahi","haan","hain"])) return "hinglish";
-  if (tdwHas(q, ["i need","i want","my business","for my","for a","need a","need an","want a","want an","can you","looking for","build a","make a","please","thank you","thanks","online sales","product catalogue","cart","checkout","admin panel","bookings","appointment","budget","within","weeks","yes","okay","sure"])) return "english";
+  if (tdwHas(q, ["mujhe","chahiye","banani","banana","banwani","banwana","karna hai","meri","mera","batao","btao","kitna","kitne","kharcha","dukaan","dhandha","bhai","sir","kaise","krna","krni","ke liye","hai","hain","nahi","haan"])) return "hinglish";
+  if (tdwHas(q, ["i need","i want","my business","for my","for a","need a","need an","want a","want an","can you","looking for","build a","make a","please","thank you","thanks","online sales","product catalogue","cart","checkout","admin panel","bookings","appointment","what is","how much","how does"])) return "english";
   return "mixed";
 }
 function tdwSetLanguage(input) {
@@ -1742,8 +1742,8 @@ function botReply(input) {
   ]);
   var appIntent=tdwHas(q,["need an app","want an app","build an app","app banani","app banwana","app chahiye","mobile app chahiye"]);
   var restart=tdwHas(q,["new project","start over","restart","naya project","another website","dobara"]);
-  var yes=/^(yes|yeah|yep|haan|han|ha|bilkul|sahi|correct|thik hai|theek hai|sure|okay|ok)$/.test(q);
-  var no=/^(no|nahi|nahin|not really|galat|kuch aur)$/.test(q);
+  var yes=/^(yes|yeah|yep|haan|han|ha|bilkul|sahi|correct|thik hai|theek hai|sure|okay|ok)(?:[.! ,]|$)/.test(q);
+  var no=/^(no|nahi|nahin|not really|galat|kuch aur)(?:[.! ,]|$)/.test(q);
   var response;
 
   // If user asks a separate factual/pricing question mid-flow, answer it without losing progress.
@@ -1784,7 +1784,15 @@ function botReply(input) {
   } else if (tdwFlow.step==="timeline") {
     tdwFlow.timeline=input.trim(); tdwFlow.step="done"; response=tdwRecommend()+"\n\nProject discuss karne ke liye WhatsApp: +91 76175 55488 / +91 81268 12317.";
   } else if (websiteIntent) {
-    response=tdwStartNewProject(tdwFlow.lang);
+    var nextBusiness=tdwExtractBusiness(q);
+    tdwFlow= {step:"idle",project:"website",business:"",goal:"",features:"",budget:"",timeline:"",lang:tdwFlow.lang};
+    if (nextBusiness) {
+      tdwFlow.business=nextBusiness;
+      tdwFlow.step="goal";
+      response=tdwAskGoal();
+    } else {
+      response=tdwStartNewProject(tdwFlow.lang);
+    }
   } else if (appIntent && tdwFlow.step==="idle") {
     tdwFlow.project="app"; tdwFlow.step="business";
     response=tdwFlow.lang==="english" ? "What type of app do you need and what should users be able to do?" : "Kis type ki app chahiye aur users usmein kya kar sakenge?";
