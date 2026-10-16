@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore selected website, e-commerce, healthcare, marketplace and brand project directions by TheDigitalWork.">
+  <meta name="theme-color" content="#0a0a0f">
+  <title>Portfolio | TheDigitalWork — Websites, E-commerce & Digital Products</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+  <style>
+/* TheDigitalWork shared visual system — aligned with the main website */
+*,*::before,*::after{box-sizing:border-box}
+:root{--bg:#0a0a0f;--blue:#4f8ef7;--purple:#8b5cf6;--pink:#ec4899;--gold:#f59e0b;--green:#10b981;--text:#f8fafc;--muted:#94a3b8;--border:rgba(248,250,252,.08);--r:16px;--ease:cubic-bezier(.22,1,.36,1)}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 60px;display:flex;align-items:center;justify-content:space-between;gap:24px;transition:background .4s,backdrop-filter .4s,padding .4s;border-bottom:1px solid transparent;animation:navEnter .7s var(--ease) both}
+#nav.scrolled{background:rgba(10,10,15,.88);backdrop-filter:blur(22px);padding:14px 60px;border-bottom-color:var(--border)}
+.logo{font-size:1.25rem;font-weight:800;letter-spacing:-.02em;white-space:nowrap;color:var(--text)}
+.logo span{color:var(--blue)}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none;margin:0;padding:0}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--muted);transition:color .3s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;padding:10px 24px;border-radius:100px;font-size:.875rem;font-weight:700;white-space:nowrap;transition:transform .3s var(--ease),box-shadow .3s}
+.nav-cta:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(79,142,247,.35)}
+main{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:132px 40px 100px;animation:pageEnter .8s .08s var(--ease) both}
+.eyebrow{color:var(--blue);font-size:.78rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin:12px 0;font-weight:800}
+.intro{color:var(--muted);max-width:760px;font-size:1rem}
+.updated{color:var(--muted);font-size:.82rem;margin:20px 0 34px}
+.policy{background:rgba(17,17,27,.76);border:1px solid var(--border);border-radius:var(--r);padding:clamp(24px,4vw,48px);box-shadow:0 20px 70px rgba(0,0,0,.12);animation:cardEnter .85s .18s var(--ease) both}
+.policy h2{font-size:1.15rem;line-height:1.45;margin:30px 0 8px;letter-spacing:-.025em;font-weight:700}
+.policy h2:first-child{margin-top:0}
+.policy p,.policy li{color:#cbd5e1}
+.policy a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+.policy a:hover{color:#93c5fd}
+#footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:80px 60px 40px;background:transparent}
+.fg-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1.5fr 1fr;gap:60px;margin-bottom:60px}
+.fb-name{font-size:1.4rem;font-weight:800;margin-bottom:12px;color:var(--text)}
+.fb-name span{color:var(--blue)}
+.fb-tag{color:var(--muted);font-size:.88rem;line-height:1.65;margin-bottom:24px}
+.socials{display:flex;gap:10px}
+.sl{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.88rem;transition:background .3s,border-color .3s,transform .3s;color:var(--muted)}
+.sl:hover{background:rgba(79,142,247,.14);border-color:var(--blue);transform:translateY(-2px)}
+.fh{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+.fl-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin:0;padding:0}
+.fl-list a{color:var(--muted);font-size:.88rem;transition:color .3s;display:flex;align-items:center;gap:5px}
+.fl-list a:hover{color:var(--text)}
+.wa-pill{display:flex;align-items:center;gap:8px;width:max-content;max-width:100%;margin:0 0 10px;padding:8px 14px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.28);border-radius:100px;color:#25d366;font-size:.82rem;font-weight:600;transition:background .3s,transform .3s}
+.wa-pill:hover{background:rgba(37,211,102,.2);transform:translateY(-2px)}
+.fbot{max-width:1200px;margin:0 auto;border-top:1px solid var(--border);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.fcopy{color:var(--muted);font-size:.85rem}
+.fleg{display:flex;gap:22px;flex-wrap:wrap}
+.fleg a{color:var(--muted);font-size:.85rem;transition:color .3s}
+.fleg a:hover{color:var(--text)}
+@keyframes navEnter{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pageEnter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cardEnter{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes footerEnter{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+@media(max-width:1000px){#nav{padding:20px 28px}.fg-grid{grid-template-columns:1.5fr 1fr 1fr;gap:36px}.fg-grid>div:first-child{grid-column:1/-1}#footer{padding:60px 28px 32px}}
+@media(max-width:700px){#nav,#nav.scrolled{padding:16px 20px}.nav-links{gap:14px}.nav-links a{font-size:.78rem}.nav-links li:nth-child(2),.nav-links li:nth-child(3){display:none}.nav-cta{font-size:.78rem;padding:9px 14px}main{padding:110px 20px 70px}.policy{padding:24px 20px}.fg-grid{grid-template-columns:1fr 1fr;gap:30px 22px}.fg-grid>div:first-child{grid-column:1/-1}#footer{padding:48px 20px 28px}.fbot{flex-direction:column;align-items:flex-start}.fb-tag{max-width:320px}}
+@media(max-width:440px){.logo{font-size:1.1rem}.nav-links{gap:10px}.nav-links a{font-size:.72rem}.nav-cta{padding:8px 10px;font-size:.72rem}main{padding:100px 16px 56px}h1{font-size:2.35rem}.fg-grid{grid-template-columns:1fr 1fr;gap:26px 16px}.fb-name{font-size:1.25rem}.wa-pill{font-size:.75rem;padding:7px 9px}.fcopy{font-size:.78rem}}
+
+
+.contact-lines{display:flex;flex-direction:column;gap:12px;max-width:290px}
+.contact-row{display:flex;align-items:center;justify-content:flex-start;gap:8px;min-width:0}
+.contact-number{color:var(--muted);font-size:.88rem;font-weight:600;white-space:nowrap;transition:color .25s}
+.contact-number:hover{color:var(--text)}
+.contact-actions{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.contact-icon{width:28px;height:28px;flex:0 0 28px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:9px;background:rgba(255,255,255,.04);color:var(--muted);transition:transform .25s,background .25s,border-color .25s,color .25s}
+.contact-icon svg{width:15px;height:15px;fill:currentColor}
+.contact-icon:hover{color:var(--blue);border-color:var(--blue);background:rgba(79,142,247,.12);transform:translateY(-2px)}
+.contact-icon-wa:hover{color:#25d366;border-color:rgba(37,211,102,.45);background:rgba(37,211,102,.1)}
+@media(max-width:700px){.contact-lines{max-width:100%}.contact-number{font-size:.83rem}}
+
+/* Exact animated background layer used by the homepage */
+#webgl-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#noise{pointer-events:none;position:fixed;inset:0;z-index:9998;opacity:.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+/* ===== PORTFOLIO PAGE ===== */
+.portfolio-main{padding-top:150px}
+.portfolio-hero{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:clamp(34px,5vw,72px);margin-bottom:112px}
+.pf-eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--blue);font-size:.78rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+.pf-eyebrow:before{content:"";width:24px;height:1px;background:var(--blue);box-shadow:0 0 14px rgba(79,142,247,.8)}
+.portfolio-hero h1{max-width:720px;font-size:clamp(2.8rem,5.5vw,5rem);line-height:1.02;letter-spacing:-.065em;margin:20px 0 24px}
+.gradient-text{background:linear-gradient(110deg,#f8fafc 0%,#8bb6ff 42%,#a78bfa 75%,#ec4899 105%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pf-intro{max-width:570px;color:var(--muted);font-size:clamp(1rem,1.5vw,1.13rem);line-height:1.8}
+.pf-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:30px}
+.pf-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 21px;border-radius:100px;font-size:.9rem;font-weight:700;transition:transform .3s var(--ease),box-shadow .3s,border-color .3s,background .3s}
+.pf-btn:hover{transform:translateY(-3px)}
+.pf-btn-primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;box-shadow:0 10px 34px rgba(79,142,247,.2)}
+.pf-btn-primary:hover{box-shadow:0 14px 42px rgba(79,142,247,.34)}
+.pf-btn-secondary{border:1px solid var(--border);background:rgba(255,255,255,.035);color:var(--text)}
+.pf-btn-secondary:hover{border-color:rgba(79,142,247,.5);background:rgba(79,142,247,.08)}
+.pf-trust-row{display:flex;gap:20px;flex-wrap:wrap;margin-top:34px;color:var(--muted);font-size:.78rem}
+.pf-trust-row span{display:inline-flex;align-items:center;gap:8px}
+.pf-trust-row span:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(16,185,129,.5)}
+.pf-hero-art{position:relative;min-width:0;perspective:1100px}
+.pf-showcase{position:relative;min-height:400px;border:1px solid rgba(248,250,252,.12);border-radius:26px;padding:16px;background:linear-gradient(145deg,rgba(79,142,247,.12),rgba(139,92,246,.08) 55%,rgba(10,10,15,.82));box-shadow:0 30px 100px rgba(0,0,0,.3);overflow:hidden;transform:rotateY(-5deg) rotateX(2deg);animation:pfFloat 7s ease-in-out infinite}
+.pf-showcase:before{content:"";position:absolute;width:250px;height:250px;right:-70px;top:-90px;border:1px solid rgba(139,92,246,.45);border-radius:50%;box-shadow:0 0 0 22px rgba(139,92,246,.035),0 0 0 48px rgba(79,142,247,.025);pointer-events:none}
+.pf-window{position:relative;z-index:1;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:rgba(8,10,18,.86);overflow:hidden}
+.pf-window-bar{height:42px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;align-items:center;gap:6px;padding:0 14px;color:var(--muted);font-size:.64rem}
+.pf-window-bar i{width:7px;height:7px;border-radius:50%;background:#4f8ef7;opacity:.9}.pf-window-bar i:nth-child(2){background:#8b5cf6}.pf-window-bar i:nth-child(3){background:#ec4899}
+.pf-window-bar span{margin-left:9px}
+.pf-window-content{padding:24px;min-height:290px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 80% 5%,rgba(139,92,246,.15),transparent 44%)}
+.pf-ui-label{font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:#8bb6ff;font-weight:800}
+.pf-ui-title{font-size:clamp(1.8rem,3vw,2.65rem);line-height:1.02;font-weight:800;letter-spacing:-.06em;margin:15px 0}
+.pf-ui-title em{font-style:normal;color:#8b9dff}
+.pf-ui-text{color:#98a3b8;font-size:.72rem;max-width:230px;line-height:1.7}
+.pf-ui-cta{display:inline-block;margin-top:17px;background:linear-gradient(100deg,#4f8ef7,#8b5cf6);padding:8px 13px;border-radius:100px;color:white;font-size:.66rem;font-weight:700}
+.pf-ui-circles{position:absolute;right:-8px;bottom:-30px;width:160px;height:160px;border:1px solid rgba(79,142,247,.45);border-radius:50%;box-shadow:0 0 0 18px rgba(79,142,247,.045),0 0 0 40px rgba(139,92,246,.045),0 0 0 62px rgba(79,142,247,.035)}
+.pf-float-chip{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;padding:12px 15px;background:rgba(12,14,24,.88);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(14px);border-radius:14px;box-shadow:0 15px 35px rgba(0,0,0,.28);font-size:.72rem;font-weight:700;animation:pfChip 5.5s ease-in-out infinite}
+.pf-float-chip small{display:block;color:var(--muted);font-size:.61rem;font-weight:500}
+.pf-float-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:10px;background:rgba(79,142,247,.18);color:#8bb6ff;font-size:1rem}
+.pf-float-chip.chip-one{left:-22px;bottom:50px}.pf-float-chip.chip-two{right:-16px;top:70px;animation-delay:-2.2s}
+.work-section{scroll-margin-top:110px;margin-bottom:112px}
+.pf-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:28px}
+.pf-section-head .eyebrow{margin-bottom:10px}
+.pf-section-head h2,.pf-bottom-cta h2{font-size:clamp(1.9rem,4vw,3rem);line-height:1.12;letter-spacing:-.05em;margin:0;font-weight:800}
+.pf-section-head p{color:var(--muted);max-width:390px;font-size:.9rem;margin:0}
+.pf-filters{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px}
+.pf-filter{font:inherit;font-size:.78rem;font-weight:700;padding:9px 15px;border-radius:100px;color:var(--muted);background:rgba(255,255,255,.035);border:1px solid var(--border);cursor:pointer;transition:all .25s}
+.pf-filter:hover{color:var(--text);border-color:rgba(79,142,247,.5)}
+.pf-filter[aria-pressed="true"]{color:#fff;border-color:transparent;background:linear-gradient(110deg,var(--blue),var(--purple));box-shadow:0 7px 25px rgba(79,142,247,.17)}
+.pf-work-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.work-card{min-width:0;overflow:hidden;border:1px solid var(--border);border-radius:20px;background:linear-gradient(160deg,rgba(21,22,34,.94),rgba(12,12,19,.96));transition:transform .35s var(--ease),border-color .35s,box-shadow .35s;animation:cardEnter .65s both}
+.work-card:hover{transform:translateY(-7px);border-color:rgba(79,142,247,.44);box-shadow:0 22px 55px rgba(0,0,0,.28),0 0 30px rgba(79,142,247,.06)}
+.work-card[hidden]{display:none}
+.work-cover{height:230px;position:relative;overflow:hidden;padding:16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.cover-label{position:absolute;top:13px;left:14px;z-index:3;padding:5px 9px;background:rgba(5,7,12,.6);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);border-radius:100px;font-size:.61rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:#e2e8f0}
+.mock-browser{width:100%;max-width:350px;border:1px solid rgba(255,255,255,.17);border-radius:11px;overflow:hidden;background:#0b0d14;box-shadow:0 14px 40px rgba(0,0,0,.25);transform:rotate(-2deg);transition:transform .4s var(--ease)}
+.work-card:hover .mock-browser{transform:rotate(0) scale(1.025)}
+.mock-chrome{height:24px;display:flex;align-items:center;gap:4px;padding:0 9px;background:rgba(255,255,255,.045);border-bottom:1px solid rgba(255,255,255,.08)}
+.mock-chrome i{width:5px;height:5px;border-radius:50%;background:#4f8ef7}.mock-chrome i:nth-child(2){background:#8b5cf6}.mock-chrome i:nth-child(3){background:#ec4899}
+.mock-page{position:relative;min-height:150px;padding:15px 15px 13px;overflow:hidden}
+.mock-small{font-size:.49rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#9ca3ff}
+.mock-heading{font-size:1.22rem;line-height:1.05;letter-spacing:-.055em;font-weight:800;margin:8px 0}
+.mock-heading em{font-style:normal;color:#7aa7ff}
+.mock-sub{font-size:.55rem;line-height:1.55;color:#b3bdce;max-width:175px}
+.mock-button{display:inline-block;margin-top:11px;padding:5px 9px;background:#4f8ef7;color:#fff;border-radius:50px;font-size:.49rem;font-weight:800}
+.cover-agency{background:radial-gradient(circle at 70% 30%,rgba(79,142,247,.29),transparent 42%),linear-gradient(135deg,#0b1020,#141023)}
+.cover-agency .mock-page{background:radial-gradient(circle at 95% 0,rgba(139,92,246,.17),transparent 45%)}
+.cover-commerce{background:linear-gradient(135deg,#eee9e1,#d9d3c8)}
+.cover-commerce .mock-browser{background:#f8f6f0;border-color:rgba(32,32,32,.15)}
+.cover-commerce .mock-chrome{background:#e9e5dd;border-color:rgba(32,32,32,.1)}
+.cover-commerce .mock-page{background:linear-gradient(120deg,#f7f4ec 0%,#e6e0d4 100%);color:#181919}
+.cover-commerce .mock-small{color:#82735b}.cover-commerce .mock-heading{font-family:Georgia,serif;font-size:1.28rem;color:#1a1a1a}.cover-commerce .mock-heading em{color:#937750}.cover-commerce .mock-sub{color:#60615d}.cover-commerce .mock-button{background:#222;color:#fff}
+.cover-health{background:radial-gradient(circle at 70% 20%,rgba(16,185,129,.2),transparent 40%),linear-gradient(135deg,#071a1d,#0b2531)}
+.cover-health .mock-page{background:linear-gradient(135deg,rgba(5,44,48,.8),rgba(6,21,33,.88))}
+.cover-health .mock-small{color:#6ee7b7}.cover-health .mock-heading em{color:#6ee7b7}.cover-health .mock-button{background:#059669}
+.cover-market{background:radial-gradient(circle at 78% 20%,rgba(139,92,246,.31),transparent 42%),linear-gradient(135deg,#17102e,#090b19)}
+.cover-market .mock-page{background:linear-gradient(110deg,rgba(29,19,53,.65),rgba(9,11,25,.9))}
+.cover-market .mock-small{color:#c4b5fd}.cover-market .mock-heading em{color:#c4b5fd}.cover-market .mock-button{background:#7c3aed}
+.cover-food{background:radial-gradient(circle at 72% 18%,rgba(251,146,60,.26),transparent 40%),linear-gradient(135deg,#24100d,#100c12)}
+.cover-food .mock-small{color:#fdba74}.cover-food .mock-heading em{color:#fb923c}.cover-food .mock-button{background:#ea580c}
+.cover-homes{background:linear-gradient(135deg,#e7e2d7,#c7d1c9)}
+.cover-homes .mock-browser{background:#f3f0e8;border-color:rgba(31,41,36,.16)}
+.cover-homes .mock-chrome{background:#e6e0d5;border-color:rgba(31,41,36,.1)}
+.cover-homes .mock-page{background:linear-gradient(135deg,#f6f2e9,#dce5db)}
+.cover-homes .mock-small{color:#647766}.cover-homes .mock-heading{font-family:Georgia,serif;color:#22372d}.cover-homes .mock-heading em{color:#63866c}.cover-homes .mock-sub{color:#566158}.cover-homes .mock-button{background:#315d47}
+.cover-beauty{background:radial-gradient(circle at 80% 15%,rgba(236,72,153,.21),transparent 36%),linear-gradient(135deg,#261322,#0d0b15)}
+.cover-beauty .mock-page{background:linear-gradient(135deg,#261525,#110d19)}
+.cover-beauty .mock-small{color:#f9a8d4}.cover-beauty .mock-heading{font-family:Georgia,serif;font-weight:500}.cover-beauty .mock-heading em{color:#f9a8d4}.cover-beauty .mock-button{background:#be185d}
+.mock-orbit{position:absolute;right:-34px;top:16px;width:115px;height:115px;border:1px solid rgba(139,92,246,.5);border-radius:50%;box-shadow:0 0 0 12px rgba(139,92,246,.06),0 0 0 25px rgba(79,142,247,.04)}
+.mock-stat-row{display:flex;gap:6px;margin-top:15px}
+.mock-stat{height:27px;flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:5px}
+.mock-image-block{position:absolute;right:14px;bottom:18px;width:72px;height:95px;border-radius:40px 40px 8px 8px;background:linear-gradient(140deg,#d6c4a5,#7e6b50);box-shadow:0 6px 22px rgba(0,0,0,.2)}
+.cover-health .mock-image-block{background:linear-gradient(135deg,#6ee7b7,#047857);border-radius:14px;width:68px;height:68px;bottom:24px}
+.cover-market .mock-image-block{background:linear-gradient(135deg,#c4b5fd,#7c3aed);border-radius:50%;width:76px;height:76px;bottom:24px}
+.cover-food .mock-image-block{background:linear-gradient(135deg,#fdba74,#c2410c);border-radius:50%;width:70px;height:70px;bottom:24px}
+.cover-beauty .mock-image-block{background:linear-gradient(135deg,#f9a8d4,#9d174d);border-radius:45% 45% 12px 12px;width:64px;height:84px;bottom:22px}
+.work-meta{padding:21px 21px 22px}
+.work-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}
+.work-type{font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--blue);font-weight:800}
+.work-index{font-size:.7rem;color:#64748b;font-weight:700}
+.work-meta h3{font-size:1.12rem;letter-spacing:-.03em;margin:0 0 8px;line-height:1.3}
+.work-meta p{font-size:.82rem;line-height:1.7;color:var(--muted);margin:0 0 16px}
+.work-tags{display:flex;gap:7px;flex-wrap:wrap}
+.work-tags span{font-size:.64rem;padding:5px 8px;border:1px solid var(--border);border-radius:100px;color:#cbd5e1;background:rgba(255,255,255,.025)}
+.work-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:.78rem;font-weight:800;color:var(--text);transition:color .25s,gap .25s}
+.work-link:hover{color:#8bb6ff;gap:12px}
+.pf-note{margin-top:23px;color:#78869c;font-size:.74rem;line-height:1.65}
+.pf-bottom-cta{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:30px;padding:clamp(26px,5vw,52px);margin-bottom:36px;border:1px solid rgba(79,142,247,.22);border-radius:24px;background:linear-gradient(115deg,rgba(79,142,247,.12),rgba(139,92,246,.1) 56%,rgba(236,72,153,.04));box-shadow:inset 0 1px rgba(255,255,255,.03)}
+.pf-bottom-cta:after{content:"";position:absolute;width:260px;height:260px;right:-90px;top:-130px;border:1px solid rgba(139,92,246,.38);border-radius:50%;box-shadow:0 0 0 24px rgba(139,92,246,.04),0 0 0 48px rgba(79,142,247,.04);pointer-events:none}
+.pf-bottom-cta .eyebrow{margin-bottom:10px}.pf-bottom-cta p{color:var(--muted);max-width:540px;font-size:.9rem;margin:12px 0 0}.pf-bottom-cta .pf-btn{position:relative;z-index:1;flex-shrink:0}
+@keyframes pfFloat{0%,100%{transform:rotateY(-5deg) rotateX(2deg) translateY(0)}50%{transform:rotateY(-2deg) rotateX(1deg) translateY(-10px)}}
+@keyframes pfChip{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@media(prefers-reduced-motion:reduce){.pf-showcase,.pf-float-chip{animation:none!important}.work-card,.mock-browser,.pf-btn{transition:none!important}}
+@media(max-width:1000px){.portfolio-main{padding-top:125px}.portfolio-hero{grid-template-columns:1fr 0.88fr;gap:30px;margin-bottom:88px}.pf-showcase{min-height:370px}.pf-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.work-cover{height:240px}}
+@media(max-width:700px){.portfolio-main{padding-top:110px}.portfolio-hero{grid-template-columns:1fr;gap:36px;margin-bottom:76px}.portfolio-hero h1{font-size:clamp(2.7rem,12vw,4rem)}.pf-hero-art{max-width:540px;width:100%;margin:0 auto}.pf-showcase{min-height:360px;transform:none;animation:pfFloat 7s ease-in-out infinite}.pf-section-head{display:block}.pf-section-head p{margin-top:12px}.work-cover{height:220px}.pf-bottom-cta{align-items:flex-start;flex-direction:column}.pf-bottom-cta .pf-btn{align-self:flex-start}}
+@media(max-width:480px){.portfolio-main{padding-left:16px;padding-right:16px;padding-bottom:56px}.portfolio-hero h1{font-size:2.7rem}.pf-actions{align-items:stretch}.pf-btn{padding:12px 16px;font-size:.82rem}.pf-showcase{padding:10px;min-height:325px}.pf-window-content{padding:19px;min-height:260px}.pf-float-chip{padding:9px 11px;font-size:.65rem}.pf-float-chip.chip-one{left:-5px;bottom:33px}.pf-float-chip.chip-two{right:-5px;top:56px}.pf-work-grid{grid-template-columns:1fr;gap:17px}.work-cover{height:230px}.pf-section-head h2,.pf-bottom-cta h2{font-size:2rem}.pf-trust-row{gap:10px 14px}.pf-section-head{margin-bottom:22px}}
+
+</style>
+</head>
+<body>
+  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+  <div id="noise" aria-hidden="true"></div>
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+  <a href="/" class="logo">The<span>Digital</span>Work</a>
+  <ul class="nav-links">
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#process">Process</a></li>
+    <li><a href="/#reviews">Reviews</a></li>
+    <li><a href="/portfolio.html" aria-current="page">Portfolio</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="/#contact">Get a Quote</a>
+</nav>
+  <main class="portfolio-main">
+  <section class="portfolio-hero" aria-labelledby="portfolio-title">
+    <div class="portfolio-copy">
+      <div class="pf-eyebrow">Portfolio · Selected work</div>
+      <h1 id="portfolio-title">Digital experiences built to <span class="gradient-text">move things forward.</span></h1>
+      <p class="pf-intro">From high-impact business websites to online stores and product platforms, we turn ideas into useful, thoughtful digital experiences that work beautifully across devices.</p>
+      <div class="pf-actions">
+        <a class="pf-btn pf-btn-primary" href="/#contact">Start a project <span aria-hidden="true">↗</span></a>
+        <a class="pf-btn pf-btn-secondary" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="pf-trust-row">
+        <span>Websites & landing pages</span>
+        <span>E-commerce & platforms</span>
+        <span>AI & automation</span>
+      </div>
+    </div>
+    <div class="pf-hero-art" aria-hidden="true">
+      <div class="pf-showcase">
+        <div class="pf-window">
+          <div class="pf-window-bar"><i></i><i></i><i></i><span>thedigitalwork.in / experience-preview</span></div>
+          <div class="pf-window-content">
+            <div class="pf-ui-label">Ideas, meet execution</div>
+            <div class="pf-ui-title">Build.<br>Automate.<br><em>Grow.</em></div>
+            <p class="pf-ui-text">Digital products and experiences designed around real business goals.</p>
+            <span class="pf-ui-cta">Explore what's possible ↗</span>
+            <div class="pf-ui-circles"></div>
+          </div>
+        </div>
+        <div class="pf-float-chip chip-one"><span class="pf-float-icon">✦</span><div>Digital craft<small>Design with purpose</small></div></div>
+        <div class="pf-float-chip chip-two"><span class="pf-float-icon">↗</span><div>Built to scale<small>From idea to launch</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="work-section" aria-labelledby="work-title">
+    <div class="pf-section-head">
+      <div>
+        <div class="eyebrow">Selected projects</div>
+        <h2 id="work-title">Different ideas.<br>Purpose-built experiences.</h2>
+      </div>
+      <p>Explore a few project directions across business websites, commerce, healthcare, marketplaces and local services.</p>
+    </div>
+    <div class="pf-filters" role="group" aria-label="Filter portfolio projects">
+      <button class="pf-filter" type="button" data-work-filter="all" aria-pressed="true">All work</button>
+      <button class="pf-filter" type="button" data-work-filter="website" aria-pressed="false">Websites</button>
+      <button class="pf-filter" type="button" data-work-filter="commerce" aria-pressed="false">E-commerce</button>
+      <button class="pf-filter" type="button" data-work-filter="platform" aria-pressed="false">Platforms</button>
+      <button class="pf-filter" type="button" data-work-filter="health" aria-pressed="false">Healthcare</button>
+      <button class="pf-filter" type="button" data-work-filter="brand" aria-pressed="false">Brands & local</button>
+    </div>
+    <div class="pf-work-grid" id="portfolio-grid">
+      <article class="work-card" data-category="website">
+        <div class="work-cover cover-agency">
+          <span class="cover-label">Agency website</span>
+          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">Digital studio · India & worldwide</div><div class="mock-heading">Build.<br>Automate.<br><em>Grow.</em></div><div class="mock-sub">Websites, AI tools and digital experiences with purpose.</div><span class="mock-button">Start a project ↗</span><div class="mock-orbit"></div></div></div>
+        </div>
+        <div class="work-meta">
+          <div class="work-topline"><span class="work-type">Digital presence</span><span class="work-index">01 / 07</span></div>
+          <h3>TheDigitalWork</h3>
+          <p>A bold agency website with motion-led visuals, service discovery and direct enquiry paths.</p>
+          <div class="work-tags"><span>Web design</span><span>Motion UI</span><span>Lead generation</span></div>
+          <a class="work-link" href="/">Visit website <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="work-card" data-category="commerce">
+        <div class="work-cover cover-commerce">
+          <span class="cover-label">Online store</span>
+          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">LUXECRAFT · OBJECTS WITH INTENT</div><div class="mock-heading">Made for<br><em>the everyday.</em></div><div class="mock-sub">Discover considered products and a smooth shopping journey.</div><span class="mock-button">Explore collection ↗</span><div class="mock-image-block"></div></div></div>
+        </div>
+        <div class="work-meta">
+          <div class="work-topline"><span class="work-type">E-commerce</span><span class="work-index">02 / 07</span></div>
+          <h3>LuxeCraft</h3>
+          <p>A refined storefront direction focused on product discovery, clean product pages and a clear purchase flow.</p>
+          <div class="work-tags"><span>Storefront UI</span><span>Product pages</span><span>Checkout</span></div>
+          <a class="work-link" href="/#contact">Discuss a similar store <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="work-card" data-category="health">
+        <div class="work-cover cover-health">
+          <span class="cover-label">Healthcare</span>
+          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">HEALTHCURE · CARE FIRST</div><div class="mock-heading">Your health,<br><em>in focus.</em></div><div class="mock-sub">Clear service information and a calm, helpful digital experience.</div><span class="mock-button">Explore care options ↗</span><div class="mock-image-block"></div></div></div>
+        </div>
+        <div class="work-meta">
+          <div class="work-topline"><span class="work-type">Healthcare web</span><span class="work-index">03 / 07</span></div>
+          <h3>HealthCure</h3>
+          <p>A healthcare website direction designed to make services, information and next steps easier to find.</p>
+          <div class="work-tags"><span>Service discovery</span><span>Accessible layout</span></div>
+          <a class="work-link" href="/#contact">Discuss a similar site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="work-card" data-category="platform">
+        <div class="work-cover cover-market">
+          <span class="cover-label">Marketplace concept</span>
+          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">GOWITH · MEET YOUR NEXT PLAN</div><div class="mock-heading">Good plans.<br><em>Better company.</em></div><div class="mock-sub">Profiles and discovery built around a simple, mobile-first flow.</div><span class="mock-button">Explore people ↗</span><div class="mock-image-block"></div></div></div>
+        </div>
+        <div class="work-meta">
+          <div class="work-topline"><span class="work-type">Product platform</span><span class="work-index">04 / 07</span></div>
+          <h3>GoWith</h3>
+          <p>A marketplace product direction covering profiles, verification touchpoints and booking journeys.</p>
+          <div class="work-tags"><span>Marketplace UX</span><span>Mobile-first</span><span>Booking flow</span></div>
+          <a class="work-link" href="/#contact">Discuss a platform <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="work-card" data-category="platform">
+        <div class="work-cover cover-food">
+          <span class="cover-label">Food ordering</span>
+          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">NONVEGONWHEEL · ORDER FRESH</div><div class="mock-heading">Good food.<br><em>Less friction.</em></div><div class="mock-sub">Menu discovery and ordering made easy on a phone.</div><span class="mock-button">View the menu ↗</span><div class="mock-image-block"></div></div></div>
+        </div>
+        <div class="work-meta">
+          <div class="work-topline"><span class="work-type">Ordering experience</span><span class="work-index">05 / 07</span></div>
+          <h3>NonVegOnWheel</h3>
+          <p>A food-service web experience centred on quick menu discovery and mobile-friendly ordering paths.</p>
+          <div class="work-tags"><span>Food service</span><span>Mobile UX</span><span>Menus</span></div>
+          <a class="work-link" href="/#contact">Discuss an ordering site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="work-card" data-category="website">
+        <div class="work-cover cover-homes">
+          <span class="cover-label">Real estate</span>
+          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">WOLHOMES · FIND YOUR SPACE</div><div class="mock-heading">A place to<br><em>belong.</em></div><div class="mock-sub">Property discovery with useful details and a clear enquiry route.</div><span class="mock-button">Explore homes ↗</span><div class="mock-image-block"></div></div></div>
+        </div>
+        <div class="work-meta">
+          <div class="work-topline"><span class="work-type">Property website</span><span class="work-index">06 / 07</span></div>
+          <h3>WolHomes</h3>
+          <p>A property-focused web experience for browsing homes and guiding visitors towards an enquiry.</p>
+          <div class="work-tags"><span>Real estate</span><span>Property browsing</span><span>Lead capture</span></div>
+          <a class="work-link" href="https://wolhomes.com/" target="_blank" rel="noopener">Visit website <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="work-card" data-category="brand">
+        <div class="work-cover cover-beauty">
+          <span class="cover-label">Beauty & lifestyle</span>
+          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">AYASHA'S VANITY · YOUR DAILY RITUAL</div><div class="mock-heading">Feel like<br><em>yourself.</em></div><div class="mock-sub">A warm brand-led landing experience with clear product storytelling.</div><span class="mock-button">Discover more ↗</span><div class="mock-image-block"></div></div></div>
+        </div>
+        <div class="work-meta">
+          <div class="work-topline"><span class="work-type">Brand website</span><span class="work-index">07 / 07</span></div>
+          <h3>Ayasha's Vanity</h3>
+          <p>A beauty brand web direction built around visual identity, product storytelling and simple navigation.</p>
+          <div class="work-tags"><span>Branding</span><span>Landing page</span><span>Product storytelling</span></div>
+          <a class="work-link" href="/#contact">Discuss a brand site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+    </div>
+    <p class="pf-note">Portfolio previews are illustrative representations of project directions, not screenshots of every live website. Ask us for relevant demos and current project details.</p>
+  </section>
+
+  <section class="pf-bottom-cta" aria-labelledby="pf-cta-title">
+    <div>
+      <div class="eyebrow">Have something in mind?</div>
+      <h2 id="pf-cta-title">Let's build your next<br>great digital experience.</h2>
+      <p>Tell us what you're planning. We'll help you shape the right first version, features and next steps.</p>
+    </div>
+    <a class="pf-btn pf-btn-primary" href="/#contact">Tell us about your project <span aria-hidden="true">↗</span></a>
+  </section>
+</main>
+<script>
+(function(){
+  var filters=document.querySelectorAll('[data-work-filter]');
+  var cards=document.querySelectorAll('.work-card[data-category]');
+  filters.forEach(function(button){
+    button.addEventListener('click',function(){
+      var filter=button.getAttribute('data-work-filter');
+      filters.forEach(function(item){item.setAttribute('aria-pressed',item===button?'true':'false');});
+      cards.forEach(function(card){
+        card.hidden=!(filter==='all'||card.getAttribute('data-category')===filter);
+      });
+    });
+  });
+})();
+</script>
+  <footer id="footer">
+  <div class="fg-grid">
+    <div>
+      <div class="fb-name">The<span>Digital</span>Work</div>
+      <p class="fb-tag">We build digital experiences that drive real growth. Your success is our portfolio.</p>
+      <div class="socials">
+  <!-- WhatsApp -->
+  <a href="https://wa.me/917617555488"
+     target="_blank" rel="noopener"
+     class="sl" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22"
+         fill="none" stroke="currentColor" stroke-width="1.7"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20l1.2-5.3A8.4 8.4 0 1 1 21 11.5Z"/>
+      <path d="M8.5 8.5c.2-.5.5-.5.8-.5h.5c.2 0 .4.1.5.4l.8 1.8c.1.2.1.4-.1.6l-.6.7c-.2.2-.2.4-.1.6.6 1 1.4 1.8 2.5 2.3.2.1.4.1.6-.1l.8-.9c.2-.2.4-.2.6-.1l1.7.8c.3.1.4.3.4.5 0 .5-.2 1.2-.7 1.6-.5.4-1.1.6-1.8.4-1.1-.3-2.5-.9-3.9-2.2-1.2-1.1-2-2.5-2.2-3.5-.2-.9.1-1.8.2-2.4Z"/>
+    </svg>
+  </a>
+
+  <!-- Facebook -->
+<a href="#" class="sl" aria-label="Facebook">
+  <svg viewBox="0 0 24 24" width="22" height="22"
+       fill="currentColor">
+    <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.49 0-1.956.93-1.956 1.886v2.265h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073Z"/>
+  </svg>
+</a>
+
+  <!-- Instagram -->
+  <a href="#" class="sl" aria-label="Instagram">
+    <svg viewBox="0 0 24 24" width="22" height="22"
+         fill="none" stroke="currentColor" stroke-width="1.8"
+         stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/>
+    </svg>
+  </a>
+
+  <!-- LinkedIn -->
+  <a href="#" class="sl" aria-label="LinkedIn">
+    <svg viewBox="0 0 24 24" width="22" height="22"
+         fill="currentColor">
+      <path d="M5.2 3a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4ZM3.3 9h3.8v12H3.3Zm6.2 0h3.6v1.6h.1A4 4 0 0 1 16.8 8c3.9 0 4.6 2.4 4.6 5.6V21h-3.8v-6.6c0-1.6 0-3.6-2.2-3.6s-2.5 1.7-2.5 3.5V21H9.5Z"/>
+    </svg>
+  </a>
+</div>
+    </div>
+    <div>
+      <div class="fh">Explore</div>
+      <ul class="fl-list">
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#process">Our Process</a></li>
+        <li><a href="/#reviews">Client Reviews</a></li>
+        <li><a href="/#contact">Contact Us</a></li>
+              <li><a href="/portfolio.html">Portfolio</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fh">Connect</div>
+      <p style="color:var(--muted);font-size:.88rem;line-height:1.75;margin-bottom:18px">Near Delhi Public School<br>Agra &ndash; 282001, U.P., INDIA</p>
+      <div class="contact-lines">
+        <div class="contact-row">
+          <a class="contact-number" href="tel:+917617555488">+91 76175 55488</a>
+          <div class="contact-actions">
+            <a class="contact-icon" href="tel:+917617555488" aria-label="Call +91 76175 55488" title="Call"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.58 2.8.7A2 2 0 0 1 22 16.92Z"/></svg></a>
+            <a class="contact-icon contact-icon-wa" href="https://wa.me/917617555488?text=Hi+TheDigitalWork!" target="_blank" rel="noopener" aria-label="WhatsApp +91 76175 55488" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.12 0C5.55 0 .2 5.35.2 11.92c0 2.1.55 4.17 1.6 5.98L.1 24l6.25-1.64a11.9 11.9 0 0 0 5.77 1.47h.01c6.57 0 11.92-5.35 11.92-11.92a11.8 11.8 0 0 0-3.53-8.43ZM12.13 21.8a9.9 9.9 0 0 1-5.04-1.38l-.36-.22-3.72.98.99-3.63-.24-.37a9.86 9.86 0 0 1-1.52-5.26c0-5.46 4.44-9.9 9.9-9.9a9.82 9.82 0 0 1 7.01 2.91 9.82 9.82 0 0 1 2.9 7.01c0 5.46-4.44 9.9-9.9 9.9Zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.88 1.22 3.08c.15.2 2.1 3.21 5.08 4.5.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.42.25-.69.25-1.29.18-1.42-.07-.12-.27-.19-.57-.34Z"/></svg></a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <a class="contact-number" href="tel:+918126812317">+91 81268 12317</a>
+          <div class="contact-actions">
+            <a class="contact-icon" href="tel:+918126812317" aria-label="Call +91 81268 12317" title="Call"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.58 2.8.7A2 2 0 0 1 22 16.92Z"/></svg></a>
+            <a class="contact-icon contact-icon-wa" href="https://wa.me/918126812317?text=Hi+TheDigitalWork!" target="_blank" rel="noopener" aria-label="WhatsApp +91 81268 12317" title="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.12 0C5.55 0 .2 5.35.2 11.92c0 2.1.55 4.17 1.6 5.98L.1 24l6.25-1.64a11.9 11.9 0 0 0 5.77 1.47h.01c6.57 0 11.92-5.35 11.92-11.92a11.8 11.8 0 0 0-3.53-8.43ZM12.13 21.8a9.9 9.9 0 0 1-5.04-1.38l-.36-.22-3.72.98.99-3.63-.24-.37a9.86 9.86 0 0 1-1.52-5.26c0-5.46 4.44-9.9 9.9-9.9a9.82 9.82 0 0 1 7.01 2.91 9.82 9.82 0 0 1 2.9 7.01c0 5.46-4.44 9.9-9.9 9.9Zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.88 1.22 3.08c.15.2 2.1 3.21 5.08 4.5.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.42.25-.69.25-1.29.18-1.42-.07-.12-.27-.19-.57-.34Z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Legal</div>
+      <ul class="fl-list">
+        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="/terms-of-service.html">Terms of Service</a></li>
+        <li><a href="/refund-policy.html">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <div class="fcopy">&#169; 2026 TheDigitalWork. All rights reserved. Built with purpose, made for impact.</div>
+  </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  if(!window.THREE) return;
+  var canvas = document.getElementById('webgl-canvas');
+  if(!canvas) return;
+  var renderer = new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,.1,1000);
+  camera.position.z = 6;
+
+  // Same animated wireframe icosahedron as the homepage.
+  var icoGeo = new THREE.IcosahedronGeometry(1.6,1);
+  var icoMat = new THREE.MeshBasicMaterial({color:0x4f8ef7,wireframe:true,opacity:.18,transparent:true});
+  var ico = new THREE.Mesh(icoGeo,icoMat);
+  scene.add(ico);
+
+  // Same purple wireframe torus knot as the homepage.
+  var tkGeo = new THREE.TorusKnotGeometry(.9,.28,80,16);
+  var tkMat = new THREE.MeshBasicMaterial({color:0x8b5cf6,wireframe:true,opacity:.12,transparent:true});
+  var tk = new THREE.Mesh(tkGeo,tkMat);
+  tk.position.set(3,1,0);
+  scene.add(tk);
+
+  // Same blue particle field.
+  var pCount = 600;
+  var pGeo = new THREE.BufferGeometry();
+  var pPos = new Float32Array(pCount*3);
+  for(var i=0;i<pCount*3;i++) pPos[i]=(Math.random()-0.5)*18;
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+  var pMat = new THREE.PointsMaterial({size:.04,color:0x4f8ef7,opacity:.6,transparent:true,sizeAttenuation:true});
+  var particles = new THREE.Points(pGeo,pMat);
+  scene.add(particles);
+
+  // Same purple particle field.
+  var pGeo2 = new THREE.BufferGeometry();
+  var pPos2 = new Float32Array(400*3);
+  for(var j=0;j<400*3;j++) pPos2[j]=(Math.random()-0.5)*14;
+  pGeo2.setAttribute('position',new THREE.BufferAttribute(pPos2,3));
+  var pMat2 = new THREE.PointsMaterial({size:.035,color:0x8b5cf6,opacity:.4,transparent:true,sizeAttenuation:true});
+  var particles2 = new THREE.Points(pGeo2,pMat2);
+  scene.add(particles2);
+
+  var mouseX=0, mouseY=0;
+  document.addEventListener('mousemove',function(e){
+    mouseX=(e.clientX/window.innerWidth-0.5)*2;
+    mouseY=(e.clientY/window.innerHeight-0.5)*2;
+  });
+
+  var scrollY = 0;
+  window.addEventListener('scroll',function(){scrollY=window.scrollY},{passive:true});
+  window.addEventListener('resize',function(){
+    camera.aspect=window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+  });
+
+  var clock = new THREE.Clock();
+  function animateGL(){
+    requestAnimationFrame(animateGL);
+    var t = clock.getElapsedTime();
+    var sp = scrollY/window.innerHeight;
+
+    ico.rotation.x = t*0.12 + mouseY*0.2 + sp*0.5;
+    ico.rotation.y = t*0.18 + mouseX*0.2;
+    ico.rotation.z = t*0.06;
+    ico.scale.setScalar(1 + sp*0.3);
+
+    tk.rotation.x = t*0.2 + sp*0.4;
+    tk.rotation.y = t*0.15 + mouseX*0.15;
+    tk.position.x = 3 + mouseX*0.5;
+    tk.position.y = 1 + mouseY*0.3;
+
+    particles.rotation.y = t*0.04 + mouseX*0.06;
+    particles.rotation.x = t*0.02 + mouseY*0.04;
+    particles2.rotation.y = -t*0.035;
+    particles2.rotation.z = t*0.018;
+
+    camera.position.x += (mouseX*0.5 - camera.position.x)*0.04;
+    camera.position.y += (-mouseY*0.3 - camera.position.y)*0.04;
+    camera.lookAt(scene.position);
+
+    renderer.render(scene,camera);
+  }
+  animateGL();
+})();
+</script>
+<script>
+(function(){
+ const nav=document.getElementById('nav');
+ const updateNav=()=>nav&&nav.classList.toggle('scrolled',window.scrollY>24);
+ updateNav();window.addEventListener('scroll',updateNav,{passive:true});
+})();
+</script>
+</body>
+</html>
