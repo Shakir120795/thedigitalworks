@@ -1386,33 +1386,142 @@ var chatSnd = document.getElementById('chat-snd');
 var chatQuick = document.getElementById('chat-quick');
 var chatOpen = false;
 
-var botResponses = {
-  'pricing': 'Our pricing depends on project scope. Website starts from ₹15,000, AI Chatbots from ₹20,000, Apps from ₹50,000, and Marketing from ₹10,000/month. Want a custom quote? 👇',
-  'price': 'Our pricing depends on project scope. Website starts from ₹15,000, AI Chatbots from ₹20,000, Apps from ₹50,000, and Marketing from ₹10,000/month. Want a custom quote? 👇',
-  'cost': 'Our pricing depends on project scope. Website starts from ₹15,000, AI Chatbots from ₹20,000, Apps from ₹50,000, and Marketing from ₹10,000/month. Want a custom quote? 👇',
-  'services': 'We offer 4 core services: 🌐 Website Development, 🤖 AI Chatbot & Automation, 📱 Mobile App Development, and 📈 Digital Marketing & Growth. Which interests you?',
-  'service': 'We offer 4 core services: 🌐 Website Development, 🤖 AI Chatbot & Automation, 📱 Mobile App Development, and 📈 Digital Marketing & Growth. Which interests you?',
-  'timeline': 'Typical timelines: Websites 2–4 weeks, AI Chatbots 1–3 weeks, Mobile Apps 6–12 weeks, Marketing campaigns start in 3–5 days. Rush delivery available!',
-  'time': 'Typical timelines: Websites 2–4 weeks, AI Chatbots 1–3 weeks, Mobile Apps 6–12 weeks, Marketing campaigns start in 3–5 days. Rush delivery available!',
-  'portfolio': 'We have delivered 120+ projects across e-commerce, healthcare, food delivery, and more. Want to see specific examples? Message us on WhatsApp for a portfolio PDF!',
-  'work': 'We have delivered 120+ projects across e-commerce, healthcare, food delivery, and more. Want to see specific examples? Message us on WhatsApp for a portfolio PDF!',
-  'location': '📍 We are based at 62/24, Shashtripuram, Near Delhi Public School, Agra - 282001, UP. We work with clients across India remotely too!',
-  'address': '📍 We are based at 62/24, Shashtripuram, Near Delhi Public School, Agra - 282001, UP. We work with clients across India remotely too!',
-  'agra': '📍 Yes, we are based in Agra! Our office is at 62/24, Shashtripuram, Near Delhi Public School, Agra - 282001.',
-  'contact': '📞 Call/WhatsApp: +91 76175 55488\n✉️ Email: wasim64malik@gmail.com\n📍 Agra, UP\n\nOr click the WhatsApp button on the page!',
-  'phone': '📞 You can reach us at +91 76175 55488 via call or WhatsApp anytime between 9AM–9PM IST!',
-  'whatsapp': '💬 Chat with us directly: wa.me/917617555488 — we respond within 2 hours!',
-  'email': '✉️ Email us at wasim64malik@gmail.com — we reply within 4 hours on business days.',
-  'process': '🚀 Our 4-step process: 1️⃣ Discovery & Strategy → 2️⃣ Design & Prototype → 3️⃣ Build & Integrate → 4️⃣ Launch & Grow. Transparent and always on time!',
-  'website': '🌐 We build custom, SEO-optimized websites starting from ₹15,000. Includes design, development, CMS, and 30-day post-launch support.',
-  'app': '📱 We build cross-platform apps (React Native/Flutter) for both iOS and Android. Projects start from ₹50,000 including UI/UX design.',
-  'chatbot': '🤖 Our AI chatbots handle leads, support, and sales 24/7. Starting from ₹20,000 with WhatsApp and website integration included.',
-  'marketing': '📈 Our digital marketing packages start from ₹10,000/month including Google Ads, Meta Ads, SEO, and monthly performance reports.',
-  'seo': '📈 Yes, all our websites come with basic SEO included. We also offer standalone SEO packages starting ₹8,000/month with guaranteed ranking improvements.',
-  'hello': 'Hello! 👋 Welcome to TheDigitalWork. I am your AI assistant. How can I help you today? Ask me about our services, pricing, or process!',
-  'hi': 'Hi there! 👋 Welcome to TheDigitalWork. I am your AI assistant. How can I help you today?',
-  'help': 'Sure! I can help with: pricing, services, timeline, portfolio, location, contact info, or our process. What would you like to know?'
-};
+
+var botKnowledge = [
+  {
+    keys: ['website price', 'website cost', 'web design price', 'website development price'],
+    answer: '🌐 Website projects start from ₹15,000. The final cost depends on pages, features, design and integrations. Tell us what kind of website you need for a quote.'
+  },
+  {
+    keys: ['chatbot price', 'ai chatbot price', 'automation price'],
+    answer: '🤖 AI chatbot projects start from ₹20,000. Price depends on integrations, knowledge base, workflows and the level of AI required.'
+  },
+  {
+    keys: ['app price', 'mobile app price', 'app cost'],
+    answer: '📱 Mobile app projects start from ₹50,000. Cost depends on features, platforms, backend and design requirements.'
+  },
+  {
+    keys: ['marketing price', 'digital marketing price', 'ads cost'],
+    answer: '📈 Digital marketing packages start from ₹10,000/month. Advertising budget, platforms and campaign scope can affect the total cost.'
+  },
+  {
+    keys: ['pricing', 'price', 'cost', 'budget', 'quote', 'charges', 'rates', 'how much'],
+    answer: 'Our starting prices are: websites ₹15,000, AI chatbots ₹20,000, mobile apps ₹50,000 and digital marketing ₹10,000/month. Final pricing depends on project requirements.'
+  },
+  {
+    keys: ['web design', 'website design', 'web development', 'website development', 'website', 'web design'],
+    answer: '🌐 We design and develop business websites, landing pages and e-commerce stores. We focus on responsive layouts, user experience, speed and SEO basics.'
+  },
+  {
+    keys: ['responsive', 'mobile friendly', 'mobile responsive'],
+    answer: '📱 Responsive design means a website automatically adapts to mobile phones, tablets and desktop screens.'
+  },
+  {
+    keys: ['landing page', 'landing pages'],
+    answer: '🎯 A landing page is a focused webpage designed to get one main action, such as a lead, signup, booking or purchase.'
+  },
+  {
+    keys: ['ecommerce', 'e commerce', 'online store', 'online shop'],
+    answer: '🛒 An e-commerce website lets customers browse products, add items to a cart and place orders. Payment, shipping, coupons and admin tools can be integrated.'
+  },
+  {
+    keys: ['domain', 'domain name'],
+    answer: '🌍 A domain is your website address, such as example.com. It helps people find your website online.'
+  },
+  {
+    keys: ['hosting', 'web hosting', 'server'],
+    answer: '🖥️ Hosting stores your website files on a server so people can access your website online.'
+  },
+  {
+    keys: ['wordpress', 'cms', 'admin dashboard'],
+    answer: '⚙️ A CMS or admin dashboard lets you manage website content, products, orders or other information without editing every page manually.'
+  },
+  {
+    keys: ['seo', 'search engine optimization', 'google ranking', 'rank on google'],
+    answer: '🔎 SEO helps search engines understand your website. It includes useful content, page titles, technical accessibility, relevant links and good page experience. Rankings are never guaranteed.'
+  },
+  {
+    keys: ['ssl', 'https', 'website security'],
+    answer: '🔐 HTTPS uses an SSL/TLS certificate to encrypt the connection between visitors and your website. It is an important part of website security.'
+  },
+  {
+    keys: ['ai chatbot', 'website chatbot', 'chatbot', 'customer support bot'],
+    answer: '🤖 A chatbot can answer common questions, collect leads and guide customers. More advanced AI chatbots can use your business information to answer questions more flexibly.'
+  },
+  {
+    keys: ['ai automation', 'business automation', 'workflow automation', 'automation'],
+    answer: '⚡ AI automation combines AI with workflows to reduce repetitive work, such as sorting enquiries, drafting replies, extracting information or updating business systems.'
+  },
+  {
+    keys: ['zapier', 'make.com', 'make automation'],
+    answer: '🔗 Zapier and Make connect apps and automate workflows. For example, a website lead can be sent to a spreadsheet or CRM automatically.'
+  },
+  {
+    keys: ['api', 'api integration', 'integration'],
+    answer: '🔌 An API lets software systems exchange data. APIs can connect websites or chatbots with payment systems, CRMs, calendars and other services.'
+  },
+  {
+    keys: ['crm', 'lead management'],
+    answer: '📋 A CRM helps businesses organize leads, customer details, follow-ups and sales activity in one place.'
+  },
+  {
+    keys: ['mobile app', 'mobile application', 'android app', 'ios app'],
+    answer: '📱 We plan and develop mobile apps for Android and iOS. The right technology depends on your features, timeline, budget and maintenance needs.'
+  },
+  {
+    keys: ['flutter', 'react native', 'cross platform'],
+    answer: '🛠️ Flutter and React Native can build apps for Android and iOS from a shared codebase. The best choice depends on project requirements and developer expertise.'
+  },
+  {
+    keys: ['push notification', 'push notifications'],
+    answer: '🔔 Push notifications send updates to users, such as order status, reminders, offers or important app alerts, subject to user permissions.'
+  },
+  {
+    keys: ['digital marketing', 'online marketing', 'marketing strategy'],
+    answer: '📈 Digital marketing can include SEO, Google Ads, Meta Ads, social media, content and email campaigns. The right mix depends on your audience and goals.'
+  },
+  {
+    keys: ['google ads', 'ppc', 'paid ads'],
+    answer: '🎯 Google Ads can show your business in relevant search results and other placements. Results depend on targeting, competition, landing pages and campaign budget.'
+  },
+  {
+    keys: ['meta ads', 'facebook ads', 'instagram ads'],
+    answer: '📣 Meta Ads can reach audiences on Facebook and Instagram. Campaigns can aim for leads, website visits, purchases or brand awareness.'
+  },
+  {
+    keys: ['social media', 'instagram marketing', 'facebook marketing'],
+    answer: '📱 Social media marketing uses content, community engagement and campaigns to build awareness and connect with potential customers.'
+  },
+  {
+    keys: ['content marketing', 'blog writing', 'blogging'],
+    answer: '✍️ Content marketing uses helpful content, such as articles, guides, videos and posts, to answer customer questions and build trust.'
+  },
+  {
+    keys: ['analytics', 'website traffic', 'conversion rate'],
+    answer: '📊 Analytics help track visitors, traffic sources and actions. Conversion rate measures the percentage of visitors who complete a desired action.'
+  },
+  {
+    keys: ['timeline', 'delivery time', 'how long', 'development time'],
+    answer: '⏱️ Timelines depend on scope. A basic website may take a few weeks, while complex apps and automations can take longer. We confirm the schedule after discussing requirements.'
+  },
+  {
+    keys: ['portfolio', 'previous work', 'past projects', 'examples'],
+    answer: '🗂️ We can share relevant portfolio examples through our team. Tell us which service or industry you want to see.'
+  },
+  {
+    keys: ['maintenance', 'website update', 'website support'],
+    answer: '🔧 Website maintenance can include updates, backups, bug fixes, security checks and performance monitoring. The exact support depends on your chosen plan.'
+  },
+  {
+    keys: ['contact', 'phone number', 'email address', 'whatsapp'],
+    answer: '📞 WhatsApp or call us at +91 76175 55488. You can also email wasim64malik@gmail.com to discuss your project.'
+  },
+  {
+    keys: ['location', 'address', 'office', 'agra'],
+    answer: '📍 Our office is in Shashtripuram, Agra, Uttar Pradesh. We also work remotely with clients across India and other countries.'
+  }
+];
+
 
 function addMsg(text, type) {
   var el = document.createElement('div');
@@ -1421,30 +1530,145 @@ function addMsg(text, type) {
   if(chatMsgs) { chatMsgs.appendChild(el); chatMsgs.scrollTop = chatMsgs.scrollHeight; }
 }
 
+/* TheDigitalWork guided discovery chatbot: English + Hinglish.
+   Integration: keep botKnowledge and addMsg(). Replace the OLD botReply(input)
+   function with this file's helper functions + botReply(). This is rules-based,
+   not a full AI model. */
+
+var tdwFlow = { step: "idle", project: "", business: "", goal: "", features: "", budget: "", timeline: "", lang: "mixed" };
+
+function tdwNorm(s) {
+  return String(s || "").toLowerCase().replace(/[’']/g, "'").replace(/[^a-z0-9\u0900-\u097f₹\s.+-]/gi, " ").replace(/\s+/g, " ").trim();
+}
+function tdwHas(s, list) { return list.some(function (x) { return s.indexOf(x) !== -1; }); }
+function tdwLang(s) {
+  var q = tdwNorm(s);
+  if (tdwHas(q, ["mujhe", "chahiye", "banani", "banana", "banwana", "karna hai", "meri", "mera", "batao", "btao", "kitna", "kitne", "kharcha", "dukaan", "dhandha", "bhai", "sir", "kaise", "krna", "krni"])) return "hinglish";
+  if (tdwHas(q, ["i need", "i want", "my business", "for my", "can you", "looking for", "build a", "make a"])) return "english";
+  return "mixed";
+}
+function tdwAskBusiness() {
+  return tdwFlow.lang === "english"
+    ? "Sure — first, tell me about your business, profession, or idea. For example: clothing shop, doctor, restaurant, coaching, freelancer, or startup."
+    : "Bilkul — pehle aapka kaam samajhte hain. Aapka business/profession kya hai? Jaise clothing shop, doctor, restaurant, coaching, freelancer ya startup.";
+}
+function tdwAskGoal() {
+  return tdwFlow.lang === "english"
+    ? "What is the main result you want: more enquiries, online sales, bookings, showcasing your work, or managing your business online?"
+    : "Aapka main goal kya hai — enquiries badhana, online sales lena, bookings/appointments, apna work dikhana, ya business ko online manage karna?";
+}
+function tdwAskFeatures() {
+  return tdwFlow.lang === "english"
+    ? "Which features do you need? For example: product catalogue, online payment, booking, login/signup, admin panel, WhatsApp enquiries, or just an information website."
+    : "Kaun-se features chahiye? Jaise product catalogue, online payment, booking, login/signup, admin panel, WhatsApp enquiries, ya sirf information website.";
+}
+function tdwRecommend() {
+  var b = tdwNorm(tdwFlow.business), g = tdwNorm(tdwFlow.goal), f = tdwNorm(tdwFlow.features);
+  var type = "Business website", why = "It explains your services, builds trust, and makes it easy for customers to contact you.", features = "Home, About, Services, testimonials/portfolio, Contact, and WhatsApp enquiry.";
+  if (tdwHas(b, ["clothing", "fashion", "garment", "kapde", "boutique", "cosmetic", "jewellery", "jewelry", "shoes", "shop", "store", "dukaan", "product"]) || tdwHas(g, ["online sales", "sell online", "products", "orders", "online bech", "order lena"])) {
+    type = "E-commerce website / online store"; why = "Customers can browse products, see prices and place orders. If you're testing demand, start with a small catalogue and WhatsApp ordering."; features = "Product categories, product pages, cart/checkout, payment or COD, order management, coupons and admin panel as needed.";
+  } else if (tdwHas(b, ["restaurant", "cafe", "café", "food", "bakery", "tiffin", "cloud kitchen", "dhaba", "catering"])) {
+    type = "Restaurant / food business website"; why = "Customers need your menu, location, hours and a quick way to order or book."; features = "Menu, food photos, map, timings, WhatsApp ordering, reviews and optional payments.";
+  } else if (tdwHas(b, ["doctor", "clinic", "dentist", "hospital", "therapist", "physio", "medical"])) {
+    type = "Healthcare website with appointment requests"; why = "Patients need to understand your services, timings, location and how to request an appointment."; features = "Doctor profile, treatments, timings, location, appointment form and click-to-call/WhatsApp.";
+  } else if (tdwHas(b, ["coaching", "tuition", "school", "college", "institute", "academy", "course", "teacher", "training", "classes"])) {
+    type = "Education / coaching website"; why = "Students and parents need course details, schedules, teacher information and a simple enquiry or admission process."; features = "Courses, faculty, timetable, admission form, testimonials and optional student login.";
+  } else if (tdwHas(b, ["real estate", "property", "builder", "interior", "architect", "construction", "broker", "plot", "flat"])) {
+    type = "Property listing website"; why = "A catalogue with photos, details, filters and enquiry forms helps buyers find relevant properties."; features = "Listings, photo galleries, filters, location, project details and visit/enquiry forms.";
+  } else if (tdwHas(b, ["freelancer", "designer", "developer", "photographer", "artist", "creator", "consultant", "portfolio", "writer"])) {
+    type = "Portfolio / personal brand website"; why = "Show selected work, results, testimonials and a clear way to contact or book you."; features = "Portfolio, services, profile, testimonials, case studies and contact/booking.";
+  } else if (tdwHas(b, ["travel", "tour", "tourism", "hotel", "homestay", "cab", "taxi", "trip", "travel agent"])) {
+    type = "Travel website with enquiry/booking flow"; why = "Visitors need packages, itineraries, dates and a quick way to request a quote or reserve a trip."; features = "Packages, itineraries, destinations, enquiry form, WhatsApp, reviews and optional payments.";
+  } else if (tdwHas(b, ["ngo", "charity", "trust", "nonprofit", "foundation"])) {
+    type = "NGO / nonprofit website"; why = "A mission-led site can explain impact and guide people to donate, volunteer or contact you."; features = "Mission, projects, impact, reports, volunteer form, donation flow and contact.";
+  } else if (tdwHas(b, ["manufacturer", "factory", "wholesale", "supplier", "export", "b2b", "industrial"])) {
+    type = "B2B company website with quote requests"; why = "Business buyers need capability details, product information and a clear way to request a quote."; features = "Company profile, catalogue, capabilities, brochure, case studies and quote form.";
+  } else if (tdwHas(g, ["ads", "campaign", "lead generation", "enquiries", "promote one service", "promotion"])) {
+    type = "Conversion-focused landing page"; why = "For one offer or ad campaign, a focused page can work better than a large site."; features = "Offer, benefits, proof, FAQs, enquiry form, WhatsApp CTA and conversion tracking.";
+  }
+  if (tdwHas(f, ["login", "signup", "sign up", "dashboard", "admin panel", "user accounts", "marketplace", "database", "subscriptions"])) {
+    type = "Full-stack web application"; why = "Login, dashboards, stored data and user workflows need a backend and database—not just a static page."; features = "User roles, login, database, admin dashboard, core workflow, notifications and payments only if needed.";
+  }
+  if (tdwHas(g, ["booking", "bookings", "appointment", "appointments", "reservation"]) && type === "Business website") {
+    type = "Service website with booking system"; why = "Customers can request a service or time slot without repeated back-and-forth messages."; features = "Service details, booking form, time slots, confirmation messages and optional payment.";
+  }
+  if (tdwFlow.lang === "english") return "Based on your answers, I'd recommend: **" + type + "**.\n\nWhy: " + why + "\n\nA practical first version could include: " + features + "\n\nDoes this fit your need, or is there one important feature I should account for?";
+  return "Aapki requirement ke hisaab se meri recommendation hai: **" + type + "**.\n\nKyun: " + why + "\n\nPehle version mein ye features rakh sakte hain: " + features + "\n\nKya ye aapke kaam ke liye sahi lag raha hai, ya koi important feature aur chahiye?";
+}
+function tdwQuickHelp(input) {
+  var q = tdwNorm(input);
+  if (tdwHas(q, ["price", "pricing", "cost", "budget", "kitne", "kitna", "kharcha", "charges", "rate", "quote"])) {
+    if (tdwHas(q, ["app", "mobile"])) return "📱 Mobile app projects start from ₹50,000. Final cost depends on features, platform, backend and admin tools. Aap app ka main purpose bata dein, main suitable scope suggest karunga.";
+    if (tdwHas(q, ["chatbot", "automation", "ai"])) return "🤖 AI chatbot projects start from ₹20,000; integrations and workflow complexity affect the final cost. Aap bot se kaunsa kaam karwana chahte hain?";
+    if (tdwHas(q, ["marketing", "seo", "ads", "social media"])) return "📈 Digital marketing packages start from ₹10,000/month; ad spend is separate. Aapka goal leads, sales, local reach ya brand awareness hai?";
+    return "🌐 Website projects start from ₹15,000. Final cost pages, design and features par depend karti hai. Aapka business kya hai aur website se kya result chahiye?";
+  }
+  if (tdwHas(q, ["hello", "hi", "hey", "namaste", "salam", "assalam", "hii"])) return "Hi! Welcome to TheDigitalWork 👋 Aap kya karte hain aur kis problem ka solution chahiye? Main aapke goal ke hisaab se website, app, automation ya marketing recommend karunga.";
+  if (tdwHas(q, ["human", "team se baat", "person se baat", "whatsapp", "contact", "call me"])) return "Project discuss karne ke liye WhatsApp/call: +91 76175 55488 or +91 81268 12317. Email: info@thedigitalwork.in. Aap chahein to pehle yahin apni requirement bata sakte hain.";
+  if (tdwHas(q, ["app", "mobile app", "android app", "ios app"])) return "App ka idea kis kaam ke liye hai — booking, delivery, learning, marketplace, ya internal business management? Use-case bata dein, main MVP features suggest karunga.";
+  if (tdwHas(q, ["chatbot", "automation", "ai bot", "workflow"])) return "Aap kaunsa repetitive kaam automate karna chahte hain — customer FAQs, WhatsApp enquiries, lead follow-up, bookings, reports ya data entry? Uske hisaab se solution suggest karunga.";
+  if (tdwHas(q, ["marketing", "ads", "seo", "instagram", "social media", "customers badhana", "leads badhana"])) return "Aap kis business/service ko promote karna chahte hain? Abhi main problem kya hai — reach kam, enquiries nahi aa rahi, ya enquiries sales mein convert nahi ho rahi?";
+  return "Main generic definitions dene ke bajay aapki actual problem samajhna chahta hoon. Aap apna business/profession aur jo result chahiye woh bata dein — main suitable solution recommend karunga.";
+}
+
 function botReply(input) {
-  var q = input.toLowerCase().trim();
-  var response = null;
-  var keys = Object.keys(botResponses);
-  for(var i=0; i<keys.length; i++) {
-    if(q.indexOf(keys[i]) !== -1) { response = botResponses[keys[i]]; break; }
+  var q = tdwNorm(input);
+  if (!q) return;
+  var detectedLang = tdwLang(input);
+  if (detectedLang !== "mixed") {
+  tdwFlow.lang = detectedLang;
+}
+  var websiteIntent = tdwHas(q, [
+  "i need a website",
+  "i want a website",
+  "need a website",
+  "website for my",
+  "website for our",
+  "build a website",
+  "make a website",
+  "create a website",
+  "website banani",
+  "website banana",
+  "website banwana",
+  "website chahiye",
+  "site banani",
+  "site chahiye",
+  "landing page",
+  "ecommerce",
+  "e-commerce",
+  "online store"
+]);
+  var yes = tdwHas(q, ["yes", "yeah", "haan", "han", "bilkul", "sahi", "correct", "thik hai", "theek hai"]);
+  var no = tdwHas(q, ["no", "nahi", "nahin", "not really", "galat", "kuch aur"]);
+  var response;
+
+  if (tdwFlow.step === "idle" && websiteIntent) {
+    tdwFlow.project = "website"; tdwFlow.step = "business"; response = tdwAskBusiness();
+  } else if (tdwFlow.step === "business") {
+    tdwFlow.business = input.trim(); tdwFlow.step = "goal"; response = tdwAskGoal();
+  } else if (tdwFlow.step === "goal") {
+    tdwFlow.goal = input.trim(); tdwFlow.step = "features"; response = tdwAskFeatures();
+  } else if (tdwFlow.step === "features") {
+    tdwFlow.features = input.trim(); tdwFlow.step = "recommendation"; response = tdwRecommend();
+  } else if (tdwFlow.step === "recommendation" && no) {
+    tdwFlow.step = "features"; response = tdwAskFeatures();
+  } else if (tdwFlow.step === "recommendation" && yes) {
+    tdwFlow.step = "budget";
+    response = tdwFlow.lang === "english" ? "What budget range are you considering: under ₹15k, ₹15k–₹30k, ₹30k–₹60k, ₹60k+, or not sure yet?" : "Budget range kya socha hai: ₹15k se kam, ₹15k–₹30k, ₹30k–₹60k, ₹60k+, ya abhi sure nahi?";
+  } else if (tdwFlow.step === "budget") {
+    tdwFlow.budget = input.trim(); tdwFlow.step = "timeline";
+    response = tdwFlow.lang === "english" ? "When would you like to launch: as soon as possible, within 2–4 weeks, or later?" : "Aap launch kab tak chahte hain — jaldi, 2–4 weeks mein, ya baad mein?";
+  } else if (tdwFlow.step === "timeline") {
+    tdwFlow.timeline = input.trim(); tdwFlow.step = "done";
+    response = tdwRecommend() + "\n\nProject discuss karne ke liye WhatsApp: +91 76175 55488 / +91 81268 12317.";
+  } else if (tdwFlow.step === "done" && tdwHas(q, ["new project", "start over", "restart", "naya project", "another website", "dobara"])) {
+    tdwFlow = { step: "business", project: "website", business: "", goal: "", features: "", budget: "", timeline: "", lang: tdwFlow.lang }; response = tdwAskBusiness();
+  } else if (websiteIntent) {
+    tdwFlow.step = "business"; tdwFlow.project = "website"; tdwFlow.business = ""; tdwFlow.goal = ""; tdwFlow.features = ""; response = tdwAskBusiness();
+  } else {
+    response = tdwQuickHelp(input);
   }
-  if(!response) {
-    response = 'That is a great question! For detailed answers, let me connect you with our team directly. 👇\n\nClick the WhatsApp button to chat with us now!';
-  }
-  setTimeout(function(){
-    addMsg(response, 'bot');
-    // If no match found, add WA escalation button
-    if(response.indexOf('WhatsApp button') !== -1 || response.indexOf('WhatsApp') !== -1) {
-      var btn = document.createElement('button');
-      btn.className = 'qbtn';
-      btn.textContent = '💬 Open WhatsApp';
-      btn.style.margin = '8px 14px';
-      btn.addEventListener('click', function(){
-        window.open('https://wa.me/917617555488?text=Hi+TheDigitalWork%2C+I+need+help+with+'+encodeURIComponent(input),'_blank');
-      });
-      if(chatMsgs){chatMsgs.appendChild(btn);chatMsgs.scrollTop=chatMsgs.scrollHeight;}
-    }
-  }, 600);
+  setTimeout(function () { addMsg(response, "bot"); }, 350);
 }
 
 function toggleChat() {
