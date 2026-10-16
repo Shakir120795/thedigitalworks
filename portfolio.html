@@ -62,7 +62,7 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 @keyframes footerEnter{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 @media(max-width:1000px){#nav{padding:20px 28px}.fg-grid{grid-template-columns:1.5fr 1fr 1fr;gap:36px}.fg-grid>div:first-child{grid-column:1/-1}#footer{padding:60px 28px 32px}}
-@media(max-width:700px){#nav,#nav.scrolled{padding:16px 20px}.nav-links{gap:14px}.nav-links a{font-size:.78rem}.nav-links li:nth-child(2),.nav-links li:nth-child(3){display:none}.nav-cta{font-size:.78rem;padding:9px 14px}main{padding:110px 20px 70px}.policy{padding:24px 20px}.fg-grid{grid-template-columns:1fr 1fr;gap:30px 22px}.fg-grid>div:first-child{grid-column:1/-1}#footer{padding:48px 20px 28px}.fbot{flex-direction:column;align-items:flex-start}.fb-tag{max-width:320px}}
+@media(max-width:700px){#nav,#nav.scrolled{padding:16px 20px}.nav-links{gap:14px}.nav-links a{font-size:.78rem}.nav-links li:nth-child(2){display:none}.nav-cta{font-size:.78rem;padding:9px 14px}main{padding:110px 20px 70px}.policy{padding:24px 20px}.fg-grid{grid-template-columns:1fr 1fr;gap:30px 22px}.fg-grid>div:first-child{grid-column:1/-1}#footer{padding:48px 20px 28px}.fbot{flex-direction:column;align-items:flex-start}.fb-tag{max-width:320px}}
 @media(max-width:440px){.logo{font-size:1.1rem}.nav-links{gap:10px}.nav-links a{font-size:.72rem}.nav-cta{padding:8px 10px;font-size:.72rem}main{padding:100px 16px 56px}h1{font-size:2.35rem}.fg-grid{grid-template-columns:1fr 1fr;gap:26px 16px}.fb-name{font-size:1.25rem}.wa-pill{font-size:.75rem;padding:7px 9px}.fcopy{font-size:.78rem}}
 
 
@@ -83,12 +83,12 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 
 /* ===== PORTFOLIO PAGE ===== */
 .portfolio-main{padding-top:150px}
-.portfolio-hero{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:clamp(34px,5vw,72px);margin-bottom:112px}
+.portfolio-hero{display:block;max-width:1040px;margin-bottom:100px}
 .pf-eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--blue);font-size:.78rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
 .pf-eyebrow:before{content:"";width:24px;height:1px;background:var(--blue);box-shadow:0 0 14px rgba(79,142,247,.8)}
 .portfolio-hero h1{max-width:720px;font-size:clamp(2.8rem,5.5vw,5rem);line-height:1.02;letter-spacing:-.065em;margin:20px 0 24px}
 .gradient-text{background:linear-gradient(110deg,#f8fafc 0%,#8bb6ff 42%,#a78bfa 75%,#ec4899 105%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.pf-intro{max-width:570px;color:var(--muted);font-size:clamp(1rem,1.5vw,1.13rem);line-height:1.8}
+.pf-intro{max-width:900px;color:var(--muted);font-size:clamp(1rem,1.5vw,1.13rem);line-height:1.85}
 .pf-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:30px}
 .pf-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 21px;border-radius:100px;font-size:.9rem;font-weight:700;transition:transform .3s var(--ease),box-shadow .3s,border-color .3s,background .3s}
 .pf-btn:hover{transform:translateY(-3px)}
@@ -98,25 +98,25 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 .pf-btn-secondary:hover{border-color:rgba(79,142,247,.5);background:rgba(79,142,247,.08)}
 .pf-trust-row{display:flex;gap:20px;flex-wrap:wrap;margin-top:34px;color:var(--muted);font-size:.78rem}
 .pf-trust-row span{display:inline-flex;align-items:center;gap:8px}
-.pf-trust-row span:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(16,185,129,.5)}
-.pf-hero-art{position:relative;min-width:0;perspective:1100px}
-.pf-showcase{position:relative;min-height:400px;border:1px solid rgba(248,250,252,.12);border-radius:26px;padding:16px;background:linear-gradient(145deg,rgba(79,142,247,.12),rgba(139,92,246,.08) 55%,rgba(10,10,15,.82));box-shadow:0 30px 100px rgba(0,0,0,.3);overflow:hidden;transform:rotateY(-5deg) rotateX(2deg);animation:pfFloat 7s ease-in-out infinite}
-.pf-showcase:before{content:"";position:absolute;width:250px;height:250px;right:-70px;top:-90px;border:1px solid rgba(139,92,246,.45);border-radius:50%;box-shadow:0 0 0 22px rgba(139,92,246,.035),0 0 0 48px rgba(79,142,247,.025);pointer-events:none}
-.pf-window{position:relative;z-index:1;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:rgba(8,10,18,.86);overflow:hidden}
-.pf-window-bar{height:42px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;align-items:center;gap:6px;padding:0 14px;color:var(--muted);font-size:.64rem}
-.pf-window-bar i{width:7px;height:7px;border-radius:50%;background:#4f8ef7;opacity:.9}.pf-window-bar i:nth-child(2){background:#8b5cf6}.pf-window-bar i:nth-child(3){background:#ec4899}
-.pf-window-bar span{margin-left:9px}
-.pf-window-content{padding:24px;min-height:290px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 80% 5%,rgba(139,92,246,.15),transparent 44%)}
-.pf-ui-label{font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:#8bb6ff;font-weight:800}
-.pf-ui-title{font-size:clamp(1.8rem,3vw,2.65rem);line-height:1.02;font-weight:800;letter-spacing:-.06em;margin:15px 0}
-.pf-ui-title em{font-style:normal;color:#8b9dff}
-.pf-ui-text{color:#98a3b8;font-size:.72rem;max-width:230px;line-height:1.7}
-.pf-ui-cta{display:inline-block;margin-top:17px;background:linear-gradient(100deg,#4f8ef7,#8b5cf6);padding:8px 13px;border-radius:100px;color:white;font-size:.66rem;font-weight:700}
-.pf-ui-circles{position:absolute;right:-8px;bottom:-30px;width:160px;height:160px;border:1px solid rgba(79,142,247,.45);border-radius:50%;box-shadow:0 0 0 18px rgba(79,142,247,.045),0 0 0 40px rgba(139,92,246,.045),0 0 0 62px rgba(79,142,247,.035)}
-.pf-float-chip{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;padding:12px 15px;background:rgba(12,14,24,.88);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(14px);border-radius:14px;box-shadow:0 15px 35px rgba(0,0,0,.28);font-size:.72rem;font-weight:700;animation:pfChip 5.5s ease-in-out infinite}
+.pf-trust-row span:before{content:"";width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(16,185,129,.5)}
+
+
+
+
+
+.pf-window-bar i:nth-child(2){background:#8b5cf6}.pf-window-bar i:nth-child(3){background:#ec4899}
+
+
+
+
+
+
+
+
+
 .pf-float-chip small{display:block;color:var(--muted);font-size:.61rem;font-weight:500}
-.pf-float-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:10px;background:rgba(79,142,247,.18);color:#8bb6ff;font-size:1rem}
-.pf-float-chip.chip-one{left:-22px;bottom:50px}.pf-float-chip.chip-two{right:-16px;top:70px;animation-delay:-2.2s}
+
+
 .work-section{scroll-margin-top:110px;margin-bottom:112px}
 .pf-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:28px}
 .pf-section-head .eyebrow{margin-bottom:10px}
@@ -132,47 +132,47 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 .work-card[hidden]{display:none}
 .work-cover{height:230px;position:relative;overflow:hidden;padding:16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
 .cover-label{position:absolute;top:13px;left:14px;z-index:3;padding:5px 9px;background:rgba(5,7,12,.6);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);border-radius:100px;font-size:.61rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:#e2e8f0}
-.mock-browser{width:100%;max-width:350px;border:1px solid rgba(255,255,255,.17);border-radius:11px;overflow:hidden;background:#0b0d14;box-shadow:0 14px 40px rgba(0,0,0,.25);transform:rotate(-2deg);transition:transform .4s var(--ease)}
-.work-card:hover .mock-browser{transform:rotate(0) scale(1.025)}
-.mock-chrome{height:24px;display:flex;align-items:center;gap:4px;padding:0 9px;background:rgba(255,255,255,.045);border-bottom:1px solid rgba(255,255,255,.08)}
-.mock-chrome i{width:5px;height:5px;border-radius:50%;background:#4f8ef7}.mock-chrome i:nth-child(2){background:#8b5cf6}.mock-chrome i:nth-child(3){background:#ec4899}
-.mock-page{position:relative;min-height:150px;padding:15px 15px 13px;overflow:hidden}
-.mock-small{font-size:.49rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#9ca3ff}
-.mock-heading{font-size:1.22rem;line-height:1.05;letter-spacing:-.055em;font-weight:800;margin:8px 0}
-.mock-heading em{font-style:normal;color:#7aa7ff}
-.mock-sub{font-size:.55rem;line-height:1.55;color:#b3bdce;max-width:175px}
-.mock-button{display:inline-block;margin-top:11px;padding:5px 9px;background:#4f8ef7;color:#fff;border-radius:50px;font-size:.49rem;font-weight:800}
+
+.work-card:hover 
+
+.mock-chrome i:nth-child(2){background:#8b5cf6}.mock-chrome i:nth-child(3){background:#ec4899}
+
+
+
+
+
+
 .cover-agency{background:radial-gradient(circle at 70% 30%,rgba(79,142,247,.29),transparent 42%),linear-gradient(135deg,#0b1020,#141023)}
-.cover-agency .mock-page{background:radial-gradient(circle at 95% 0,rgba(139,92,246,.17),transparent 45%)}
+.cover-agency 
 .cover-commerce{background:linear-gradient(135deg,#eee9e1,#d9d3c8)}
-.cover-commerce .mock-browser{background:#f8f6f0;border-color:rgba(32,32,32,.15)}
-.cover-commerce .mock-chrome{background:#e9e5dd;border-color:rgba(32,32,32,.1)}
-.cover-commerce .mock-page{background:linear-gradient(120deg,#f7f4ec 0%,#e6e0d4 100%);color:#181919}
-.cover-commerce .mock-small{color:#82735b}.cover-commerce .mock-heading{font-family:Georgia,serif;font-size:1.28rem;color:#1a1a1a}.cover-commerce .mock-heading em{color:#937750}.cover-commerce .mock-sub{color:#60615d}.cover-commerce .mock-button{background:#222;color:#fff}
+.cover-commerce 
+.cover-commerce 
+.cover-commerce 
+.cover-commerce .cover-commerce .cover-commerce .cover-commerce .cover-commerce 
 .cover-health{background:radial-gradient(circle at 70% 20%,rgba(16,185,129,.2),transparent 40%),linear-gradient(135deg,#071a1d,#0b2531)}
-.cover-health .mock-page{background:linear-gradient(135deg,rgba(5,44,48,.8),rgba(6,21,33,.88))}
-.cover-health .mock-small{color:#6ee7b7}.cover-health .mock-heading em{color:#6ee7b7}.cover-health .mock-button{background:#059669}
+.cover-health 
+.cover-health .cover-health .cover-health 
 .cover-market{background:radial-gradient(circle at 78% 20%,rgba(139,92,246,.31),transparent 42%),linear-gradient(135deg,#17102e,#090b19)}
-.cover-market .mock-page{background:linear-gradient(110deg,rgba(29,19,53,.65),rgba(9,11,25,.9))}
-.cover-market .mock-small{color:#c4b5fd}.cover-market .mock-heading em{color:#c4b5fd}.cover-market .mock-button{background:#7c3aed}
+.cover-market 
+.cover-market .cover-market .cover-market 
 .cover-food{background:radial-gradient(circle at 72% 18%,rgba(251,146,60,.26),transparent 40%),linear-gradient(135deg,#24100d,#100c12)}
-.cover-food .mock-small{color:#fdba74}.cover-food .mock-heading em{color:#fb923c}.cover-food .mock-button{background:#ea580c}
+.cover-food .cover-food .cover-food 
 .cover-homes{background:linear-gradient(135deg,#e7e2d7,#c7d1c9)}
-.cover-homes .mock-browser{background:#f3f0e8;border-color:rgba(31,41,36,.16)}
-.cover-homes .mock-chrome{background:#e6e0d5;border-color:rgba(31,41,36,.1)}
-.cover-homes .mock-page{background:linear-gradient(135deg,#f6f2e9,#dce5db)}
-.cover-homes .mock-small{color:#647766}.cover-homes .mock-heading{font-family:Georgia,serif;color:#22372d}.cover-homes .mock-heading em{color:#63866c}.cover-homes .mock-sub{color:#566158}.cover-homes .mock-button{background:#315d47}
+.cover-homes 
+.cover-homes 
+.cover-homes 
+.cover-homes .cover-homes .cover-homes .cover-homes .cover-homes 
 .cover-beauty{background:radial-gradient(circle at 80% 15%,rgba(236,72,153,.21),transparent 36%),linear-gradient(135deg,#261322,#0d0b15)}
-.cover-beauty .mock-page{background:linear-gradient(135deg,#261525,#110d19)}
-.cover-beauty .mock-small{color:#f9a8d4}.cover-beauty .mock-heading{font-family:Georgia,serif;font-weight:500}.cover-beauty .mock-heading em{color:#f9a8d4}.cover-beauty .mock-button{background:#be185d}
-.mock-orbit{position:absolute;right:-34px;top:16px;width:115px;height:115px;border:1px solid rgba(139,92,246,.5);border-radius:50%;box-shadow:0 0 0 12px rgba(139,92,246,.06),0 0 0 25px rgba(79,142,247,.04)}
-.mock-stat-row{display:flex;gap:6px;margin-top:15px}
-.mock-stat{height:27px;flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:5px}
-.mock-image-block{position:absolute;right:14px;bottom:18px;width:72px;height:95px;border-radius:40px 40px 8px 8px;background:linear-gradient(140deg,#d6c4a5,#7e6b50);box-shadow:0 6px 22px rgba(0,0,0,.2)}
-.cover-health .mock-image-block{background:linear-gradient(135deg,#6ee7b7,#047857);border-radius:14px;width:68px;height:68px;bottom:24px}
-.cover-market .mock-image-block{background:linear-gradient(135deg,#c4b5fd,#7c3aed);border-radius:50%;width:76px;height:76px;bottom:24px}
-.cover-food .mock-image-block{background:linear-gradient(135deg,#fdba74,#c2410c);border-radius:50%;width:70px;height:70px;bottom:24px}
-.cover-beauty .mock-image-block{background:linear-gradient(135deg,#f9a8d4,#9d174d);border-radius:45% 45% 12px 12px;width:64px;height:84px;bottom:22px}
+.cover-beauty 
+.cover-beauty .cover-beauty .cover-beauty .cover-beauty 
+
+
+
+
+.cover-health 
+.cover-market 
+.cover-food 
+.cover-beauty 
 .work-meta{padding:21px 21px 22px}
 .work-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}
 .work-type{font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--blue);font-weight:800}
@@ -187,13 +187,31 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 .pf-bottom-cta{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:30px;padding:clamp(26px,5vw,52px);margin-bottom:36px;border:1px solid rgba(79,142,247,.22);border-radius:24px;background:linear-gradient(115deg,rgba(79,142,247,.12),rgba(139,92,246,.1) 56%,rgba(236,72,153,.04));box-shadow:inset 0 1px rgba(255,255,255,.03)}
 .pf-bottom-cta:after{content:"";position:absolute;width:260px;height:260px;right:-90px;top:-130px;border:1px solid rgba(139,92,246,.38);border-radius:50%;box-shadow:0 0 0 24px rgba(139,92,246,.04),0 0 0 48px rgba(79,142,247,.04);pointer-events:none}
 .pf-bottom-cta .eyebrow{margin-bottom:10px}.pf-bottom-cta p{color:var(--muted);max-width:540px;font-size:.9rem;margin:12px 0 0}.pf-bottom-cta .pf-btn{position:relative;z-index:1;flex-shrink:0}
-@keyframes pfFloat{0%,100%{transform:rotateY(-5deg) rotateX(2deg) translateY(0)}50%{transform:rotateY(-2deg) rotateX(1deg) translateY(-10px)}}
-@keyframes pfChip{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-@media(prefers-reduced-motion:reduce){.pf-showcase,.pf-float-chip{animation:none!important}.work-card,.mock-browser,.pf-btn{transition:none!important}}
-@media(max-width:1000px){.portfolio-main{padding-top:125px}.portfolio-hero{grid-template-columns:1fr 0.88fr;gap:30px;margin-bottom:88px}.pf-showcase{min-height:370px}.pf-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.work-cover{height:240px}}
-@media(max-width:700px){.portfolio-main{padding-top:110px}.portfolio-hero{grid-template-columns:1fr;gap:36px;margin-bottom:76px}.portfolio-hero h1{font-size:clamp(2.7rem,12vw,4rem)}.pf-hero-art{max-width:540px;width:100%;margin:0 auto}.pf-showcase{min-height:360px;transform:none;animation:pfFloat 7s ease-in-out infinite}.pf-section-head{display:block}.pf-section-head p{margin-top:12px}.work-cover{height:220px}.pf-bottom-cta{align-items:flex-start;flex-direction:column}.pf-bottom-cta .pf-btn{align-self:flex-start}}
-@media(max-width:480px){.portfolio-main{padding-left:16px;padding-right:16px;padding-bottom:56px}.portfolio-hero h1{font-size:2.7rem}.pf-actions{align-items:stretch}.pf-btn{padding:12px 16px;font-size:.82rem}.pf-showcase{padding:10px;min-height:325px}.pf-window-content{padding:19px;min-height:260px}.pf-float-chip{padding:9px 11px;font-size:.65rem}.pf-float-chip.chip-one{left:-5px;bottom:33px}.pf-float-chip.chip-two{right:-5px;top:56px}.pf-work-grid{grid-template-columns:1fr;gap:17px}.work-cover{height:230px}.pf-section-head h2,.pf-bottom-cta h2{font-size:2rem}.pf-trust-row{gap:10px 14px}.pf-section-head{margin-bottom:22px}}
+50%{transform:rotateY(-2deg) rotateX(1deg) translateY(-10px)}}
+50%{transform:translateY(-9px)}}
+@media(prefers-reduced-motion:reduce){.work-card,.pf-btn{transition:none!important}}}
+@media(max-width:1000px){.portfolio-main{padding-top:125px}.portfolio-hero{margin-bottom:88px}.pf-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.work-cover{height:220px}}.portfolio-hero{grid-template-columns:1fr 0.88fr;gap:30px;margin-bottom:88px}.pf-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.work-cover{height:240px}}
+@media(max-width:700px){.portfolio-main{padding-top:110px}.portfolio-hero{margin-bottom:76px}.portfolio-hero h1{font-size:clamp(2.7rem,12vw,4rem)}.pf-section-head{display:block}.pf-section-head p{margin-top:12px}.work-cover{height:205px}.pf-bottom-cta{align-items:flex-start;flex-direction:column}.pf-bottom-cta .pf-btn{align-self:flex-start}}.portfolio-hero{grid-template-columns:1fr;gap:36px;margin-bottom:76px}.portfolio-hero h1{font-size:clamp(2.7rem,12vw,4rem)}.pf-section-head{display:block}.pf-section-head p{margin-top:12px}.work-cover{height:220px}.pf-bottom-cta{align-items:flex-start;flex-direction:column}.pf-bottom-cta .pf-btn{align-self:flex-start}}
+@media(max-width:480px){.portfolio-main{padding-left:16px;padding-right:16px;padding-bottom:56px}.portfolio-hero h1{font-size:2.7rem}.pf-actions{align-items:stretch}.pf-btn{padding:12px 16px;font-size:.82rem}.pf-work-grid{grid-template-columns:1fr;gap:17px}.work-cover{height:220px}.pf-section-head h2,.pf-bottom-cta h2{font-size:2rem}.pf-trust-row{gap:10px 14px}.pf-section-head{margin-bottom:22px}}.portfolio-hero h1{font-size:2.7rem}.pf-actions{align-items:stretch}.pf-btn{padding:12px 16px;font-size:.82rem}.pf-work-grid{grid-template-columns:1fr;gap:17px}.work-cover{height:230px}.pf-section-head h2,.pf-bottom-cta h2{font-size:2rem}.pf-trust-row{gap:10px 14px}.pf-section-head{margin-bottom:22px}}
 
+
+
+.work-cover{height:228px;position:relative;overflow:hidden;padding:0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.cover-label{position:absolute;top:13px;left:14px;z-index:3;padding:5px 9px;background:rgba(5,7,12,.62);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);border-radius:100px;font-size:.61rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:#e2e8f0}
+.project-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.project-art:before{content:"";position:absolute;width:230px;height:230px;border:1px solid rgba(255,255,255,.14);border-radius:50%;box-shadow:0 0 0 20px rgba(255,255,255,.025),0 0 0 48px rgba(255,255,255,.02),0 0 0 78px rgba(255,255,255,.015);transition:transform .6s var(--ease)}
+.work-card:hover .project-art:before{transform:scale(1.12) rotate(14deg)}
+.project-mark{position:relative;z-index:1;font-size:clamp(3.6rem,7vw,5.6rem);font-weight:800;letter-spacing:-.095em;line-height:1;color:rgba(248,250,252,.96);text-shadow:0 8px 45px rgba(0,0,0,.2)}
+.project-mark span{color:#8bb6ff}
+.project-orbit{position:absolute;width:110px;height:110px;border:1px solid rgba(139,92,246,.55);border-radius:50%;right:16%;top:24%;box-shadow:0 0 0 11px rgba(139,92,246,.055),0 0 0 25px rgba(79,142,247,.035);transform:rotate(-24deg)}
+.project-domain{position:absolute;z-index:2;right:13px;bottom:12px;left:13px;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;border:1px solid rgba(255,255,255,.13);border-radius:10px;background:rgba(7,9,17,.6);backdrop-filter:blur(12px);color:#d6deed;font-size:.68rem;font-weight:700}
+.project-domain b{font-size:.95rem;color:#8bb6ff}
+.project-art-homes .project-mark span{color:#a4c7a7}
+.project-art-homes .project-orbit{border-color:rgba(164,199,167,.5);right:17%;top:23%}
+.project-art-health .project-mark span{color:#6ee7b7}
+.project-art-health .project-orbit{border-color:rgba(110,231,183,.5)}
+.project-art-food .project-mark span{color:#fdba74}
+.project-art-food .project-orbit{border-color:rgba(251,146,60,.48)}
 </style>
 </head>
 <body>
@@ -213,33 +231,17 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
   <main class="portfolio-main">
   <section class="portfolio-hero" aria-labelledby="portfolio-title">
     <div class="portfolio-copy">
-      <div class="pf-eyebrow">Portfolio · Selected work</div>
-      <h1 id="portfolio-title">Digital experiences built to <span class="gradient-text">move things forward.</span></h1>
-      <p class="pf-intro">From high-impact business websites to online stores and product platforms, we turn ideas into useful, thoughtful digital experiences that work beautifully across devices.</p>
+      <div class="pf-eyebrow">Portfolio · Real projects</div>
+      <h1 id="portfolio-title">Websites and digital tools built for <span class="gradient-text">real business work.</span></h1>
+      <p class="pf-intro">We build and improve responsive business websites and web applications. Our work includes property websites, healthcare experiences, food-ordering journeys, e-commerce workflows, admin dashboards, API and payment integrations, and deployment fixes. The focus is practical: clear navigation, useful features, and a smooth experience on mobile and desktop.</p>
       <div class="pf-actions">
         <a class="pf-btn pf-btn-primary" href="/#contact">Start a project <span aria-hidden="true">↗</span></a>
-        <a class="pf-btn pf-btn-secondary" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>
+        <a class="pf-btn pf-btn-secondary" href="#work">Explore live websites <span aria-hidden="true">↓</span></a>
       </div>
       <div class="pf-trust-row">
-        <span>Websites & landing pages</span>
-        <span>E-commerce & platforms</span>
-        <span>AI & automation</span>
-      </div>
-    </div>
-    <div class="pf-hero-art" aria-hidden="true">
-      <div class="pf-showcase">
-        <div class="pf-window">
-          <div class="pf-window-bar"><i></i><i></i><i></i><span>thedigitalwork.in / experience-preview</span></div>
-          <div class="pf-window-content">
-            <div class="pf-ui-label">Ideas, meet execution</div>
-            <div class="pf-ui-title">Build.<br>Automate.<br><em>Grow.</em></div>
-            <p class="pf-ui-text">Digital products and experiences designed around real business goals.</p>
-            <span class="pf-ui-cta">Explore what's possible ↗</span>
-            <div class="pf-ui-circles"></div>
-          </div>
-        </div>
-        <div class="pf-float-chip chip-one"><span class="pf-float-icon">✦</span><div>Digital craft<small>Design with purpose</small></div></div>
-        <div class="pf-float-chip chip-two"><span class="pf-float-icon">↗</span><div>Built to scale<small>From idea to launch</small></div></div>
+        <span>Mobile-first websites</span>
+        <span>Real business workflows</span>
+        <span>Integrations & deployment</span>
       </div>
     </div>
   </section>
@@ -247,120 +249,94 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
   <section id="work" class="work-section" aria-labelledby="work-title">
     <div class="pf-section-head">
       <div>
-        <div class="eyebrow">Selected projects</div>
-        <h2 id="work-title">Different ideas.<br>Purpose-built experiences.</h2>
+        <div class="eyebrow">Live project links</div>
+        <h2 id="work-title">Work built around<br>real business needs.</h2>
       </div>
-      <p>Explore a few project directions across business websites, commerce, healthcare, marketplaces and local services.</p>
+      <p>These cards link to the public websites. Descriptions focus on the type of website work and digital experience—not made-up client results.</p>
     </div>
     <div class="pf-filters" role="group" aria-label="Filter portfolio projects">
       <button class="pf-filter" type="button" data-work-filter="all" aria-pressed="true">All work</button>
-      <button class="pf-filter" type="button" data-work-filter="website" aria-pressed="false">Websites</button>
-      <button class="pf-filter" type="button" data-work-filter="commerce" aria-pressed="false">E-commerce</button>
-      <button class="pf-filter" type="button" data-work-filter="platform" aria-pressed="false">Platforms</button>
+      <button class="pf-filter" type="button" data-work-filter="website" aria-pressed="false">Business websites</button>
       <button class="pf-filter" type="button" data-work-filter="health" aria-pressed="false">Healthcare</button>
-      <button class="pf-filter" type="button" data-work-filter="brand" aria-pressed="false">Brands & local</button>
+      <button class="pf-filter" type="button" data-work-filter="food" aria-pressed="false">Food ordering</button>
     </div>
     <div class="pf-work-grid" id="portfolio-grid">
       <article class="work-card" data-category="website">
         <div class="work-cover cover-agency">
-          <span class="cover-label">Agency website</span>
-          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">Digital studio · India & worldwide</div><div class="mock-heading">Build.<br>Automate.<br><em>Grow.</em></div><div class="mock-sub">Websites, AI tools and digital experiences with purpose.</div><span class="mock-button">Start a project ↗</span><div class="mock-orbit"></div></div></div>
+          <span class="cover-label">Live website</span>
+          <div class="project-art project-art-agency" aria-hidden="true">
+            <span class="project-mark">The<span>DW</span></span>
+            <span class="project-orbit"></span>
+            <span class="project-domain">thedigitalwork.in <b>↗</b></span>
+          </div>
         </div>
         <div class="work-meta">
-          <div class="work-topline"><span class="work-type">Digital presence</span><span class="work-index">01 / 07</span></div>
+          <div class="work-topline"><span class="work-type">Agency website</span><span class="work-index">01 / 04</span></div>
           <h3>TheDigitalWork</h3>
-          <p>A bold agency website with motion-led visuals, service discovery and direct enquiry paths.</p>
-          <div class="work-tags"><span>Web design</span><span>Motion UI</span><span>Lead generation</span></div>
-          <a class="work-link" href="/">Visit website <span aria-hidden="true">↗</span></a>
-        </div>
-      </article>
-
-      <article class="work-card" data-category="commerce">
-        <div class="work-cover cover-commerce">
-          <span class="cover-label">Online store</span>
-          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">LUXECRAFT · OBJECTS WITH INTENT</div><div class="mock-heading">Made for<br><em>the everyday.</em></div><div class="mock-sub">Discover considered products and a smooth shopping journey.</div><span class="mock-button">Explore collection ↗</span><div class="mock-image-block"></div></div></div>
-        </div>
-        <div class="work-meta">
-          <div class="work-topline"><span class="work-type">E-commerce</span><span class="work-index">02 / 07</span></div>
-          <h3>LuxeCraft</h3>
-          <p>A refined storefront direction focused on product discovery, clean product pages and a clear purchase flow.</p>
-          <div class="work-tags"><span>Storefront UI</span><span>Product pages</span><span>Checkout</span></div>
-          <a class="work-link" href="/#contact">Discuss a similar store <span aria-hidden="true">↗</span></a>
-        </div>
-      </article>
-
-      <article class="work-card" data-category="health">
-        <div class="work-cover cover-health">
-          <span class="cover-label">Healthcare</span>
-          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">HEALTHCURE · CARE FIRST</div><div class="mock-heading">Your health,<br><em>in focus.</em></div><div class="mock-sub">Clear service information and a calm, helpful digital experience.</div><span class="mock-button">Explore care options ↗</span><div class="mock-image-block"></div></div></div>
-        </div>
-        <div class="work-meta">
-          <div class="work-topline"><span class="work-type">Healthcare web</span><span class="work-index">03 / 07</span></div>
-          <h3>HealthCure</h3>
-          <p>A healthcare website direction designed to make services, information and next steps easier to find.</p>
-          <div class="work-tags"><span>Service discovery</span><span>Accessible layout</span></div>
-          <a class="work-link" href="/#contact">Discuss a similar site <span aria-hidden="true">↗</span></a>
-        </div>
-      </article>
-
-      <article class="work-card" data-category="platform">
-        <div class="work-cover cover-market">
-          <span class="cover-label">Marketplace concept</span>
-          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">GOWITH · MEET YOUR NEXT PLAN</div><div class="mock-heading">Good plans.<br><em>Better company.</em></div><div class="mock-sub">Profiles and discovery built around a simple, mobile-first flow.</div><span class="mock-button">Explore people ↗</span><div class="mock-image-block"></div></div></div>
-        </div>
-        <div class="work-meta">
-          <div class="work-topline"><span class="work-type">Product platform</span><span class="work-index">04 / 07</span></div>
-          <h3>GoWith</h3>
-          <p>A marketplace product direction covering profiles, verification touchpoints and booking journeys.</p>
-          <div class="work-tags"><span>Marketplace UX</span><span>Mobile-first</span><span>Booking flow</span></div>
-          <a class="work-link" href="/#contact">Discuss a platform <span aria-hidden="true">↗</span></a>
-        </div>
-      </article>
-
-      <article class="work-card" data-category="platform">
-        <div class="work-cover cover-food">
-          <span class="cover-label">Food ordering</span>
-          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">NONVEGONWHEEL · ORDER FRESH</div><div class="mock-heading">Good food.<br><em>Less friction.</em></div><div class="mock-sub">Menu discovery and ordering made easy on a phone.</div><span class="mock-button">View the menu ↗</span><div class="mock-image-block"></div></div></div>
-        </div>
-        <div class="work-meta">
-          <div class="work-topline"><span class="work-type">Ordering experience</span><span class="work-index">05 / 07</span></div>
-          <h3>NonVegOnWheel</h3>
-          <p>A food-service web experience centred on quick menu discovery and mobile-friendly ordering paths.</p>
-          <div class="work-tags"><span>Food service</span><span>Mobile UX</span><span>Menus</span></div>
-          <a class="work-link" href="/#contact">Discuss an ordering site <span aria-hidden="true">↗</span></a>
+          <p>The agency website brings services, motion-led design, an enquiry chatbot and clear ways to start a project into one responsive experience.</p>
+          <div class="work-tags"><span>Responsive UI</span><span>Chatbot</span><span>Lead flows</span></div>
+          <a class="work-link" href="https://thedigitalwork.in/" target="_blank" rel="noopener">Visit live website <span aria-hidden="true">↗</span></a>
         </div>
       </article>
 
       <article class="work-card" data-category="website">
         <div class="work-cover cover-homes">
-          <span class="cover-label">Real estate</span>
-          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">WOLHOMES · FIND YOUR SPACE</div><div class="mock-heading">A place to<br><em>belong.</em></div><div class="mock-sub">Property discovery with useful details and a clear enquiry route.</div><span class="mock-button">Explore homes ↗</span><div class="mock-image-block"></div></div></div>
+          <span class="cover-label">Live website</span>
+          <div class="project-art project-art-homes" aria-hidden="true">
+            <span class="project-mark">W<span>H</span></span>
+            <span class="project-orbit"></span>
+            <span class="project-domain">wolhomes.com <b>↗</b></span>
+          </div>
         </div>
         <div class="work-meta">
-          <div class="work-topline"><span class="work-type">Property website</span><span class="work-index">06 / 07</span></div>
-          <h3>WolHomes</h3>
-          <p>A property-focused web experience for browsing homes and guiding visitors towards an enquiry.</p>
-          <div class="work-tags"><span>Real estate</span><span>Property browsing</span><span>Lead capture</span></div>
-          <a class="work-link" href="https://wolhomes.com/" target="_blank" rel="noopener">Visit website <span aria-hidden="true">↗</span></a>
+          <div class="work-topline"><span class="work-type">Property website</span><span class="work-index">02 / 04</span></div>
+          <h3>WOLHomes</h3>
+          <p>Website improvement and deployment work for a property-focused experience, with attention to dependable page loading and clear visitor journeys.</p>
+          <div class="work-tags"><span>Property website</span><span>UX fixes</span><span>Deployment</span></div>
+          <a class="work-link" href="https://wolhomes.com/" target="_blank" rel="noopener">Visit live website <span aria-hidden="true">↗</span></a>
         </div>
       </article>
 
-      <article class="work-card" data-category="brand">
-        <div class="work-cover cover-beauty">
-          <span class="cover-label">Beauty & lifestyle</span>
-          <div class="mock-browser"><div class="mock-chrome"><i></i><i></i><i></i></div><div class="mock-page"><div class="mock-small">AYASHA'S VANITY · YOUR DAILY RITUAL</div><div class="mock-heading">Feel like<br><em>yourself.</em></div><div class="mock-sub">A warm brand-led landing experience with clear product storytelling.</div><span class="mock-button">Discover more ↗</span><div class="mock-image-block"></div></div></div>
+      <article class="work-card" data-category="health">
+        <div class="work-cover cover-health">
+          <span class="cover-label">Live website</span>
+          <div class="project-art project-art-health" aria-hidden="true">
+            <span class="project-mark">H<span>C</span></span>
+            <span class="project-orbit"></span>
+            <span class="project-domain">healthcure.in <b>↗</b></span>
+          </div>
         </div>
         <div class="work-meta">
-          <div class="work-topline"><span class="work-type">Brand website</span><span class="work-index">07 / 07</span></div>
-          <h3>Ayasha's Vanity</h3>
-          <p>A beauty brand web direction built around visual identity, product storytelling and simple navigation.</p>
-          <div class="work-tags"><span>Branding</span><span>Landing page</span><span>Product storytelling</span></div>
-          <a class="work-link" href="/#contact">Discuss a brand site <span aria-hidden="true">↗</span></a>
+          <div class="work-topline"><span class="work-type">Healthcare website</span><span class="work-index">03 / 04</span></div>
+          <h3>HealthCure</h3>
+          <p>Healthcare web work focused on responsive page layouts, helpful service information, navigation and frontend deployment troubleshooting.</p>
+          <div class="work-tags"><span>Responsive pages</span><span>Content structure</span><span>UI fixes</span></div>
+          <a class="work-link" href="https://www.healthcure.in/" target="_blank" rel="noopener">Visit live website <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="work-card" data-category="food">
+        <div class="work-cover cover-food">
+          <span class="cover-label">Live website</span>
+          <div class="project-art project-art-food" aria-hidden="true">
+            <span class="project-mark">NV<span>W</span></span>
+            <span class="project-orbit"></span>
+            <span class="project-domain">nonvegonwheel.in <b>↗</b></span>
+          </div>
+        </div>
+        <div class="work-meta">
+          <div class="work-topline"><span class="work-type">Food-ordering UX</span><span class="work-index">04 / 04</span></div>
+          <h3>NonVegOnWheel</h3>
+          <p>A food-delivery UI direction centred on quick menu discovery, mobile-friendly browsing and a straightforward route from menu to order.</p>
+          <div class="work-tags"><span>Food service</span><span>Mobile UX</span><span>Menu flow</span></div>
+          <a class="work-link" href="https://nonvegonwheel.in/" target="_blank" rel="noopener">Visit website <span aria-hidden="true">↗</span></a>
         </div>
       </article>
     </div>
-    <p class="pf-note">Portfolio previews are illustrative representations of project directions, not screenshots of every live website. Ask us for relevant demos and current project details.</p>
+    <p class="pf-note">Each project link opens its domain in a new tab. Site content and availability can change over time.</p>
   </section>
+
+  <section class="pf-bottom-cta"</section>
 
   <section class="pf-bottom-cta" aria-labelledby="pf-cta-title">
     <div>
