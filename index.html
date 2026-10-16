@@ -1542,10 +1542,14 @@ function tdwNorm(s) {
 function tdwHas(s, list) { return list.some(function (x) { return s.indexOf(x) !== -1; }); }
 function tdwLang(s) {
   var q = tdwNorm(s);
-  if (tdwHas(q, ["mujhe","chahiye","banani","banana","banwani","banwana","karna hai","meri","mera","batao","btao","kitna","kitne","kharcha","dukaan","dhandha","bhai","sir","kaise","krna","krni","ke liye","hai","hain","nahi","haan"])) return "hinglish";
-  return "english";
+  if (tdwHas(q, ["mujhe","chahiye","banani","banana","banwani","banwana","karna hai","meri","mera","batao","btao","kitna","kitne","kharcha","dukaan","dhandha","bhai","sir","kaise","krna","krni","ke liye","hai","hain","nahi","haan","hain"])) return "hinglish";
+  if (tdwHas(q, ["i need","i want","my business","for my","for a","need a","need an","want a","want an","can you","looking for","build a","make a","please","thank you","thanks","online sales","product catalogue","cart","checkout","admin panel","bookings","appointment","budget","within","weeks","yes","okay","sure"])) return "english";
+  return "mixed";
 }
-function tdwSetLanguage(input) { tdwFlow.lang = tdwLang(input); }
+function tdwSetLanguage(input) {
+  var detected = tdwLang(input);
+  if (detected !== "mixed") tdwFlow.lang = detected;
+}
 function tdwAskBusiness() {
   return tdwFlow.lang === "english"
     ? "Sure — what business, profession, or idea is this for? For example: a clothing shop, restaurant, clinic, coaching centre, property business, freelancer, or startup."
@@ -1643,7 +1647,7 @@ function tdwRecommend() {
     type="Service website with booking system"; why="Customers can request a service or time slot without repeated back-and-forth messages.";
     features="Service details, booking form, time slots, confirmation messages and optional payment.";
   }
-  if (tdwHas(f,["login","signup","sign up","dashboard","admin panel","user accounts","marketplace","database","subscriptions","multiple users","seller accounts"])) {
+  if (tdwHas(f,["login","signup","sign up","user accounts","marketplace","database","subscriptions","multiple users","seller accounts","user dashboard","authentication","member accounts","custom dashboard"])) {
     type=tdwHas(f,["marketplace","seller accounts","multiple sellers"]) ? "Full-stack marketplace" : "Full-stack web application";
     why="Accounts, dashboards, roles, stored data and custom workflows need a backend and database—not just a static page.";
     features="Authentication, roles, database, admin dashboard, core workflow, notifications and payment only if required.";
