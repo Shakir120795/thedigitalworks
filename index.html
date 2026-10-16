@@ -1623,7 +1623,20 @@ function tdwRecommend() {
       why="Customers need to browse products and place orders while the business manages products and fulfilment.";
       features="Product catalogue, cart/checkout, payment or COD, order tracking and admin product/order management.";
     }
-    return (tdwFlow.lang==="english" ? "Based on your requirements, I'd recommend: " : "Aapki requirements ke hisaab se meri recommendation hai: ")+type+".\\n\\n"+why+"\\n\\n"+(tdwFlow.lang==="english" ? "A practical first version could include: " : "Pehle version mein: ")+features+"\\n\\n"+(tdwFlow.lang==="english" ? "Does this fit your workflow, or is there a must-have feature to add?" : "Kya ye aapke workflow ke liye sahi hai, ya koi must-have feature add karna hai?");
+    if (tdwFlow.lang !== "english" && type === "Gym Management Web App / Software") {
+      why="Ek dashboard se staff members register kar sakta hai, rozana entry/attendance mark kar sakta hai, membership expiry aur fees due track kar sakta hai. Mobile-friendly web app gym ke existing phone/tablet par chal sakti hai; QR/ID scanning zaroorat ho to add kar sakte hain.";
+      features="Member registration/profile; daily check-in aur attendance history; membership plans/expiry; fees/payment records aur due reminders; staff/admin login; member search aur reports. QR/ID entry ka workflow pehle confirm karenge.";
+    } else if (tdwFlow.lang !== "english" && type === "Booking & scheduling management software") {
+      why="Ye available slots, customer details, bookings, status aur reminders ek jagah manage karta hai.";
+      features="Calendar/time slots, customer records, staff access, booking status, reminders aur admin reports.";
+    } else if (tdwFlow.lang !== "english" && type === "Inventory / stock management software") {
+      why="Isse stock movement track hota hai aur manual spreadsheet errors kam ho sakte hain.";
+      features="Product list, stock in/out, low-stock alerts, suppliers, reports aur role-based access.";
+    } else if (tdwFlow.lang !== "english" && type === "Custom business management web app") {
+      why="Aapke workflow mein records aur actions manage karne hain, isliye backend aur database ke saath mobile-friendly app brochure website se behtar fit hai.";
+      features="Secure login, records, search/filter, dashboard, user roles, reports aur sirf required integrations.";
+    }
+    return (tdwFlow.lang==="english" ? "Based on your requirements, I'd recommend: " : "Aapki requirements ke hisaab se meri recommendation hai: ")+type+".\n\n"+why+"\n\n"+(tdwFlow.lang==="english" ? "A practical first version could include: " : "Pehle version mein: ")+features+"\n\n"+(tdwFlow.lang==="english" ? "Does this fit your workflow, or is there a must-have feature to add?" : "Kya ye aapke workflow ke liye sahi hai, ya koi must-have feature add karna hai?");
   }
   if (tdwFlow.project === "automation") {
     if (tdwHas(g,["lead","follow up","follow-up","enquiry","enquiries","whatsapp"])) {
@@ -1639,7 +1652,19 @@ function tdwRecommend() {
       why="Automating a clearly defined repetitive workflow can reduce copy-paste work and missed follow-ups.";
       features="Trigger/action mapping, required integrations, validation, error alerts, logs and a manual fallback for failures.";
     }
-    return (tdwFlow.lang==="english" ? "I'd recommend: " : "Meri recommendation hai: ")+type+".\\n\\n"+why+"\\n\\n"+(tdwFlow.lang==="english" ? "Possible first scope: " : "Pehle version mein: ")+features+"\\n\\n"+(tdwFlow.lang==="english" ? "What should we automate first?" : "Sabse pehle kaunsa task automate karna hai?");
+    if (tdwFlow.lang !== "english") {
+      if (type === "Lead capture & follow-up automation") {
+        why="Nayi enquiries ek jagah collect aur qualify ho sakti hain, assign ki ja sakti hain aur unka follow-up time par ho sakta hai.";
+        features="Website/WhatsApp/form se leads capture, qualifying questions, CRM ya spreadsheet sync, reminders, status tracking aur zaroorat par human hand-off.";
+      } else if (type === "AI customer-support chatbot") {
+        why="Business ke approved FAQs ke jawab de sakta hai, important details collect kar sakta hai aur unclear sawalon ko human team tak bhej sakta hai.";
+        features="Business FAQ knowledge base, website chat, optional WhatsApp integration, lead capture, safe fallback aur human hand-off.";
+      } else {
+        why="Clearly defined repetitive task automate karne se copy-paste kaam aur missed follow-ups kam ho sakte hain.";
+        features="Trigger/action flow, required integrations, validation, error alerts, logs aur failures ke liye manual fallback.";
+      }
+    }
+    return (tdwFlow.lang==="english" ? "I'd recommend: " : "Meri recommendation hai: ")+type+".\n\n"+why+"\n\n"+(tdwFlow.lang==="english" ? "Possible first scope: " : "Pehle version mein: ")+features+"\n\n"+(tdwFlow.lang==="english" ? "What should we automate first?" : "Sabse pehle kaunsa task automate karna hai?");
   }
   if (tdwFlow.project === "marketing") {
     if (tdwHas(g,["google","seo","ranking","search"])) {
@@ -1655,7 +1680,19 @@ function tdwRecommend() {
       why="The best channel mix depends on audience, location, offer and the current sales funnel.";
       features="Channel audit, audience/offer, content plan, relevant SEO/ads, lead capture and results tracking.";
     }
-    return (tdwFlow.lang==="english" ? "I'd recommend: " : "Meri recommendation hai: ")+type+".\\n\\n"+why+"\\n\\n"+(tdwFlow.lang==="english" ? "Initial scope: " : "Initial plan: ")+features;
+    if (tdwFlow.lang !== "english") {
+      if (type === "SEO and search visibility plan") {
+        why="Is plan se website ke technical basics aur customers ke search terms improve karne par kaam hoga. Google ranking ki guarantee nahi di ja sakti.";
+        features="Site audit, keyword/topic list, on-page improvements, zaroorat par local SEO, useful content aur reporting.";
+      } else if (type === "Performance marketing campaign") {
+        why="Campaign ka focus clear conversion goal, audience, budget aur landing page par hona chahiye—sirf impressions par nahi.";
+        features="Audience/keyword targeting, ad creatives, landing page review, conversion tracking aur reports. Ads ka spend alag hoga.";
+      } else {
+        why="Best marketing channels aapki audience, location, offer aur current sales process par depend karte hain.";
+        features="Channel audit, audience/offer, content plan, relevant SEO/ads, lead capture aur results tracking.";
+      }
+    }
+    return (tdwFlow.lang==="english" ? "I'd recommend: " : "Meri recommendation hai: ")+type+".\n\n"+why+"\n\n"+(tdwFlow.lang==="english" ? "Initial scope: " : "Initial plan: ")+features;
   }
 
   if (tdwHas(b,["clothing","fashion","garment","kapde","boutique","cosmetic","jewellery","jewelry","shoes","shop","store","dukaan","retail","product"]) ||
@@ -1895,7 +1932,7 @@ function botReply(input) {
   if (!q) return;
   tdwSetLanguage(input);
   var greeting=/^(hello|hi|hii|hey|heya|namaste|salam|assalam|assalamualaikum|assalamu alaikum|good morning|good afternoon|good evening)$/.test(q);
-  var faqQuestion=tdwHas(q,["price","pricing","cost","how much","kitna","kitne","kharcha","quote","not working","website error","site down","contact number","phone number","email address","what is","what are","how does","how do","why does","why do","kya hai","kya hota","kaise kaam karta"]);
+  var faqQuestion=tdwHas(q,["services","what service","what services","what do you do","price","pricing","cost","how much","kitna","kitne","kharcha","quote","not working","website error","site down","contact number","phone number","email address","what is","what are","how does","how do","why does","why do","kya hai","kya hota","kaise kaam karta"]);
   var projectIntent=tdwDetectIntent(q);
   var yes=/^(yes|yeah|yep|haan|han|ha|bilkul|sahi|correct|thik hai|theek hai|sure|okay|ok)(?:[.! ,]|$)/.test(q);
   var no=/^(no|nahi|nahin|not really|galat|kuch aur)(?:[.! ,]|$)/.test(q);
