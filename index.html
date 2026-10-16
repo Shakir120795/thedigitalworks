@@ -1852,8 +1852,8 @@ function tdwAskBusiness() {
     ? "What process should the app/software manage, and who will use it? Examples: gym entry, membership, inventory, staff attendance, bookings, or customer orders."
     : "App/software se kaunsa kaam manage karna hai aur ise kaun use karega? Jaise gym entry, membership, inventory, staff attendance, bookings ya customer orders.";
   if (tdwFlow.project === "automation") return tdwFlow.lang === "english"
-    ? "Which repetitive task should we automate? Examples: website/WhatsApp FAQs, lead follow-ups, booking reminders, CRM updates, reports, or data entry."
-    : "Kaunsa repetitive kaam automate karna hai? Jaise website/WhatsApp FAQs, lead follow-up, booking reminders, CRM updates, reports ya data entry.";
+    ? "Sure — what business or profession is this AI tool for? For example: salon, gym, shop, clinic, restaurant, or service business."
+    : "Bilkul — ye AI tool kis business ke liye chahiye? Jaise salon, gym, shop, clinic, restaurant ya koi service business.";
   if (tdwFlow.project === "marketing") return tdwFlow.lang === "english"
     ? "Which business, service, or product do you want to promote, and where are your customers located?"
     : "Kis business, service ya product ko promote karna hai, aur customers kis city/area mein hain?";
@@ -1896,8 +1896,9 @@ function tdwAskFeatures() {
     : "Kaun-se features zaroori hain? Jaise product catalogue, cart/payment, booking, login/signup, admin panel, user dashboard, WhatsApp enquiries, ya sirf business information?";
 }
 function tdwDetectIntent(q) {
-  if (tdwHas(q,["app banbani","app banbana","app banani","app banwani","app banwana","app chahiye","software chahiye","software banana","software banani","software banwana","need an app","need a mobile app","want an app","want a mobile app","build an app","create an app","make an app","app for my","app for the","software for my","software for the","management system","web app","mobile app","custom software","gym entry","gym management","gym attendance","manage gym","member check in","member check-in","entry manage","entry management","attendance app","membership management","staff attendance app","inventory software","booking system","gym members","gym management software"])) return "software";
-  if (tdwHas(q,["ai automation","business automation","workflow automation","automate","automation chahiye","automation banwani","automation banwana","whatsapp automation","whatsapp bot","ai chatbot chahiye","need a chatbot","need chatbot","want a chatbot","want chatbot","build a chatbot","create a chatbot","chatbot banana","chatbot banwana","chatbot banani","chatbot chahiye","ai assistant banana","lead follow-up automation","auto follow up","automatic follow-up","automate my"])) return "automation";
+  // Support natural Hinglish phrasing customers actually type, not only exact English keywords.
+  if (tdwHas(q,["app banbani","app banbana","app banani","app banwani","app banwana","app chahiye","software chahiye","software banana","software banani","software banwana","need an app","need a mobile app","want an app","want a mobile app","build an app","create an app","make an app","app for my","app for the","software for my","software for the","management system","web app","mobile app","custom software","gym entry","gym management","gym manage","gym ko manage","gym manage krne","manage gym","manage my gym","gym attendance","member check in","member check-in","entry manage","entry management","attendance app","membership management","staff attendance app","inventory software","booking system","gym members","gym management software"])) return "software";
+  if (tdwHas(q,["ai tool","ai tools","ai se kaam","ai for my work","ai for my business","ai for work","ai assistant","ai automation","business automation","workflow automation","automate","automation chahiye","automation banwani","automation banwana","whatsapp automation","whatsapp bot","ai chatbot","chatbot chahiye","need a chatbot","need chatbot","want a chatbot","want chatbot","build a chatbot","create a chatbot","chatbot banana","chatbot banwana","chatbot banani","ai assistant banana","lead follow-up automation","auto follow up","automatic follow-up","automate my"])) return "automation";
   if (tdwHas(q,["digital marketing chahiye","need digital marketing","want digital marketing","marketing agency","run ads","google ads chahiye","instagram ads","facebook ads","meta ads","seo chahiye","need seo","social media marketing","promote my business","promote my product","leads badhana","customers badhana","marketing karwani","marketing karwana","manage my social media"])) return "marketing";
   if (tdwHas(q,["i need a website","i want a website","need a website","want a website","website for my","website for our","build a website","make a website","create a website","website banwani","website banvani","website banani","website banana","website banwana","website chahiye","site banwani","site banvani","site banani","site chahiye","landing page","ecommerce","e-commerce","online store","web design chahiye"])) return "website";
   return "";
@@ -1905,7 +1906,7 @@ function tdwDetectIntent(q) {
 function tdwBeginProject(project,q) {
   tdwFlow={step:"idle",project:project,business:"",goal:"",features:"",budget:"",timeline:"",lang:tdwFlow.lang};
   var business=tdwExtractBusiness(q);
-  var gymWorkflow=tdwHas(q,["gym entry","gym management","gym attendance","manage gym","member check in","member check-in","membership management"]);
+  var gymWorkflow=tdwHas(q,["gym entry","gym management","gym manage","gym ko manage","gym manage krne","manage gym","manage my gym","gym attendance","member check in","member check-in","membership management"]);
   if (project==="software") {
     if (gymWorkflow || (business==="gym / fitness business" && tdwHas(q,["entry","attendance","member","manage","management"]))) {
       tdwFlow.business="gym / fitness business";
