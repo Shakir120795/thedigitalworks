@@ -125,6 +125,8 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 .cover-agency{background:radial-gradient(circle at 70% 30%,rgba(79,142,247,.3),transparent 42%),linear-gradient(135deg,#0b1020,#141023)}
 .cover-homes{background:radial-gradient(circle at 78% 20%,rgba(164,199,167,.19),transparent 45%),linear-gradient(135deg,#19231e,#0b1112)}
 .cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+.cover-logo{background:#04050a}
+.cover-logo .cover-img{object-fit:contain;padding:20px}
 .cover-tall{height:350px}
 a.work-cover{text-decoration:none;color:inherit;cursor:pointer}
 .project-art-homes .project-mark span{color:#a4c7a7}
@@ -182,7 +184,6 @@ a.work-cover{text-decoration:none;color:inherit;cursor:pointer}
     <div class="pf-filters" role="group" aria-label="Filter portfolio projects">
       <button class="pf-filter" type="button" data-work-filter="all" aria-pressed="true">All work</button>
       <button class="pf-filter" type="button" data-work-filter="website" aria-pressed="false">Business websites</button>
-      <button class="pf-filter" type="button" data-work-filter="health" aria-pressed="false">Healthcare</button>
       <button class="pf-filter" type="button" data-work-filter="food" aria-pressed="false">Food ordering</button>
     </div>
     <div class="pf-work-grid" id="portfolio-grid">
@@ -211,17 +212,14 @@ a.work-cover{text-decoration:none;color:inherit;cursor:pointer}
         </div>
       </article>
 
-      <article class="work-card" data-category="health">
-        <a class="work-cover cover-health" href="https://www.healthcure.in/" target="_blank" rel="noopener" aria-label="Visit HealthCure">
+      <article class="work-card" data-category="website">
+        <a class="work-cover cover-logo" href="https://ravenoracle.xyz/" target="_blank" rel="noopener" aria-label="Visit Raven Oracle">
           <span class="cover-label">Live website</span>
-          <div class="project-art project-art-health" aria-hidden="true">
-            <span class="project-mark">H<span>C</span></span>
-            <span class="project-orbit"></span>
-          </div>
+          <img class="cover-img" src="assets/raven-oracle.png" alt="Raven Oracle — NFT raffles platform" />
         </a>
         <div class="work-meta">
-          <h3>HealthCure</h3>
-          <p>Healthcare website with clear service pages and responsive layout.</p>
+          <h3>Raven Oracle</h3>
+          <p>NFT raffle platform with transparent entries and recorded winners.</p>
         </div>
       </article>
 
