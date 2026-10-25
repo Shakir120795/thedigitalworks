@@ -112,7 +112,7 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 .work-card{min-width:0;overflow:hidden;border:1px solid var(--border);border-radius:20px;background:linear-gradient(160deg,rgba(21,22,34,.94),rgba(12,12,19,.92));transition:transform .35s var(--ease),border-color .35s,box-shadow .35s;animation:cardEnter .65s both}
 .work-card:hover{transform:translateY(-6px);border-color:rgba(79,142,247,.44);box-shadow:0 22px 55px rgba(0,0,0,.28),0 0 30px rgba(79,142,247,.06)}
 .work-card[hidden]{display:none}
-.work-cover{height:210px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.work-cover{height:350px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
 .cover-label{position:absolute;top:14px;left:14px;z-index:3;padding:5px 9px;background:rgba(5,7,12,.62);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);border-radius:100px;font-size:.61rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:#e2e8f0}
 .project-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .project-art:before{content:"";position:absolute;width:235px;height:235px;border:1px solid rgba(255,255,255,.14);border-radius:50%;box-shadow:0 0 0 20px rgba(255,255,255,.025),0 0 0 48px rgba(255,255,255,.02),0 0 0 78px rgba(255,255,255,.015);transition:transform .6s var(--ease)}
@@ -125,7 +125,7 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 .cover-agency{background:radial-gradient(circle at 70% 30%,rgba(79,142,247,.3),transparent 42%),linear-gradient(135deg,#0b1020,#141023)}
 .cover-homes{background:radial-gradient(circle at 78% 20%,rgba(164,199,167,.19),transparent 45%),linear-gradient(135deg,#19231e,#0b1112)}
 .cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
-.cover-tall{height:320px}
+.cover-tall{height:350px}
 a.work-cover{text-decoration:none;color:inherit;cursor:pointer}
 .project-art-homes .project-mark span{color:#a4c7a7}
 .project-art-homes .project-orbit{border-color:rgba(164,199,167,.5)}
@@ -153,9 +153,9 @@ a.work-cover{text-decoration:none;color:inherit;cursor:pointer}
 .pf-bottom-cta .pf-btn{position:relative;z-index:1;flex-shrink:0}
 @keyframes cardEnter{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.work-card,.pf-btn{transition:none!important}}
-@media(max-width:1000px){.portfolio-main{padding-top:125px}.portfolio-hero{margin-bottom:88px}.pf-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.work-cover{height:205px}}
-@media(max-width:700px){.portfolio-main{padding-top:110px}.portfolio-hero{margin-bottom:76px}.portfolio-hero h1{font-size:clamp(2.7rem,12vw,4rem)}.pf-section-head{display:block}.pf-section-head p{margin-top:12px}.work-cover{height:205px}.pf-bottom-cta{align-items:flex-start;flex-direction:column}.pf-bottom-cta .pf-btn{align-self:flex-start}}
-@media(max-width:480px){.portfolio-main{padding-left:16px;padding-right:16px;padding-bottom:56px}.portfolio-hero h1{font-size:2.7rem}.pf-actions{align-items:stretch}.pf-btn{padding:12px 16px;font-size:.82rem}.pf-work-grid{grid-template-columns:1fr;gap:17px}.work-cover{height:200px}.pf-section-head h2,.pf-bottom-cta h2{font-size:2rem}.pf-trust-row{gap:10px 14px}.pf-section-head{margin-bottom:22px}}
+@media(max-width:1000px){.portfolio-main{padding-top:125px}.portfolio-hero{margin-bottom:88px}.pf-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.work-cover{height:320px}}
+@media(max-width:700px){.portfolio-main{padding-top:110px}.portfolio-hero{margin-bottom:76px}.portfolio-hero h1{font-size:clamp(2.7rem,12vw,4rem)}.pf-section-head{display:block}.pf-section-head p{margin-top:12px}.work-cover{height:300px}.pf-bottom-cta{align-items:flex-start;flex-direction:column}.pf-bottom-cta .pf-btn{align-self:flex-start}}
+@media(max-width:480px){.portfolio-main{padding-left:16px;padding-right:16px;padding-bottom:56px}.portfolio-hero h1{font-size:2.7rem}.pf-actions{align-items:stretch}.pf-btn{padding:12px 16px;font-size:.82rem}.pf-work-grid{grid-template-columns:1fr;gap:17px}.work-cover{height:260px}.pf-section-head h2,.pf-bottom-cta h2{font-size:2rem}.pf-trust-row{gap:10px 14px}.pf-section-head{margin-bottom:22px}}
 
 </style>
 </head>
@@ -187,20 +187,16 @@ a.work-cover{text-decoration:none;color:inherit;cursor:pointer}
     </div>
     <div class="pf-work-grid" id="portfolio-grid">
       <article class="work-card" data-category="website">
-        <div class="work-cover cover-agency">
+        <a class="work-cover cover-agency" href="https://thedigitalwork.in/" target="_blank" rel="noopener" aria-label="Visit TheDigitalWork">
           <span class="cover-label">Live website</span>
           <div class="project-art project-art-agency" aria-hidden="true">
             <span class="project-mark">The<span>DW</span></span>
             <span class="project-orbit"></span>
-            <span class="project-domain">thedigitalwork.in <b>↗</b></span>
           </div>
-        </div>
+        </a>
         <div class="work-meta">
-          <div class="work-topline"><span class="work-type">Agency website</span><span class="work-index">01 / 05</span></div>
           <h3>TheDigitalWork</h3>
-          <p>The agency website brings service information, motion-led visuals, enquiry paths and a website chatbot together in a responsive experience.</p>
-          <div class="work-tags"><span>Responsive UI</span><span>Chatbot</span><span>Enquiries</span></div>
-          <a class="work-link" href="https://thedigitalwork.in/" target="_blank" rel="noopener">Visit live website <span aria-hidden="true">↗</span></a>
+          <p>Agency website with services, enquiries and a website chatbot.</p>
         </div>
       </article>
 
@@ -208,49 +204,38 @@ a.work-cover{text-decoration:none;color:inherit;cursor:pointer}
         <a class="work-cover cover-homes cover-tall" href="https://wolhomes.com/" target="_blank" rel="noopener" aria-label="Visit Wolhomes — luxury rugs and crafts e-commerce store">
           <span class="cover-label">Live website</span>
           <img class="cover-img" src="assets/wolhomes.png" alt="Wolhomes — luxury rugs & crafts store homepage" />
-          <span class="project-domain">wolhomes.com <b>↗</b></span>
         </a>
         <div class="work-meta">
-          <div class="work-topline"><span class="work-type">E-commerce website</span><span class="work-index">02 / 05</span></div>
           <h3>WOLHomes</h3>
-          <p>Luxury rugs and crafts e-commerce store — hand-knotted, hand-tufted and flat-weave rugs, bespoke custom designs and artisan crafts, delivered worldwide.</p>
-          <div class="work-tags"><span>E-commerce</span><span>Luxury rugs</span><span>Worldwide delivery</span></div>
+          <p>Luxury rugs &amp; crafts e-commerce store, delivered worldwide.</p>
         </div>
       </article>
 
       <article class="work-card" data-category="health">
-        <div class="work-cover cover-health">
+        <a class="work-cover cover-health" href="https://www.healthcure.in/" target="_blank" rel="noopener" aria-label="Visit HealthCure">
           <span class="cover-label">Live website</span>
           <div class="project-art project-art-health" aria-hidden="true">
             <span class="project-mark">H<span>C</span></span>
             <span class="project-orbit"></span>
-            <span class="project-domain">healthcure.in <b>↗</b></span>
           </div>
-        </div>
+        </a>
         <div class="work-meta">
-          <div class="work-topline"><span class="work-type">Healthcare website</span><span class="work-index">03 / 05</span></div>
           <h3>HealthCure</h3>
-          <p>Healthcare web work focused on page layout, clear service information, responsive behavior and frontend troubleshooting.</p>
-          <div class="work-tags"><span>Responsive pages</span><span>Content structure</span><span>UI fixes</span></div>
-          <a class="work-link" href="https://www.healthcure.in/" target="_blank" rel="noopener">Visit live website <span aria-hidden="true">↗</span></a>
+          <p>Healthcare website with clear service pages and responsive layout.</p>
         </div>
       </article>
 
       <article class="work-card" data-category="food">
-        <div class="work-cover cover-food">
+        <a class="work-cover cover-food" href="https://nonvegonwheel.in/" target="_blank" rel="noopener" aria-label="Visit NonVegOnWheel">
           <span class="cover-label">Live website</span>
           <div class="project-art project-art-food" aria-hidden="true">
             <span class="project-mark">NV<span>W</span></span>
             <span class="project-orbit"></span>
-            <span class="project-domain">nonvegonwheel.in <b>↗</b></span>
           </div>
-        </div>
+        </a>
         <div class="work-meta">
-          <div class="work-topline"><span class="work-type">Food-ordering UX</span><span class="work-index">04 / 05</span></div>
           <h3>NonVegOnWheel</h3>
-          <p>Food-delivery interface improvement direction centred on fast menu discovery, mobile-friendly browsing and clearer ordering paths.</p>
-          <div class="work-tags"><span>Food service</span><span>Mobile UX</span><span>Menu flow</span></div>
-          <a class="work-link" href="https://nonvegonwheel.in/" target="_blank" rel="noopener">Visit website <span aria-hidden="true">↗</span></a>
+          <p>Food-ordering experience built for fast menu discovery on mobile.</p>
         </div>
       </article>
 
@@ -258,13 +243,10 @@ a.work-cover{text-decoration:none;color:inherit;cursor:pointer}
         <a class="work-cover cover-tall" href="https://gym-chi-swart-63.vercel.app" target="_blank" rel="noopener" aria-label="Open Gym Manager SaaS">
           <span class="cover-label">Live product</span>
           <img class="cover-img" src="assets/gym-saas.jpg" alt="Gym Manager app homepage" />
-          <span class="project-domain">gym-chi-swart-63.vercel.app <b>↗</b></span>
         </a>
         <div class="work-meta">
-          <div class="work-topline"><span class="work-type">SaaS web app</span><span class="work-index">05 / 05</span></div>
           <h3>Gym Manager SaaS</h3>
-          <p>Gym management app for memberships, QR attendance, fee collection and payment reminders — built for gym owners, runs on any phone.</p>
-          <div class="work-tags"><span>Membership</span><span>QR attendance</span><span>Fee tracking</span></div>
+          <p>Gym memberships, QR attendance and fee tracking in one app.</p>
         </div>
       </article>
     </div>
