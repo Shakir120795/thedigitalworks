@@ -124,6 +124,7 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
 .project-domain b{font-size:.95rem;color:#8bb6ff}
 .cover-agency{background:radial-gradient(circle at 70% 30%,rgba(79,142,247,.3),transparent 42%),linear-gradient(135deg,#0b1020,#141023)}
 .cover-homes{background:radial-gradient(circle at 78% 20%,rgba(164,199,167,.19),transparent 45%),linear-gradient(135deg,#19231e,#0b1112)}
+.cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
 .project-art-homes .project-mark span{color:#a4c7a7}
 .project-art-homes .project-orbit{border-color:rgba(164,199,167,.5)}
 .cover-health{background:radial-gradient(circle at 70% 20%,rgba(16,185,129,.2),transparent 40%),linear-gradient(135deg,#071a1d,#0b2531)}
@@ -204,11 +205,8 @@ h1{font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;letter-spacing:-.05em;margin
       <article class="work-card" data-category="website">
         <div class="work-cover cover-homes">
           <span class="cover-label">Live website</span>
-          <div class="project-art project-art-homes" aria-hidden="true">
-            <span class="project-mark">W<span>H</span></span>
-            <span class="project-orbit"></span>
-            <span class="project-domain">wolhomes.com <b>↗</b></span>
-          </div>
+          <img class="cover-img" src="assets/wolhomes.png" alt="Wolhomes — luxury rugs & crafts store homepage" />
+          <span class="project-domain">wolhomes.com <b>↗</b></span>
         </div>
         <div class="work-meta">
           <div class="work-topline"><span class="work-type">Property website</span><span class="work-index">02 / 04</span></div>
