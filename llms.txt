@@ -1,0 +1,37 @@
+# TheDigitalWork
+
+> TheDigitalWork is a digital agency based in Agra, India. It builds custom websites, e-commerce stores, mobile apps, AI chatbots and WhatsApp automation, and runs digital marketing for businesses in India and worldwide.
+
+## Services
+
+- Website Development: fast, mobile-first business websites designed to convert visitors into enquiries and sales.
+- E-commerce Development: online stores with product catalogues, secure payments and order management, including worldwide delivery setups.
+- AI Chatbots & Automation: AI chatbots and WhatsApp automation that answer customer queries instantly and capture leads around the clock.
+- Mobile App Development: Android and iOS apps, including SaaS products with memberships, attendance and payment tracking.
+- Digital Marketing & Growth: Google Ads, social media marketing and SEO focused on measurable business growth.
+
+## Selected Work
+
+- [WOLHomes](https://wolhomes.com/): luxury rugs and crafts e-commerce store with worldwide delivery; owner Ahmed Hussen.
+- [Raven Oracle](https://ravenoracle.xyz/): NFT raffle platform with transparent entries and recorded winners; owner Sazid Malik.
+- [NonVegOnWheel](https://nonvegonwheel.in/): online food-ordering website for fresh meat and ready-to-cook products; owner Ashish Kumar.
+- [Gym Manager App](https://gym-chi-swart-63.vercel.app): gym management SaaS with memberships, QR attendance and fee tracking.
+- [Ayesha's](https://ayashas-vanity.vercel.app): beauty and makeup studio website with gallery and WhatsApp booking.
+- [Vision Style](https://optical-eosin.vercel.app/): online eyewear store with eyeglasses, sunglasses, contact lenses and virtual try-on.
+
+Full portfolio: https://thedigitalwork.in/portfolio.html
+
+## Contact
+
+- Website: https://thedigitalwork.in/
+- Email: hello@thedigitalwork.in
+- Phone / WhatsApp: +91 76175 55488
+- Location: Agra, Uttar Pradesh, India; serving clients worldwide.
+
+## Key Pages
+
+- [Home](https://thedigitalwork.in/): services, process, client reviews and contact.
+- [Portfolio](https://thedigitalwork.in/portfolio.html): real client projects with live links.
+- [Privacy Policy](https://thedigitalwork.in/privacy-policy.html)
+- [Terms of Service](https://thedigitalwork.in/terms-of-service.html)
+- [Refund Policy](https://thedigitalwork.in/refund-policy.html)
