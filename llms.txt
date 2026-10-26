@@ -18,6 +18,7 @@
 - [Gym Manager App](https://gym-chi-swart-63.vercel.app): gym management SaaS with memberships, QR attendance and fee tracking.
 - [Ayesha's](https://ayashas-vanity.vercel.app): beauty and makeup studio website with gallery and WhatsApp booking.
 - [Vision Style](https://optical-eosin.vercel.app/): online eyewear store with eyeglasses, sunglasses, contact lenses and virtual try-on.
+- [Zaika House](https://restaurant-jet-xi-79.vercel.app/): pure-veg restaurant website with online menu, cart and table booking.
 
 Full portfolio: https://thedigitalwork.in/portfolio.html
 
