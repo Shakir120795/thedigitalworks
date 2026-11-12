@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glamour Nest Beauty Salon — Book on WhatsApp (Demo)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #fdf7f5; color: #33231f; }
+  .hero { background: linear-gradient(135deg, #8e2f4d, #c65b7c 55%, #d9a441); color: #fff; padding: 34px 20px 26px; text-align: center; }
+  .hero h1 { font-size: 29px; letter-spacing: .5px; }
+  .hero p { opacity: .95; margin-top: 6px; font-size: 15px; }
+  .badge { display: inline-block; margin-top: 12px; background: rgba(255,255,255,.22); border: 1px solid rgba(255,255,255,.5); border-radius: 999px; padding: 5px 12px; font-size: 12px; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 18px 16px 40px; }
+  h2 { font-size: 17px; margin: 22px 0 10px; }
+  .hint { font-size: 13px; color: #8a736e; margin-bottom: 10px; }
+  .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex: 0 0 auto; border: 2px solid #f0dcd8; background: #fff; border-radius: 999px; padding: 9px 15px; font-size: 14px; cursor: pointer; white-space: nowrap; }
+  .tab.sel { border-color: #8e2f4d; background: #8e2f4d; color: #fff; }
+  .service { display: flex; justify-content: space-between; align-items: center; background: #fff; border: 2px solid #f0dcd8; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; }
+  .service.sel { border-color: #8e2f4d; background: #fbf0f2; }
+  .service b { font-size: 15px; display: block; }
+  .service span { font-size: 12px; color: #8a736e; }
+  .price { font-weight: 700; color: #8e2f4d; white-space: nowrap; margin-left: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { border: 2px solid #f0dcd8; background: #fff; border-radius: 999px; padding: 9px 14px; font-size: 14px; cursor: pointer; }
+  .chip.sel { border-color: #8e2f4d; background: #8e2f4d; color: #fff; }
+  .daybtn { border: 2px solid #f0dcd8; background: #fff; border-radius: 12px; padding: 10px 16px; font-size: 14px; cursor: pointer; margin-right: 8px; }
+  .daybtn.sel { border-color: #8e2f4d; background: #8e2f4d; color: #fff; }
+  input[type=text] { width: 100%; padding: 13px 14px; border: 2px solid #f0dcd8; border-radius: 12px; font-size: 15px; background: #fff; }
+  .confirm { display: block; width: 100%; margin-top: 24px; background: #25d366; color: #fff; border: none; border-radius: 14px; padding: 16px; font-size: 17px; font-weight: 700; cursor: pointer; }
+  .confirm:disabled { background: #c9c2b8; cursor: not-allowed; }
+  .summary { background: #fff; border: 2px dashed #c65b7c; border-radius: 14px; padding: 14px 16px; margin-top: 16px; font-size: 14px; line-height: 1.6; display: none; }
+  .foot { text-align: center; font-size: 12px; color: #a08a85; margin-top: 26px; line-height: 1.6; }
+  .foot a { color: #8e2f4d; text-decoration: none; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>Glamour Nest Beauty Salon</h1>
+  <p>Agra &middot; Hair, Skin, Makeup &amp; Nails &middot; Book in 30 seconds</p>
+  <span class="badge">DEMO — built by TheDigitalWork</span>
+</div>
+
+<div class="wrap">
+  <h2>1. Pick a category</h2>
+  <p class="hint">Browse the full catalog — every service with its price upfront.</p>
+  <div class="tabs" id="tabs"></div>
+
+  <h2 id="catTitle">Hair</h2>
+  <div id="services"></div>
+
+  <h2>2. Pick a day</h2>
+  <div>
+    <button class="daybtn sel" data-day="Today">Today</button>
+    <button class="daybtn" data-day="Tomorrow">Tomorrow</button>
+  </div>
+
+  <h2>3. Pick a time slot</h2>
+  <div class="chips" id="slots"></div>
+
+  <h2>4. Your name <span style="font-weight:400;color:#8a736e">(optional)</span></h2>
+  <input type="text" id="custName" placeholder="e.g. Priya Sharma">
+
+  <div class="summary" id="summary"></div>
+
+  <button class="confirm" id="confirmBtn" disabled>Book on WhatsApp</button>
+
+  <p class="foot">Demo booking messages go to TheDigitalWork (+91 81268 12317) so the salon owner can see exactly what a customer sends.<br>
+  In the live version this number becomes the salon's own WhatsApp number, and the salon gets the booking with name, service, day and slot — ready to confirm in one tap.<br>
+  <a href="https://thedigitalwork.in">thedigitalwork.in</a></p>
+</div>
+
+<script>
+const CATALOG = {
+  "Hair": [
+    { name: "Haircut + Styling", detail: "Cut, wash & blow-dry · 45 min", price: 499 },
+    { name: "Hair Spa", detail: "Deep nourishing treatment · 60 min", price: 999 },
+    { name: "Global Hair Colour", detail: "Full colour + care · 2 hrs", price: 2999 },
+    { name: "Keratin Treatment", detail: "Smooth, frizz-free shine · 2.5 hrs", price: 3499 },
+    { name: "Hair Wash + Blow-dry", detail: "Quick refresh · 30 min", price: 399 }
+  ],
+  "Skin": [
+    { name: "Glow Facial", detail: "Deep cleanse + glow · 60 min", price: 1499 },
+    { name: "HydraGlow Facial", detail: "Hydration + radiance · 75 min", price: 2499 },
+    { name: "Clean-up", detail: "Express glow · 45 min", price: 799 },
+    { name: "De-Tan Pack", detail: "Tan removal + brightening · 45 min", price: 999 }
+  ],
+  "Makeup": [
+    { name: "Party Makeup", detail: "HD finish · 60 min", price: 1999 },
+    { name: "HD Bridal Makeup", detail: "Bridal + hairstyling · 3 hrs", price: 7999 },
+    { name: "Engagement Makeup", detail: "HD + draping · 2 hrs", price: 4999 },
+    { name: "Saree Draping + Hairstyling", detail: "Occasion look · 45 min", price: 999 }
+  ],
+  "Nails": [
+    { name: "Gel Manicure", detail: "Shape, polish & shine · 60 min", price: 899 },
+    { name: "Gel Pedicure", detail: "Foot care + gel · 60 min", price: 999 },
+    { name: "Nail Art", detail: "Custom designs · 30 min", price: 499 },
+    { name: "Acrylic Extensions", detail: "Length + shape · 90 min", price: 1999 }
+  ],
+  "Waxing & Threading": [
+    { name: "Full Arms + Legs Waxing", detail: "Smooth finish · 60 min", price: 999 },
+    { name: "Full Body Waxing", detail: "Head-to-toe · 2 hrs", price: 2499 },
+    { name: "Eyebrow Threading", detail: "Perfect shape · 15 min", price: 99 },
+    { name: "Upper Lip Threading", detail: "Quick & gentle · 10 min", price: 49 }
+  ]
+};
+const SLOTS = ["10:00 AM","11:00 AM","12:00 PM","2:00 PM","4:00 PM","5:30 PM","7:00 PM"];
+const DEMO_WHATSAPP = "918126812317"; // TheDigitalWork lead number — swap to the salon's number when live
+
+let selCategory = "Hair", selService = null, selSlot = null, selDay = "Today";
+
+const tabsEl = document.getElementById("tabs");
+Object.keys(CATALOG).forEach(cat => {
+  const t = document.createElement("button");
+  t.className = "tab" + (cat === selCategory ? " sel" : "");
+  t.textContent = cat;
+  t.onclick = () => {
+    document.querySelectorAll(".tab").forEach(x => x.classList.remove("sel"));
+    t.classList.add("sel");
+    selCategory = cat; selService = null;
+    renderServices(); update();
+  };
+  tabsEl.appendChild(t);
+});
+
+const svcEl = document.getElementById("services");
+function renderServices() {
+  document.getElementById("catTitle").textContent = selCategory;
+  svcEl.innerHTML = "";
+  CATALOG[selCategory].forEach(s => {
+    const d = document.createElement("div");
+    d.className = "service";
+    d.innerHTML = "<div><b>" + s.name + "</b><span>" + s.detail + "</span></div><div class='price'>₹" + s.price.toLocaleString("en-IN") + "</div>";
+    d.onclick = () => {
+      document.querySelectorAll(".service").forEach(x => x.classList.remove("sel"));
+      d.classList.add("sel"); selService = s; update();
+    };
+    svcEl.appendChild(d);
+  });
+}
+renderServices();
+
+const slotEl = document.getElementById("slots");
+SLOTS.forEach(t => {
+  const c = document.createElement("button");
+  c.className = "chip"; c.textContent = t;
+  c.onclick = () => {
+    document.querySelectorAll(".chip").forEach(x => x.classList.remove("sel"));
+    c.classList.add("sel"); selSlot = t; update();
+  };
+  slotEl.appendChild(c);
+});
+
+document.querySelectorAll(".daybtn").forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll(".daybtn").forEach(x => x.classList.remove("sel"));
+    b.classList.add("sel"); selDay = b.dataset.day; update();
+  };
+});
+document.getElementById("custName").addEventListener("input", update);
+
+function update() {
+  const btn = document.getElementById("confirmBtn");
+  const sum = document.getElementById("summary");
+  if (selService && selSlot) {
+    btn.disabled = false;
+    const name = document.getElementById("custName").value.trim();
+    sum.style.display = "block";
+    sum.innerHTML = "<b>Your booking</b><br>" + selCategory + " — " + selService.name + " — ₹" + selService.price.toLocaleString("en-IN") +
+      "<br>" + selDay + " at " + selSlot + (name ? "<br>Name: " + name : "") +
+      "<br><span style='color:#8a736e'>Tap Book on WhatsApp — WhatsApp opens with this message ready to send. No payment now; pay at the salon.</span>";
+  } else {
+    btn.disabled = true; sum.style.display = "none";
+  }
+}
+
+document.getElementById("confirmBtn").onclick = () => {
+  if (!selService || !selSlot) return;
+  const name = document.getElementById("custName").value.trim();
+  const msg = "Hi Glamour Nest Beauty Salon! I would like to book:\n• " + selCategory + " — " + selService.name + " (₹" + selService.price.toLocaleString("en-IN") + ")\n• " + selDay + " at " + selSlot +
+    (name ? "\n• Name: " + name : "") + "\nPlease confirm my slot. Thank you!";
+  window.open("https://wa.me/" + DEMO_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
+};
+</script>
+</body>
+</html>
