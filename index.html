@@ -563,17 +563,6 @@ section{position:relative;z-index:1}
 #wa-sticky:hover{transform:scale(1.05);box-shadow:0 12px 40px rgba(37,211,102,.5)}
 #wa-sticky svg{width:18px;height:18px;fill:#fff}
 
-/* ===== PWA PROMPT ===== */
-#pwa-prompt{position:fixed;bottom:88px;left:24px;z-index:9993;background:#111118;border:1px solid var(--border);border-radius:16px;padding:18px 22px;max-width:270px;box-shadow:0 20px 60px rgba(0,0,0,.5);transform:translateY(20px);opacity:0;pointer-events:none;transition:all .4s var(--ease)}
-#pwa-prompt.show{transform:translateY(0);opacity:1;pointer-events:all}
-.pwa-t{font-weight:700;font-size:.93rem;margin-bottom:5px}
-.pwa-s{font-size:.78rem;color:var(--muted);margin-bottom:14px;line-height:1.55}
-.pwa-btns{display:flex;gap:9px}
-.pwa-ins{flex:1;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;padding:8px;border-radius:8px;font-size:.8rem;font-weight:700;transition:opacity .3s}
-.pwa-ins:hover{opacity:.88}
-.pwa-dis{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);padding:8px 12px;border-radius:8px;font-size:.8rem;transition:background .3s}
-.pwa-dis:hover{background:rgba(255,255,255,.1)}
-.pwa-x{position:absolute;top:8px;right:10px;color:var(--muted);font-size:.85rem}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:1024px){
@@ -1284,16 +1273,7 @@ section{position:relative;z-index:1}
   WhatsApp Us
 </a>
 
-<!-- ==================== PWA INSTALL PROMPT ==================== -->
-<div id="pwa-prompt" role="dialog" aria-label="Install app">
-  <button class="pwa-x" id="pwa-x" aria-label="Close">&#10005;</button>
-  <div class="pwa-t">&#128640; Install TheDigitalWork</div>
-  <p class="pwa-s">Add to your home screen for faster access and offline browsing.</p>
-  <div class="pwa-btns">
-    <button class="pwa-ins" id="pwa-install-btn">Install App</button>
-    <button class="pwa-dis" id="pwa-dismiss">Not now</button>
-  </div>
-</div>
+
 
 <!-- ==================== CDN SCRIPTS ==================== -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -1578,7 +1558,7 @@ if(leadForm){
     var phone = (document.getElementById('lf-phone')||{}).value||'';
     var service = (document.getElementById('lf-service')||{}).value||'your project';
     var msg = encodeURIComponent('Hi TheDigitalWork! I am '+decodeURIComponent(name)+' and I am interested in '+service+'. Please contact me at '+phone+'.');
-    window.open('https://wa.me/917617555488?text='+msg,'_blank');
+    window.open('https://wa.me/918126812317?text='+msg,'_blank');
     closeModal();
   });
 }
@@ -2369,43 +2349,6 @@ if(chatQuick){
 }
 
 /* ============================================================
-   15. PWA INSTALL PROMPT
-   ============================================================ */
-var pwaPrompt = document.getElementById('pwa-prompt');
-var pwaInstall = document.getElementById('pwa-install-btn');
-var pwaDismiss = document.getElementById('pwa-dismiss');
-var pwaX = document.getElementById('pwa-x');
-var deferredInstallPrompt = null;
-
-window.addEventListener('beforeinstallprompt', function(e){
-  e.preventDefault();
-  deferredInstallPrompt = e;
-});
-
-if(!sessionStorage.getItem('tdw_pwa_dismissed')){
-  setTimeout(function(){
-    if(pwaPrompt) pwaPrompt.classList.add('show');
-  }, 7000);
-}
-
-function closePWA(){
-  if(pwaPrompt) pwaPrompt.classList.remove('show');
-  sessionStorage.setItem('tdw_pwa_dismissed','1');
-}
-
-if(pwaInstall){
-  pwaInstall.addEventListener('click', function(){
-    if(deferredInstallPrompt){
-      deferredInstallPrompt.prompt();
-      deferredInstallPrompt.userChoice.then(function(){ deferredInstallPrompt=null; });
-    }
-    closePWA();
-  });
-}
-if(pwaDismiss) pwaDismiss.addEventListener('click', closePWA);
-if(pwaX) pwaX.addEventListener('click', closePWA);
-
-/* ============================================================
    16. SCROLL-BASED SECTION CLIP-PATH via GSAP (Active Theory style)
    ============================================================ */
 var sections = document.querySelectorAll('#services,#process,#reviews,#contact');
@@ -2662,7 +2605,7 @@ setInterval(refreshHover,2000);
 
     if (event.pointerType === 'mouse' && event.button !== 0) return;
     if (!inside(event)) return;
-    if (event.target.closest && event.target.closest('#chatbot,#chat-toggle,#wa-sticky,#pwa-prompt,#lead-modal,#nav,#mob-menu,a,button,input,textarea')) return;
+    if (event.target.closest && event.target.closest('#chatbot,#chat-toggle,#wa-sticky,#lead-modal,#nav,#mob-menu,a,button,input,textarea')) return;
 
     clearTimeout(snapTimer);
     clearTimeout(pauseTimer);
@@ -2819,7 +2762,7 @@ setInterval(refreshHover,2000);
     revealTimer=setTimeout(unlock,REVEAL_MS);   // let the text finish sliding in, then page scrolls
   }
   function isFloatingUI(target){
-    return !!(target && target.closest && target.closest('#chatbot,#chat-toggle,#wa-sticky,#pwa-prompt,#lead-modal,#nav,#mob-menu,input,textarea,select,button,a,[contenteditable="true"]'));
+    return !!(target && target.closest && target.closest('#chatbot,#chat-toggle,#wa-sticky,#lead-modal,#nav,#mob-menu,input,textarea,select,button,a,[contenteditable="true"]'));
   }
   function onWheel(e){
     if(isFloatingUI(e.target)) return;
