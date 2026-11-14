@@ -1988,16 +1988,16 @@ function tdwRecommend() {
   if (tdwHas(b,["clothing","fashion","garment","kapde","boutique","cosmetic","jewellery","jewelry","shoes","shop","store","dukaan","retail","product"]) ||
       tdwHas(g,["online sales","sell online","products","orders","online bech","order lena","sales online","online order"])) {
     type="E-commerce website / online store";
-    why="Customersart and place orders. If you're testing demand first, a small catalogue with WhatsApp ordering can be a simpler starting point.";
-    features="Product categories/pages, cart and checkout, payment or COD, order management and an admin panel; coupons or inventory can be added if needed.";
+    why="Customers can see your products with photos and prices and order themselves - every order reaches you on WhatsApp, so you stop answering 'price kya hai' all day. If you want to test demand first, a small catalogue with WhatsApp ordering is a simpler start.";
+    features="Your products with photos and prices, an order button, online payment or cash-on-delivery, and a simple panel where you see and manage orders.";
   } else if (tdwHas(b,["restaurant","cafe","café","food","bakery","tiffin","cloud kitchen","dhaba","catering"])) {
-    type="Restaurant / food business website"; why="Customers need your menu, timings, location and a quick way to order or book.";
+    type="Restaurant / food business website"; why="Customers get your menu, timings and location in one place, with a quick way to order or book a table.";
     features="Menu, food photos, map, timings, WhatsApp ordering, reviews and optional online payment.";
   } else if (tdwHas(b,["doctor","clinic","dentist","hospital","therapist","physio","medical","health"])) {
-    type="Healthcare website with appointment requests"; why="Patients need clear service information, timings, location and an easy appointment request.";
+    type="Healthcare website with appointment requests"; why="Patients get clear treatment information, timings and location, and can request an appointment easily - so your phone stays less crowded.";
     features="Doctor/team profile, treatments, timings, location, appointment form and click-to-call/WhatsApp. Avoid collecting unnecessary sensitive information.";
   } else if (tdwHas(b,["coaching","tuition","school","college","institute","academy","course","teacher","training","classes","education"])) {
-    type="Education / coaching website"; why="Students and parents need course details, schedules, teaching team information and a simple enquiry/admission flow.";
+    type="Education / coaching website"; why="Students and parents get courses, fees, timings and admission details in one place, and can enquire without visiting or calling again and again.";
     features="Courses, faculty, timetable, admission/enquiry form, testimonials and optional student login.";
   } else if (tdwHas(b,["real estate","property","builder","interior","architect","construction","broker","plot","flat","realty"])) {
     type="Property listing website"; why="Buyers need photos, details, filters, locations and an easy way to enquire or book a visit.";
@@ -2015,21 +2015,21 @@ function tdwRecommend() {
     type="B2B company website with quote requests"; why="Business buyers need capability details, product information and a clear way to request a quote.";
     features="Company profile, catalogue, capabilities, brochure, case studies and quote form.";
   } else if (tdwHas(b,["salon","spa","beauty","barber","parlour","parlor","makeup","mehndi"])) {
-    type="Salon / beauty service website with booking"; why="Customers want to see services, prices, work samples and timings, then book an appointment.";
+    type="Salon / beauty service website with booking"; why="Customers can see your services, prices and your work, and book an appointment themselves.";
     features="Service menu, price list, gallery, location, appointment form and WhatsApp.";
   } else if (tdwHas(b,["gym","fitness","yoga","trainer","sports","wellness"])) {
-    type="Fitness / gym website"; why="Visitors need membership options, trainers, timetable and a way to arrange a visit or join.";
+    type="Fitness / gym website"; why="New visitors can see plans, trainers and timings, and contact you to visit or join - more enquiries without extra effort.";
     features="Plans, trainers, timetable, gallery, enquiry form and optional member login.";
   } else if (tdwHas(b,["startup","saas","software","platform","marketplace","subscription","community","app idea"])) {
     type="Product landing page first; full-stack platform if needed"; why="A focused page can validate demand. Accounts, dashboards, stored data and transactions can be added when the workflow is clear.";
     features="Value proposition, benefits, demo, pricing, waitlist/signup; later authentication, database, roles and admin dashboard.";
   } else if (tdwHas(g,["ads","campaign","lead generation","enquiries","promote one service","promotion","ad traffic"])) {
-    type="Conversion-focused landing page"; why="For one offer or ad campaign, a focused page with one clear action can be more useful than a large site.";
+    type="Conversion-focused landing page"; why="This is a single page made for one offer - it explains the offer clearly and pushes the visitor to enquire or order. Best when you run ads.";
     features="Offer, benefits, reviews/proof, FAQs, enquiry form, WhatsApp action and conversion tracking.";
   }
 
   if (tdwHas(g,["booking","bookings","appointment","appointments","reservation","schedule"]) && type==="Business website") {
-    type="Service website with booking system"; why="Customers can request a service or time slot without repeated back-and-forth messages.";
+    type="Service website with booking system"; why="Customers can pick a service and time themselves, without long back-and-forth messages - it saves your time every day.";
     features="Service details, booking form, time slots, confirmation messages and optional payment.";
   }
   if (tdwHas(f,["login","signup","sign up","user accounts","marketplace","database","subscriptions","multiple users","seller accounts","user dashboard","authentication","member accounts","custom dashboard"])) {
@@ -2037,10 +2037,22 @@ function tdwRecommend() {
     why="Accounts, dashboards, roles, stored data and custom workflows need a backend and database—not just a static page.";
     features="Authentication, roles, database, admin dashboard, core workflow, notifications and payment only if required.";
   }
+  if (tdwFlow.lang !== "english") {
+    if (type === "E-commerce website / online store") { why="Customer aapke products photo aur rate ke saath khud dekh kar order kar sakega - har order seedha aapke WhatsApp par aayega. 'Price kya hai' ka baar-baar jawab dena khatam. Pehle demand test karni ho to chhoti catalogue aur WhatsApp order se shuru kar sakte hain."; features="Products ki list photo-rate ke saath, order karne ka button, online payment ya cash-on-delivery, aur aapke liye orders dekhne ka simple panel."; }
+    else if (type === "Restaurant / food business website") { why="Customer ko menu, time, jagah aur order/booking ka asaan tareeka ek hi jagah mil jayega."; features="Menu, khane ki photos, map, time, WhatsApp par order, reviews aur chaaho to online payment."; }
+    else if (type === "Healthcare website with appointment requests") { why="Patient ko ilaaj ki jaankari, time aur pata saaf milega aur wo asani se appointment maang sakega - phone ki bheed kam hogi."; features="Doctor ki jaankari, ilaaj/services, time, pata, appointment ka form aur call/WhatsApp button."; }
+    else if (type === "Education / coaching website") { why="Students aur parents ko course, fees, time aur admission ki jaankari ek jagah milegi - baar-baar phone kiye bina enquiry asaan ho jayegi."; features="Courses, teachers, timetable, admission/enquiry form, students ki raay aur chaaho to student login."; }
+    else if (type === "Salon / beauty service website with booking") { why="Customer services, rates aur aapka kaam dekh kar khud appointment book kar sakega."; features="Services ki list rate ke saath, kaam ki photos, pata aur time, appointment form aur WhatsApp button."; }
+    else if (type === "Fitness / gym website") { why="Naye log plans, trainers aur time dekh kar visit ya join ke liye khud sampark kar sakenge - bina extra mehnat ke zyada enquiries."; features="Plans, trainers, timetable, photos, enquiry form aur chaaho to member login."; }
+    else if (type === "Conversion-focused landing page") { why="Ye ek hi offer ke liye bani chhoti si page hai - offer saaf samjhati hai aur visitor ko enquiry ya order ke liye aage badhati hai. Ads chalate hain to sabse kaam ki."; features="Offer ki saaf jaankari, fayde, reviews, aam sawalo ke jawab, enquiry form aur WhatsApp button."; }
+    else if (type === "Service website with booking system") { why="Customer bina lambe message-bazi ke apni seva aur time khud chun sakega - aapka roz ka samay bachega."; features="Services ki jaankari, booking form, time chunne ki suvidha, confirm message aur chaaho to payment."; }
+    else if (type === "Business website") { why="Ye aapke kaam ki jaankari saaf tareeke se dikhayegi, bharosa banayegi aur customer ke liye aap se sampark karna asaan karegi."; features="Home page, aapke kaam aur services ki jaankari, customers ki raay, sampark aur WhatsApp button."; }
+  }
   var english=tdwFlow.lang==="english";
   var out=english
     ? "Based on your answers, I'd recommend: "+type+".\n\nWhy: "+why+"\n\nA practical first version could include: "+features
     : "Aapki requirements ke hisaab se meri recommendation hai: "+type+".\n\nKyun: "+why+"\n\nPehle version mein ye features rakh sakte hain: "+features;
+  out += english ? "\n\nStarting price: from \u20B915,000 - the final quote depends on the final scope." : "\n\nShuruaati price: \u20B915,000 se - final quote scope pakka hone par milega.";
   out += english ? "\n\nDoes this fit your need? Reply yes to discuss budget/timeline, or tell me what should change." : "\n\nKya ye aapke kaam ke liye sahi hai? Budget/timeline ke liye haan bolein, ya batayein kya change karna hai.";
   return out;
 }
@@ -2235,8 +2247,8 @@ function tdwAskFeatures() {
     ? "Which channels are relevant: Google Search/Ads, Instagram/Facebook, SEO, content/reels, or WhatsApp/email follow-ups? Share a monthly budget if known."
     : "Kaun-se channels chahiye — Google Search/Ads, Instagram/Facebook, SEO, content/reels, ya WhatsApp/email follow-up? Monthly budget pata ho to bata dein.";
   return tdwFlow.lang === "english"
-    ? "Which features are must-haves? For example: product catalogue, cart/payment, booking, login/signup, admin panel, user dashboard, WhatsApp enquiries, or just business information."
-    : "Kaun-se features zaroori hain? Jaise product catalogue, cart/payment, booking, login/signup, admin panel, user dashboard, WhatsApp enquiries, ya sirf business information?";
+    ? "Almost done - what should visitors be able to do on it? For example: see your products with prices and order online, book an appointment, chat on WhatsApp, or just see your work and contact you. Not sure? Just say 'not sure' - I will pick the right option based on your work."
+    : "Bas ek aakhri baat - log website par aakar kya kar sakein: products rate ke saath dekh kar order, booking/appointment, WhatsApp par baat, ya sirf aapke kaam ki jaankari dekh kar sampark? Samajh na aaye to bas 'pata nahi' likh dein - aapke kaam ke hisaab se main khud sahi option chun lunga.";
 }
 function tdwDetectIntent(q) {
   // Support natural Hinglish phrasing customers actually type, not only exact English keywords.
@@ -2286,6 +2298,9 @@ function tdwStartFresh() {
     ? "Sure, let's start fresh. What do you need: a website, app/custom software, AI chatbot/automation, or digital marketing?"
     : "Theek hai bhai, fresh start karte hain. Aapko kya chahiye — website, app/custom software, AI chatbot/automation, ya digital marketing?";
 }
+function tdwNotSure(q) {
+  return tdwHas(q,["pata nahi","nahi pata","not sure","dont know","don't know","aap batao","tum batao","aap decide","jo sahi lage","jo best ho","samajh nahi","koi idea nahi","idea nahi hai","jo theek lage","kuch bhi chalega","aap chun lo"]);
+}
 function botReply(input) {
   var q=tdwNorm(input);
   if (!q) return;
@@ -2309,9 +2324,9 @@ function botReply(input) {
   } else if (tdwFlow.step==="business") {
     tdwFlow.business=input.trim(); var gl2=tdwExtractGoal(q); if (gl2) { tdwFlow.goal=gl2; tdwFlow.step="features"; response=tdwAskFeatures(); } else { tdwFlow.step="goal"; response=tdwAskGoal(); }
   } else if (tdwFlow.step==="goal") {
-    tdwFlow.goal=input.trim(); tdwFlow.step="features"; response=tdwAskFeatures();
+    tdwFlow.goal=tdwNotSure(q) ? "" : input.trim(); tdwFlow.step="features"; response=tdwAskFeatures();
   } else if (tdwFlow.step==="features") {
-    tdwFlow.features=input.trim(); tdwFlow.step="recommendation"; response=tdwRecommend();
+    tdwFlow.features=tdwNotSure(q) ? "" : input.trim(); tdwFlow.step="recommendation"; response=tdwRecommend();
   } else if (tdwFlow.step==="recommendation" && no) {
     tdwFlow.step="features"; response=tdwAskFeatures();
   } else if (tdwFlow.step==="recommendation" && yes) {
