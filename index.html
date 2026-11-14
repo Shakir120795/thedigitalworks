@@ -1589,12 +1589,26 @@ if(leadForm){
 var contactForm = document.getElementById('contact-form');
 if(contactForm){
   contactForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    // Fix (15 Nov 2026): ye form pehle Netlify ke bharose tha,
+    // par site Vercel par hai — submit "Sent!" dikhata tha aur
+    // lead kahin jati hi nahi thi. Ab lead form ki tarah seedha
+    // WhatsApp par jata hai, saari details ke saath.
+    var name = (document.getElementById('cf-name')||{}).value||'';
+    var phone = (document.getElementById('cf-phone')||{}).value||'';
+    var email = (document.getElementById('cf-email')||{}).value||'';
+    var svcEl = document.getElementById('cf-service');
+    var service = (svcEl && svcEl.value) ? svcEl.options[svcEl.selectedIndex].text : '';
+    var msg = (document.getElementById('cf-msg')||{}).value||'';
+    var text = 'Hi TheDigitalWork! I am '+name+'.';
+    if(service) text += ' I am interested in: '+service+'.';
+    if(msg) text += ' ' + msg;
+    if(phone) text += ' My phone: '+phone+'.';
+    if(email) text += ' My email: '+email+'.';
     var btn = contactForm.querySelector('button[type="submit"]');
-    if(btn){btn.textContent='Sending...';btn.disabled=true;}
-    // Netlify handles actual submission; re-enable after short delay for UX
-    setTimeout(function(){
-      if(btn){btn.textContent='Sent! We will contact you soon ✓';btn.style.background='linear-gradient(135deg,#10b981,#059669)';}
-    },1500);
+    if(btn){btn.textContent='Opening WhatsApp...';}
+    window.open('https://wa.me/917617555488?text='+encodeURIComponent(text),'_blank');
+    if(btn){setTimeout(function(){btn.textContent='Sent via WhatsApp ✓';btn.style.background='linear-gradient(135deg,#10b981,#059669)';},600);}
   });
 }
 
