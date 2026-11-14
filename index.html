@@ -2341,6 +2341,27 @@ function botReply(input) {
   }
   setTimeout(function(){addMsg(response,"bot");},350);
 }
+var tdwAiHistory = [];
+function tdwAiReply(input) {
+  tdwAiHistory.push({ role: "user", content: input });
+  if (tdwAiHistory.length > 12) tdwAiHistory = tdwAiHistory.slice(-12);
+  var done = false;
+  function fallback() { if (!done) { done = true; botReply(input); } }
+  var timer = setTimeout(fallback, 12000);
+  try {
+    fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: tdwAiHistory }) })
+      .then(function (r) { if (!r.ok) throw new Error("ai"); return r.json(); })
+      .then(function (d) {
+        if (done) return;
+        if (d && d.reply) {
+          done = true; clearTimeout(timer);
+          tdwAiHistory.push({ role: "assistant", content: d.reply });
+          setTimeout(function () { addMsg(d.reply, "bot"); }, 350);
+        } else { clearTimeout(timer); fallback(); }
+      })
+      .catch(function () { clearTimeout(timer); fallback(); });
+  } catch (e) { clearTimeout(timer); fallback(); }
+}
 function toggleChat() {
   chatOpen = !chatOpen;
   if(chatBox) chatBox.classList.toggle('open', chatOpen);
@@ -2358,7 +2379,7 @@ function sendMsg() {
   if(!val) return;
   addMsg(val, 'user');
   chatInp.value = '';
-  botReply(val);
+  tdwAiReply(val);
 }
 if(chatSnd) chatSnd.addEventListener('click', sendMsg);
 if(chatInp) chatInp.addEventListener('keydown', function(e){ if(e.key==='Enter') sendMsg(); });
@@ -2368,7 +2389,7 @@ if(chatQuick){
     btn.addEventListener('click', function(){
       var t = btn.textContent.trim();
       addMsg(t, 'user');
-      botReply(t);
+      tdwAiReply(t);
     });
   });
 }
