@@ -63,6 +63,10 @@ module.exports = async (req, res) => {
         ? String(data.choices[0].message.content || "").trim() : "";
       if (!reply) { lastStatus = 502; continue; }
       module.exports._model = model;
+      if (reply.length < 60) {
+        res.status(200).json({ reply: reply, debug: JSON.stringify(data).slice(0, 500) });
+        return;
+      }
       res.status(200).json({ reply: reply });
       return;
     }
