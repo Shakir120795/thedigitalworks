@@ -52,7 +52,8 @@ module.exports = async (req, res) => {
         body: JSON.stringify({
           model: model,
           temperature: 0.4,
-          max_tokens: 120,
+          max_tokens: 600,
+          reasoning_effort: "low",
           messages: [{ role: "system", content: SYSTEM_PROMPT }].concat(msgs)
         })
       });
