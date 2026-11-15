@@ -57,20 +57,16 @@ module.exports = async (req, res) => {
           messages: [{ role: "system", content: SYSTEM_PROMPT }].concat(msgs)
         })
       });
-      if (!r.ok) { lastStatus = r.status; try { const t = await r.text(); if (!module.exports._detail) module.exports._detail = (model + " -> " + t.slice(0, 220)); } catch (e) {} continue; }
+      if (!r.ok) { lastStatus = r.status; continue; }
       const data = await r.json();
       const reply = data && data.choices && data.choices[0] && data.choices[0].message
         ? String(data.choices[0].message.content || "").trim() : "";
       if (!reply) { lastStatus = 502; continue; }
       module.exports._model = model;
-      if (reply.length < 60) {
-        res.status(200).json({ reply: reply, debug: JSON.stringify(data).slice(0, 500) });
-        return;
-      }
       res.status(200).json({ reply: reply });
       return;
     }
-    res.status(502).json({ error: "ai_" + lastStatus, detail: module.exports._detail || "" });
+    res.status(502).json({ error: "ai_" + lastStatus });
   } catch (e) {
     res.status(500).json({ error: "server" });
   }
