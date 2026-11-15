@@ -1608,23 +1608,23 @@ var chatOpen = false;
 var botKnowledge = [
   {
     keys: ['website price', 'website cost', 'web design price', 'website development price'],
-    answer: '🌐 Website projects start from ₹15,000. The final cost depends on pages, features, design and integrations. Tell us what kind of website you need for a quote.'
+    answer: '🌐 Website projects start from ₹15,000 — only a reference price, not the final price. The final price depends on pages, features, design and integrations. For the final price, connect on WhatsApp or call us.'
   },
   {
     keys: ['chatbot price', 'ai chatbot price', 'automation price'],
-    answer: '🤖 AI chatbot projects start from ₹20,000. Price depends on integrations, knowledge base, workflows and the level of AI required.'
+    answer: '🤖 AI chatbot projects start from ₹20,000 — only a reference price, not the final price. The final price depends on integrations, knowledge base, workflows and the level of AI required. For the final price, connect on WhatsApp or call us.'
   },
   {
     keys: ['app price', 'mobile app price', 'app cost'],
-    answer: '📱 Mobile app projects start from ₹50,000. Cost depends on features, platforms, backend and design requirements.'
+    answer: '📱 Mobile app projects start from ₹50,000 — only a reference price, not the final price. The final price depends on features, platforms, backend and design requirements. For the final price, connect on WhatsApp or call us.'
   },
   {
     keys: ['marketing price', 'digital marketing price', 'ads cost'],
-    answer: '📈 Digital marketing packages start from ₹10,000/month. Advertising budget, platforms and campaign scope can affect the total cost.'
+    answer: '📈 Digital marketing packages start from ₹10,000/month — only a reference price, not the final price. The final price depends on advertising budget, platforms and campaign scope. For the final price, connect on WhatsApp or call us.'
   },
   {
     keys: ['pricing', 'price', 'cost', 'budget', 'quote', 'charges', 'rates', 'how much'],
-    answer: 'Our starting prices are: websites ₹15,000, AI chatbots ₹20,000, mobile apps ₹50,000 and digital marketing ₹10,000/month. Final pricing depends on project requirements.'
+    answer: 'Our starting prices are only a reference, not the final price: websites ₹15,000, AI chatbots ₹20,000, mobile apps ₹50,000 and digital marketing ₹10,000/month. For the final price, connect on WhatsApp or call us — it depends on your exact work.'
   },
   {
     keys: ['web design', 'website design', 'web development', 'website development', 'website', 'web design'],
@@ -2052,7 +2052,7 @@ function tdwRecommend() {
   var out=english
     ? "Based on your answers, I'd recommend: "+type+".\n\nWhy: "+why+"\n\nA practical first version could include: "+features
     : "Aapki requirements ke hisaab se meri recommendation hai: "+type+".\n\nKyun: "+why+"\n\nPehle version mein ye features rakh sakte hain: "+features;
-  out += english ? "\n\nStarting price: from \u20B915,000 - the final quote depends on the final scope." : "\n\nShuruaati price: \u20B915,000 se - final quote scope pakka hone par milega.";
+  out += english ? "\n\nStarting price: from \u20B915,000 — only a reference, not the final price. For the final price, connect on WhatsApp or call us." : "\n\nShuruaati price: \u20B915,000 se — ye sirf reference hai, final price nahi. Final price ke liye WhatsApp par ya call par connect karein.";
   out += english ? "\n\nDoes this fit your need? Reply yes to discuss budget/timeline, or tell me what should change." : "\n\nKya ye aapke kaam ke liye sahi hai? Budget/timeline ke liye haan bolein, ya batayein kya change karna hai.";
   return out;
 }
@@ -2077,12 +2077,12 @@ function tdwKnownAnswer(q) {
   }
   var rows = [
     {keys:["website not working","site not working","website down","site down","website error","page not opening"],answer:"Chaliye issue diagnose karte hain. Exact error kya hai—blank page, 404, server error, SSL warning, ya sirf mobile par issue? URL aur screenshot share karein; bina details ke guess nahi karunga.",en:"Let's diagnose the issue. What is the exact error - blank page, 404, server error, SSL warning, or is it only on mobile? Please share the URL and a screenshot; I won't guess without details."},
-    {keys:["website price","website cost","web design price","website kitne","website kitne ki","banane ka price","banwane ka kharcha","banane ka kharcha","website banane ka price"],answer:"Website projects ₹15,000 se start hote hain. Final cost pages, design, e-commerce, accounts, integrations and admin features par depend karti hai. Aapko kis kaam ke liye website chahiye?",en:"Website projects start at ₹15,000. The final cost depends on pages, design, e-commerce, accounts, integrations and admin features. What do you need the website for?"},
-    {keys:["chatbot price","ai chatbot price","bot price","bot kitne","bot ka price","bot ki cost","bot cost"],answer:"AI chatbot projects ₹20,000 se start hote hain. Cost integrations, knowledge base and workflow complexity par depend karti hai. Bot se kaunsa kaam karwana hai?",en:"AI chatbot projects start at ₹20,000. The cost depends on integrations, knowledge base and workflow complexity. What should the bot do for you?"},
-    {keys:["app price","mobile app price","app cost"],answer:"Mobile app projects ₹50,000 se start hote hain. Cost features, Android/iOS, backend and admin tools par depend karti hai. App ka main purpose kya hai?",en:"Mobile app projects start at ₹50,000. The cost depends on features, Android/iOS, backend and admin tools. What is the app's main purpose?"},
-    {keys:["marketing price","digital marketing price","ads cost"],answer:"Digital marketing packages ₹10,000/month se start hote hain; ad spend alag ho sakta hai. Aapka goal leads, sales, local reach ya brand awareness hai?",en:"Digital marketing packages start at ₹10,000/month; ad spend may be extra. Is your goal leads, sales, local reach, or brand awareness?"},
+    {keys:["website price","website cost","web design price","website kitne","website kitne ki","banane ka price","banwane ka kharcha","banane ka kharcha","website banane ka price"],answer:"Website projects ₹15,000 se start hote hain — ye sirf reference price hai, final price nahi. Final price ke liye WhatsApp par ya call par connect karein.",en:"Website projects start at ₹15,000 — only a reference price, not the final price. For the final price, connect on WhatsApp or call us."},
+    {keys:["chatbot price","ai chatbot price","bot price","bot kitne","bot ka price","bot ki cost","bot cost"],answer:"AI chatbot projects ₹20,000 se start hote hain — ye sirf reference price hai, final price nahi. Final price ke liye WhatsApp par ya call par connect karein.",en:"AI chatbot projects start at ₹20,000 — only a reference price, not the final price. For the final price, connect on WhatsApp or call us."},
+    {keys:["app price","mobile app price","app cost"],answer:"Mobile app projects ₹50,000 se start hote hain — ye sirf reference price hai, final price nahi. Final price ke liye WhatsApp par ya call par connect karein.",en:"Mobile app projects start at ₹50,000 — only a reference price, not the final price. For the final price, connect on WhatsApp or call us."},
+    {keys:["marketing price","digital marketing price","ads cost"],answer:"Digital marketing packages ₹10,000/month se start hote hain — ye sirf reference price hai, final price nahi. Final price ke liye WhatsApp par ya call par connect karein.",en:"Digital marketing packages start at ₹10,000/month — only a reference price, not the final price. For the final price, connect on WhatsApp or call us."},
     {keys:["how to pay","how do i pay","an advance","any advance","pay kaise","advance payment","advance kitna","advance dena","advance lagega","advance hota","kitna advance","payment kaise","payment process","payment terms","payment method","payment structure","paise kaise","installment","kist"],answer:"Payment ka tareeka simple hai - project confirm hone par kaam ek advance se shuru hota hai aur baaki payment milestones ke hisaab se hoti hai. Exact structure scope fix hote hi estimate me pehle se saaf likh diya jata hai - koi chhupa charge nahi. Payment UPI ya bank transfer se ho jata hai. Aap kis service ke liye payment structure janna chahte hain?",en:"Payments are simple - work starts with an advance once the project is confirmed, and the rest is paid in milestones as the work progresses. The exact structure is written clearly in the estimate before we begin, with no hidden charges. We accept UPI and bank transfer. Which service are you asking about?"},
-    {keys:["price","pricing","cost","budget","kitne","kitna","kharcha","charges","rate","quote","quotation","fees","how much"],answer:"Starting prices: website ₹15,000, AI chatbot ₹20,000, mobile app ₹50,000, digital marketing ₹10,000/month. Final quote scope par depend karta hai. Aap apna business aur desired result bata dein.",en:"Starting prices: websites ₹15,000, AI chatbots ₹20,000, mobile apps ₹50,000, digital marketing ₹10,000/month. The final quote depends on scope. Tell me your business and the result you want."},
+    {keys:["price","pricing","cost","budget","kitne","kitna","kharcha","charges","rate","quote","quotation","fees","how much"],answer:"Starting prices sirf reference hain, final price nahi: website ₹15,000, AI chatbot ₹20,000, mobile app ₹50,000, digital marketing ₹10,000/month. Final price ke liye WhatsApp par ya call par connect karein.",en:"Starting prices are only a reference, not the final price: websites ₹15,000, AI chatbots ₹20,000, mobile apps ₹50,000, digital marketing ₹10,000/month. For the final price, connect on WhatsApp or call us."},
     {keys:["landing page"],answer:"Landing page ek focused page hota hai jo enquiry, booking, signup ya sale jaise ek main action par focus karta hai. Ads ya ek specific offer ke liye useful ho sakta hai. Aap kya promote kar rahe hain?",en:"A landing page is a focused page built around one main action - an enquiry, booking, signup or sale. It works well for ads or a specific offer. What are you promoting?"},
     {keys:["ecommerce","e-commerce","online store","online shop","cart","checkout"],answer:"E-commerce store products, cart, checkout, payment/COD, order management and admin panel support kar sakta hai. Aap kitne products sell karna chahte hain aur payment online chahiye?",en:"An e-commerce store can support products, cart, checkout, payment/COD, order management and an admin panel. How many products do you plan to sell, and do you need online payments?"},
     {keys:["seo","google ranking","rank on google","google par rank","search engine"],answer:"SEO mein useful content, page titles, technical accessibility, site speed and relevant links shamil hain. Ranking guarantee nahi hoti. Aap local customers target kar rahe hain ya India-wide?",en:"SEO includes useful content, page titles, technical accessibility, site speed and relevant links. Rankings are never guaranteed. Are you targeting local customers or all of India?"},

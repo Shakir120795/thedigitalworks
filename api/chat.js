@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
 
     // Try models in order - Groq retires/renames models over time, so the
     // function finds a working one itself and remembers it while warm.
-    const MODELS = ["llama-3.3-70b-versatile", "openai/gpt-oss-120b", "llama-3.1-8b-instant", "openai/gpt-oss-20b", "qwen/qwen3-32b"];
+    const MODELS = ["openai/gpt-oss-120b", "openai/gpt-oss-20b"];
     if (module.exports._model) {
       const i = MODELS.indexOf(module.exports._model);
       if (i > 0) { MODELS.splice(i, 1); MODELS.unshift(module.exports._model); }
@@ -56,7 +56,7 @@ module.exports = async (req, res) => {
           messages: [{ role: "system", content: SYSTEM_PROMPT }].concat(msgs)
         })
       });
-      if (!r.ok) { lastStatus = r.status; continue; }
+      if (!r.ok) { lastStatus = r.status; try { const t = await r.text(); if (!module.exports._detail) module.exports._detail = (model + " -> " + t.slice(0, 220)); } catch (e) {} continue; }
       const data = await r.json();
       const reply = data && data.choices && data.choices[0] && data.choices[0].message
         ? String(data.choices[0].message.content || "").trim() : "";
@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
       res.status(200).json({ reply: reply });
       return;
     }
-    res.status(502).json({ error: "ai_" + lastStatus });
+    res.status(502).json({ error: "ai_" + lastStatus, detail: module.exports._detail || "" });
   } catch (e) {
     res.status(500).json({ error: "server" });
   }
