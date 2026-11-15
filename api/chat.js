@@ -37,22 +37,35 @@ module.exports = async (req, res) => {
       .map(m => ({ role: m.role, content: m.content.slice(0, 1000) }));
     if (!msgs.length) { res.status(400).json({ error: "empty" }); return; }
 
-    const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        temperature: 0.4,
-        max_tokens: 450,
-        messages: [{ role: "system", content: SYSTEM_PROMPT }].concat(msgs)
-      })
-    });
-    if (!r.ok) { res.status(502).json({ error: "ai_" + r.status }); return; }
-    const data = await r.json();
-    const reply = data && data.choices && data.choices[0] && data.choices[0].message
-      ? String(data.choices[0].message.content || "").trim() : "";
-    if (!reply) { res.status(502).json({ error: "empty_ai" }); return; }
-    res.status(200).json({ reply: reply });
+    // Try models in order - Groq retires/renames models over time, so the
+    // function finds a working one itself and remembers it while warm.
+    const MODELS = ["llama-3.3-70b-versatile", "openai/gpt-oss-120b", "llama-3.1-8b-instant", "openai/gpt-oss-20b", "qwen/qwen3-32b"];
+    if (module.exports._model) {
+      const i = MODELS.indexOf(module.exports._model);
+      if (i > 0) { MODELS.splice(i, 1); MODELS.unshift(module.exports._model); }
+    }
+    let lastStatus = 0;
+    for (const model of MODELS) {
+      const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: model,
+          temperature: 0.4,
+          max_tokens: 450,
+          messages: [{ role: "system", content: SYSTEM_PROMPT }].concat(msgs)
+        })
+      });
+      if (!r.ok) { lastStatus = r.status; continue; }
+      const data = await r.json();
+      const reply = data && data.choices && data.choices[0] && data.choices[0].message
+        ? String(data.choices[0].message.content || "").trim() : "";
+      if (!reply) { lastStatus = 502; continue; }
+      module.exports._model = model;
+      res.status(200).json({ reply: reply });
+      return;
+    }
+    res.status(502).json({ error: "ai_" + lastStatus });
   } catch (e) {
     res.status(500).json({ error: "server" });
   }
